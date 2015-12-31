@@ -9,7 +9,7 @@ class Case {
 public:
   Case();
   Case(int, int, int, int);
-  Case(int, int, int, int, Pion*, int*); // Sert pour la premiere case ou se trouvent tous les pions au debut, ou pour modifier une case en cours de partie si un jeu le permet
+  Case(int, int, int, int, Pion**, int*); // Sert pour la premiere case ou se trouvent tous les pions au debut, ou pour modifier une case en cours de partie si un jeu le permet
   virtual ~Case();
 
   bool isEmpty();
@@ -19,14 +19,14 @@ public:
   int getNbPionsMax();
   int getNbPions();
   int* getTableauIdJoueurs();
-  Pion* getTableauPions();
-  
+  Pion** getTableauPions();
+
   void setX(int);
   void setY(int);
   void setNbPionsMax(int);
   void setNbPions(int);
   void setTableauIdJoueurs(int*);
-  void setTableauPions(Pion*);
+  void setTableauPions(Pion**);
 
 private:
   int x;
@@ -34,7 +34,7 @@ private:
 
   int nbPionsMax;
   int nbPions;
-  Pion* tableauPions; // Tableau de pointeurs de Pion
+  Pion** tableauPions; // Tableau de pointeurs de Pion
   int* tableauIdJoueurs; // (length = Jeu::nbJoueursTotal + 1 : [0] = nbJoueursTotal : pour que J1 commence a l'indice 1)
 
   //protected:

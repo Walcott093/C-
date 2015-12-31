@@ -2,6 +2,7 @@
 #define JEU_HPP
 
 /***** CLASSE ABSTRAITE *****/
+
 class Jeu {
 public:
   Jeu();
@@ -23,8 +24,8 @@ private:
   int* tableauScoreJoueur; // (length = nbJoueursTotal + 1 : [0] = nbJoueursTotal : pour que J1 commence a l'indice 1)
   
 protected:
-  bool finDePartie() = 0; //On donne les conditions de fin de partie
-  int nbCasesDeplacementPion(int) = 0; //Renvoie le nombre de case pour le deplacement du numero de pion donne en argument
+  virtual bool finDePartie() = 0; //On donne les conditions de fin de partie
+  virtual int nbCasesDeplacementPion(int) = 0; //Renvoie le nombre de case pour le deplacement du numero de pion donne en argument
 
 };
 

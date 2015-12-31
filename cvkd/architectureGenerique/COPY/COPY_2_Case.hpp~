@@ -18,7 +18,7 @@ public:
   bool ajouterPions(forward_list<Pion>, int);
   //bool ajouterPions(Pion*, int);
   bool retirerPion(Pion);
-  bool retirerPions(forward_list<Pion>, int);
+  bool retirerPIons(forward_list<Pion>, int);
   //bool retirerPIons(Pion*, int);
 
   int getX();
@@ -26,7 +26,7 @@ public:
   int getNbPionsMax();
   int getNbPions();
   int* getTableauIdJoueurs();
-  forward_list<Pion> getListePions();
+  forward_list<Pion> getTableauPions();
   //Pion* getTableauPions();
   
   void setX(int);
@@ -34,7 +34,7 @@ public:
   void setNbPionsMax(int);
   void setNbPions(int);
   void setTableauIdJoueurs(int*);
-  void setListePions(forward_list<Pion>);
+  void setTableauPions(forward_list<Pion>);
   //void setTableauPions(Pion*);
 
 private:

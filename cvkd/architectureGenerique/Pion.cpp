@@ -3,22 +3,22 @@
 using namespace std;
 
 Pion::Pion() {
-  cout << "Construction d'un Pion par defaut" << endl;
+  cout << "                              Construction d'un Pion par defaut" << endl;
 }
 
 /*
 Pion::Pion(int idPlayer, int identifiant, string colour, Case c): idJoueur(idPlayer), id(identifiant), couleur(colour), case(c) {
-  cout << "Contruction du Pion : " << *this << endl;
+  cout << "                              Contruction du Pion : " << *this << endl;
 }
 */
 
 Pion::Pion(int idPlayer, int identifiant, string colour, int abscisse, int ordonnee): idJoueur(idPlayer), id(identifiant), couleur(colour), x(abscisse), y(ordonnee) {
-  cout << "Contruction du Pion : " << *this << endl;
+  cout << "                              Contruction du Pion : " << *this << endl;
 }
 
 
 Pion::~Pion() {
-  cout << "Destruction du Pion : " << *this << endl;
+  cout << "                              Destruction du Pion : " << *this << endl;
 }
 
 
@@ -44,3 +44,15 @@ ostream& operator<<(ostream& o, Pion& p) {
     << "couleur=" << p.couleur << ">";
   return o;
 }
+
+bool Pion::operator==(const Pion& other) {
+  if(idJoueur == other.idJoueur
+     && id == other.id
+     && couleur == other.couleur
+     && x == other.x
+     && y == other.y)
+    return true;
+  else
+    return false;     
+}
+

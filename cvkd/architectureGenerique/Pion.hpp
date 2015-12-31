@@ -24,6 +24,8 @@ public:
   //void setCase(Case*);
   void setX(int);
   void setY(int);
+
+  bool operator==(const Pion&);
   
 private:
   int idJoueur;

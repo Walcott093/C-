@@ -25,30 +25,53 @@ int main() {
   const string NUMERI = "Numeri";
   */
 
-  int choixJeu, nbJoueursHumains, nbJoueursDisponibles, nbJoueursRobots, nbJoueursTotal, nbPionsParJoueur, nbLignesPlateau, nbColonnesPlateau, nbBonus, nbMalus, difficultePedagogique;
-  //int choixTypePlateau, plateauCarreTaille, 
-  //char charCaseSpeciale;
-  //bool boolCaseSpeciale; // Surtout utile pour le jeu Echelle-Serpent et pour l'addition de nouveaux jeux qui laisseraient le choix d'utilisation des cases speciales
+  int choixJeu, nbJoueursHumains, nbJoueursDisponibles, nbJoueursRobots, nbJoueursTotal, choixTypePlateau, plateauCarreTaille, plateauRectangleNbLignes, plateauRectangleNbColonnes, nbBonus, nbMalus, difficulte;
+  char charCaseSpeciale;
+  bool boolCaseSpeciale; // Surtout utile pour le jeu Echelle-Serpent et pour l'addition de nouveaux jeux qui laisseraient le choix d'utilisation des cases speciales
+
 
   Jeu* jeu;
   
 
 
-
-  /****** DEBUT : CHOIX DU NOMBRE DE JOUEURS ROBOTS  ******/
   cout << "Choix du jeu :\n" << LISTE_DES_JEUX << endl;
   cin >> choixJeu;
   cin.clear(); // A securiser encore plus si time
-  /****** FIN : CHOIX DU NOMBRE DE JOUEURS ROBOTS  ******/
+
+  /****** DEBUT : CHOIX DU JEU  ******/
+  switch(choixJeu) {
+  case 1:
+    //jeu = new EchelleSerpent(ECHELLE_SERPENT, ...);
+    break;
+  case 2:
+    //jeu = new EchelleSerpent(ECHELLE_SERPENT_ORANGE_VERTE...); // OrangeVerte
+    break;
+  case 3:
+    //jeu = new EchelleSerpent(ECHELLE_SERPENT_PEDAGOGIQUE...); // Pedagogique
+    break;
+  case 4:
+    //jeu = new EchelleSerpent(ECHELLE_SERPENT_PLUSIEURS_PIONS...); // PlusieursPions
+    break;
+  case 5:
+    //jeu = new CartagenaVariante(CARTAGENA_VARIANTE...);
+    break;
+  case 6:
+    //jeu = new Numeri(NUMERI, ...);
+    break;
+  default:
+    cout << "Erreur sur le choix du jeu" << endl;
+    exit(EXIT_FAILURE);
+  }
+  /****** FIN : CHOIX DU JEU  ******/
 
 
 
 
-  /****** DEBUT : CHOIX DU NOMBRE DE JOUEURS HUMAINS  ******/
   cout << "Nombre de joueurs humains (4 max.) :" << endl;
   cin >> nbJoueursHumains;
   cin.clear(); // A securiser encore plus si time
 
+  /****** DEBUT : CHOIX DU NOMBRE DE JOUEURS HUMAINS  ******/
   switch(nbJoueursHumains) {
   case 0:
     nbJoueursDisponibles = NB_JOUEURS_MAX - 0;
@@ -66,19 +89,18 @@ int main() {
     nbJoueursDisponibles = NB_JOUEURS_MAX - 4;
     break;
   default:
-    cout << "[main.cpp] : Erreur sur le nombre de joueurs" << endl;
+    cout << "Erreur sur le nombre de joueurs" << endl;
     exit(EXIT_FAILURE);
   }
   /****** FIN : CHOIX DU NOMBRE DE JOUEURS HUMAINS  ******/
 
 
 
-
-  /****** DEBUT : CHOIX DU NOMBRE DE JOUEURS ROBOTS  ******/
   cout << "Nombre de joueurs robots (" << nbJoueursDisponibles << " disponible(s)) :" << endl;
   cin >> nbJoueursRobots;
   cin.clear(); // A securiser encore plus si time
-
+  
+ /****** DEBUT : CHOIX DU NOMBRE DE JOUEURS ROBOTS  ******/
   switch(nbJoueursRobots) {
   case 0:
   case 1:
@@ -88,80 +110,10 @@ int main() {
     nbJoueursTotal = nbJoueursHumains + nbJoueursRobots;
     break;
   default:
-    cout << "[main.cpp] : Erreur sur le nombre de joueurs" << endl;
+    cout << "Erreur sur le nombre de joueurs" << endl;
     exit(EXIT_FAILURE);
   }
   /****** FIN : CHOIX DU NOMBRE DE JOUEURS ROBOTS  ******/
-
-
-
-
-  /****** DEBUT : CHOIX DE LA TAILLE DU PLATEAU (NOMBRE DE LIGNES) ******/
-  do {
-    nbLignesPlateau = 0;
-    cout << "Taille du plateau > nombre de lignes (entre 4 et 10) :" << endl;
-    cin >> nbLignesPlateau;
-    cin.clear(); // A securiser encore plus si time
-  } while(nbLignesPlateau < 4 || 10 < nbLignesPlateau);
-  /****** FIN : CHOIX DE LA TAILLE DU PLATEAU (NOMBRE DE LIGNES) ******/
-
-  /****** DEBUT : CHOIX DE LA TAILLE DU PLATEAU (NOMBRE DE COLONNES) ******/
-  do {
-    nbColonnesPlateau = 0;
-    cout << "Taille du plateau > nombre de colonnes (entre 4 et 10) :" << endl;
-    cin >> nbColonnesPlateau;
-    cin.clear(); // A securiser encore plus si time
-  } while(nbColonnesPlateau < 4 || 10 < nbColonnesPlateau);
-  /****** FIN : CHOIX DE LA TAILLE DU PLATEAU (NOMBRE DE COLONNES) ******/
-
-
-
-
-  /****** DEBUT : CREATION DU JEU  ******/
-  switch(choixJeu) {
-  case 1:
-    //jeu = new EchelleSerpent(ECHELLE_SERPENT, nbJoueursHumains, nbJoueursTotal, 1, nbLignesPlateau, nbColonnesPlateau); // Standard
-    break;
-  case 2:
-    //jeu = new EchelleSerpent(ECHELLE_SERPENT_ORANGE_VERTE, nbJoueursHumains, nbJoueursTotal, 1, nbLignesPlateau, nbColonnesPlateau); // OrangeVerte
-    break;
-  case 3:
-    //jeu = new EchelleSerpent(ECHELLE_SERPENT_PEDAGOGIQUE, nbJoueursHumains, nbJoueursTotal, 1, nbLignesPlateau, nbColonnesPlateau); // Pedagogique
-    break;
-  case 4:
-    /****** DEBUT : CHOIX DU NOMBRE DE PIONS PAR JOUEUR ******/
-    do {
-      nbPionsParJoueur = 0;
-      cout << "Nombre de pions par joueur (de 2 à 4 max.) :" << endl;
-      cin >> nbPionsParJoueur;
-      cin.clear(); // A securiser encore plus si time
-    } while(nbPionsParJoueur < 2 || 4 < nbPionsParJoueur);
-    /****** FIN : CHOIX DU NOMBRE DE PIONS PAR JOUEUR ******/
-
-    //jeu = new EchelleSerpent(ECHELLE_SERPENT_PLUSIEURS_PIONS, nbJoueursHumains, nbJoueursTotal, nbPionsParJoueur, nbLignesPlateau, nbColonnesPlateau); // PlusieursPions
-
-
-
-    break;
-  case 5:
-    //jeu = new CartagenaVariante(CARTAGENA_VARIANTE, nbJoueursHumains, nbJoueursTotal, ...);
-    break;
-  case 6:
-    //jeu = new Numeri(NUMERI, nbJoueursHumains, nbJoueursTotal, ...);
-    break;
-  default:
-    cout << "[main.cpp] : Erreur sur le choix du jeu" << endl;
-    exit(EXIT_FAILURE);
-  }
-  /****** FIN : CREATION DU JEU  ******/
-
-
-
-
-  /****** DEBUT : CREATION DU PLATEAU  ******/
-
-
-  /****** FIN : CREATION DU PLATEAU  ******/
 
 
 
@@ -174,10 +126,6 @@ int main() {
 
   return 0;
 }
-
-
-
-
 
 
 

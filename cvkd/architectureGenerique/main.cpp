@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Constantes.hpp"
 #include "Jeu.hpp" // Il faudra surement ajouter le jeu en question (ex: Numeri.hpp)
 #include "Plateau.hpp"
 
@@ -13,6 +14,7 @@ using namespace std;
 
 
 int main() {
+  /*
   const int NB_JOUEURS_MAX = 4;
   const string LISTE_DES_JEUX = "1. Serpent-Echelle \n2. Serpent-Echelle (variante cases bonus/malus) \n3. Serpent-Echelle (variante pedagogique) \n4. Serpent-Echelle (variante a plusieurs pions) \n5. Cartagena (variante) \n6. Numeri";
   const string ECHELLE_SERPENT = "EchelleSerpent";
@@ -21,6 +23,7 @@ int main() {
   const string ECHELLE_SERPENT_PLUSIEURS_PIONS = "EchelleSerpentPlusieursPions";
   const string CARTAGENA_VARIANTE = "CartagenaVariante";
   const string NUMERI = "Numeri";
+  */
 
   int choixJeu, nbJoueursHumains, nbJoueursDisponibles, nbJoueursRobots, nbJoueursTotal, choixTypePlateau, plateauCarreTaille, plateauRectangleNbLignes, plateauRectangleNbColonnes, nbBonus, nbMalus, difficulte;
   char charCaseSpeciale;
@@ -38,22 +41,22 @@ int main() {
   /****** DEBUT : CHOIX DU JEU  ******/
   switch(choixJeu) {
   case 1:
-    //jeu = new EchelleSerpent(...);
+    //jeu = new EchelleSerpent(ECHELLE_SERPENT, ...);
     break;
   case 2:
-    //jeu = new EchelleSerpent(...); // OrangeVerte
+    //jeu = new EchelleSerpent(ECHELLE_SERPENT_ORANGE_VERTE...); // OrangeVerte
     break;
   case 3:
-    //jeu = new EchelleSerpent(...); // Pedagogique
+    //jeu = new EchelleSerpent(ECHELLE_SERPENT_PEDAGOGIQUE...); // Pedagogique
     break;
   case 4:
-    //jeu = new EchelleSerpent(...); // PlusieursPions
+    //jeu = new EchelleSerpent(ECHELLE_SERPENT_PLUSIEURS_PIONS...); // PlusieursPions
     break;
   case 5:
-    //jeu = new CartagenaVariante(...);
+    //jeu = new CartagenaVariante(CARTAGENA_VARIANTE...);
     break;
   case 6:
-    //jeu = new Numeri(...);
+    //jeu = new Numeri(NUMERI, ...);
     break;
   default:
     cout << "Erreur sur le choix du jeu" << endl;

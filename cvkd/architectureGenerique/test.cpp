@@ -1,16 +1,22 @@
 #include <iostream>
 #include <forward_list>
+
+#include "Constantes.hpp"
 #include "Pion.hpp"
 #include "Case.hpp"
 #include "CaseNormale.hpp"
 #include "../jeux/EchelleSerpent/CaseEchelleSerpent.hpp"
 using namespace std;
 
+
+
 int main() {
   cout << "Hello !" << endl;
   
-
-  
+  /*
+  cout << "LISTE_DES_JEUX = " << LISTE_DES_JEUX << endl;
+  cout << "NB_SPECIFICITE_ES = " << NB_SPECIFICITES_ES << endl;
+  */
 
 
   /*

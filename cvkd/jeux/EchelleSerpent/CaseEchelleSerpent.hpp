@@ -1,6 +1,7 @@
 #ifndef CASE_ECHELLE_SERPENT_HPP
 #define CASE_ECHELLE_SERPENT_HPP
 
+#include "../../architectureGenerique/Constantes.hpp"
 #include "../../architectureGenerique/Case.hpp"
 
 class CaseEchelleSerpent : public Case {
@@ -22,6 +23,8 @@ public:
 private:
   bool variante;
   int specificite;
+
+  /*
   const int NB_SPECIFICITES_ES = 3; // Neutre + Echelle + Serpent
   const int NB_SPECIFICITES_ESOV = 5; // Neutre + Echelle + Serpent + Orange + Verte
   const int NEUTRE = 0;
@@ -30,7 +33,7 @@ private:
 
   const int ORANGE = 3;
   const int VERTE = 4;
-
+  */
 
 };
 

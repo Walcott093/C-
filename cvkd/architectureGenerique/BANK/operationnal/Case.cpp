@@ -3,15 +3,11 @@
 #include <forward_list>
 using namespace std;
 
-
+const int NB_JOUEURS_MAX = 4;
 
 Case::Case() {
   cout << "                              Creation d'une Case par defaut" << endl;
 }
-Case::~Case() {
-  cout << "                              Destruction de la Case : " << *this << endl;
-}
-
 
 Case::Case(int abs, int ord, int nbMax, int nb):
   x(abs), y(ord), nbPionsMax(nbMax), nbPions(nb) {
@@ -30,14 +26,15 @@ Case::Case(int abs, int ord, int nbMax, int nb, forward_list<Pion> pions, int* t
   cout << "                              Construction de la case : " << *this <<endl;
 }
 
-
-
+Case::~Case() {
+  cout << "                              Destruction de la Case : " << *this << endl;
+}
 
 
 bool Case::isEmpty() { return nbPions == 0; }
 
 bool Case::ajouterPion(Pion p) {
-  if(nbPions < nbPionsMax) {
+  if(nbPions <= nbPionsMax) {
     listePions.push_front(p);
     nbPions++;
     //tableauPions[nbPions++] = p;
@@ -81,7 +78,6 @@ bool Case::retirerPion(Pion p) {
       }
       
     }
-    cout << "[Case.cpp/retirerPion] Erreur : Impossible de retirer le pion. Il n'est pas present." << endl;
     return false;
   }
 }

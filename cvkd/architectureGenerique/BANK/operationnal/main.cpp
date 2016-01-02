@@ -15,19 +15,19 @@ using namespace std;
 int main() {
   const int NB_JOUEURS_MAX = 4;
   const string LISTE_DES_JEUX = "1. Serpent-Echelle \n2. Serpent-Echelle (variante cases bonus/malus) \n3. Serpent-Echelle (variante pedagogique) \n4. Serpent-Echelle (variante a plusieurs pions) \n5. Cartagena (variante) \n6. Numeri";
-  const string SERPENT_ECHELLE = "SerpentEchelle";
-  const string SERPENT_ECHELLE_ORANGE_VERTE = "SerpentEchelleOrangeVerte";
-  const string SERPENT_ECHELLE_PEDAGOGIQUE = "SerpentEchellePedagogique";
-  const string SERPENT_ECHELLE_PLUSIEURS_PIONS = "SerpentEchellePlusieursPions";
-  const string CARTAGENA_VARIANTE = "CartagenaVariante";
-  const string NUMERI = "Numeri";
+  const int SERPENT_ECHELLE = 1;
+  const int SERPENT_ECHELLE_BONUS_MALUS = 2;
+  const int SERPENT_ECHELLE_PEDAGOGIQUE = 3;
+  const int SERPENT_ECHELLE_PLUSIEURS_PIONS = 4;
+  const int CARTAGENA_VARIANTE = 5;
+  const int NUMERI = 6;
 
-  int choixJeu, nbJoueursHumains, nbJoueursDisponibles, nbJoueursRobots, nbJoueursTotal, choixTypePlateau, plateauCarreTaille, plateauRectangleNbLignes, plateauRectangleNbColonnes, nbBonus, nbMalus, difficulte;
+  int choixJeu, nbJoueursHumains, nbJoueursRobots, nbJoueursTotal, choixTypePlateau, plateauCarreTaille, plateauRectangleNbLignes, plateauRectangleNbColonnes, nbBonus, nbMalus, difficulte;
   char charCaseSpeciale;
   bool boolCaseSpeciale; // Surtout utile pour le jeu Echelle-Serpent et pour l'addition de nouveaux jeux qui laisseraient le choix d'utilisation des cases speciales
 
 
-  Jeu* jeu;
+  Jeu jeu;
   
 
 
@@ -35,31 +35,30 @@ int main() {
   cin >> choixJeu;
   cin.clear(); // A securiser encore plus si time
 
-  /****** DEBUT : CHOIX DU JEU  ******/
   switch(choixJeu) {
-  case 1:
+  case SERPENT_ECHELLE:
     //jeu = new SerpentEchelle(...);
     break;
-  case 2:
+  case SERPENT_ECHELLE_BONUS_MALUS:
     //jeu = new SerpentEchelleBonusMalus(...);
     break;
-  case 3:
+  case SERPENT_ECHELLE_PEDAGOGIQUE:
     //jeu = new SerpentEchellePedagogique(...);
     break;
-  case 4:
+  case SERPENT_ECHELLE_PLUSIEURS_PIONS:
     //jeu = new SerpentEchellePlusieursPions(...);
     break;
-  case 5:
+  case CARTAGENA_VARIANTE:
     //jeu = new CartagenaVariante(...);
     break;
-  case 6:
+  case NUMERI:
     //jeu = new Numeri(...);
     break;
   default:
     cout << "Erreur sur le choix du jeu" << endl;
     exit(EXIT_FAILURE);
   }
-  /****** FIN : CHOIX DU JEU  ******/
+  
 
 
 
@@ -68,85 +67,40 @@ int main() {
   cin >> nbJoueursHumains;
   cin.clear(); // A securiser encore plus si time
 
-  /****** DEBUT : CHOIX DU NOMBRE DE JOUEURS HUMAINS  ******/
   switch(nbJoueursHumains) {
   case 0:
-    nbJoueursDisponibles = NB_JOUEURS_MAX - 0;
+    nbJoueursRobots = NB_JOUEURS_MAX - 0;
     break;
   case 1:
-    nbJoueursDisponibles = NB_JOUEURS_MAX - 1;
+    nbJoueursRobots = NB_JOUEURS_MAX - 1;
     break;
   case 2:
-    nbJoueursDisponibles = NB_JOUEURS_MAX - 2;
+    nbJoueursRobots = NB_JOUEURS_MAX - 2;
     break;
   case 3:
-    nbJoueursDisponibles = NB_JOUEURS_MAX - 3;
+    nbJoueursRobots = NB_JOUEURS_MAX - 3;
     break;
   case 4:
-    nbJoueursDisponibles = NB_JOUEURS_MAX - 4;
+    nbJoueursRobots = NB_JOUEURS_MAX - 4;
     break;
   default:
     cout << "Erreur sur le nombre de joueurs" << endl;
     exit(EXIT_FAILURE);
   }
-  /****** FIN : CHOIX DU NOMBRE DE JOUEURS HUMAINS  ******/
 
 
 
-  cout << "Nombre de joueurs robots (" << nbJoueursDisponibles << " disponible(s)) :" << endl;
-  cin >> nbJoueursRobots;
+
+
+  cout << "Nombre de joueurs total (" << nbJoueursRobots << " disponible(s)) :" << endl;
+  cin >> nbJoueursTotal;
   cin.clear(); // A securiser encore plus si time
   
- /****** DEBUT : CHOIX DU NOMBRE DE JOUEURS ROBOTS  ******/
-  switch(nbJoueursRobots) {
-  case 0:
-  case 1:
-  case 2:
-  case 3:
-  case 4:
-    nbJoueursTotal = nbJoueursHumains + nbJoueursRobots;
-    break;
-  default:
-    cout << "Erreur sur le nombre de joueurs" << endl;
-    exit(EXIT_FAILURE);
-  }
-  /****** FIN : CHOIX DU NOMBRE DE JOUEURS ROBOTS  ******/
 
 
 
 
 
-
- 
-
-
-
-  return 0;
-}
-
-
-
-/*
-  cout << "Utilisation des cases speciales ? y/n" << endl;
-  cin >> charCaseSpeciale;
-  cin.clear(); // A securiser encore plus si time
-
-  switch(charCaseSpeciale) {
-  case 'y':
-    boolCaseSpeciale = true;
-    break;
-  case 'n':
-    boolCaseSpeciale = false;
-    break;
-  default:
-    cout << "Erreur sur la question des cases speciales" << endl;
-    exit(EXIT_FAILURE);
-  }
-*/
-
-
-
- /*
   cout << "Type du plateau : 1. Carre  /  2. Rectangle" << endl;
   cin >> choixTypePlateau;
   cin.clear(); // A securiser encore plus si time
@@ -172,4 +126,25 @@ int main() {
     cout << "Erreur sur le type du plateau" << endl;
     exit(EXIT_FAILURE);
   }
-  */
+
+
+
+
+  cout << "Utilisation des cases speciales ? y/n" << endl;
+  cin >> charCaseSpeciale;
+  cin.clear(); // A securiser encore plus si time
+
+  switch(charCaseSpeciale) {
+  case 'y':
+    boolCaseSpeciale = true;
+    break;
+  case 'n':
+    boolCaseSpeciale = false;
+    break;
+  default:
+    cout << "Erreur sur la question des cases speciales" << endl;
+    exit(EXIT_FAILURE);
+  }
+
+  return 0;
+}

@@ -9,7 +9,8 @@ using namespace std;
 //template <class T> // Contient le type de case
 class Plateau {
 public:
-  Plateau(int, int, string);
+  //Plateau(int); // Pour creer un plateau carre
+  Plateau(int, int); // Pour creer un plateau rectangulaire
   virtual ~Plateau();
 
   int getNbLignes();
@@ -23,7 +24,7 @@ public:
 private:  
   int nbLignes;
   int nbColonnes;
-  string jeu;
+  string typeCase;
 
   //T** plateau; // + fonction initPlateau()
   Case** plateau; // en fonction abstract CA VA PLUTOT ETRE CA JE PENSE

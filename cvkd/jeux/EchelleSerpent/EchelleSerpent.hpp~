@@ -1,0 +1,10 @@
+#ifndef ECHELLE_SERPENT_HPP
+#define ECHELLE_SERPENT_HPP
+
+class EchelleSerpent : public Jeu {
+
+
+
+};
+
+#endif //ECHELLE_SERPENT_HPP

@@ -12,7 +12,29 @@ using namespace std;
 
 int main() {
   cout << "Hello !" << endl;
-  
+  int nbPionsParJoueur;
+  do {
+    nbPionsParJoueur = 0;
+    cout << "Nombre de pions par joueur (de 2 à 4 max.) :" << endl;
+    cin >> nbPionsParJoueur;
+    cin.clear(); // A securiser encore plus si time
+    cout << "nbPionsParJoueur = " << nbPionsParJoueur << endl;
+  } while(nbPionsParJoueur < 2 || 4 < nbPionsParJoueur);
+
+  /*
+  int i = 0;
+
+  cin >> i;
+  cout << "i = " << i << endl;
+
+  if(i == 1)
+    cout << "gg" << endl;
+  else
+    cout << "perdu" << endl;
+  */
+
+
+
   /*
   cout << "LISTE_DES_JEUX = " << LISTE_DES_JEUX << endl;
   cout << "NB_SPECIFICITE_ES = " << NB_SPECIFICITES_ES << endl;

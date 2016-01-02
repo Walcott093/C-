@@ -3,6 +3,7 @@
 
 #include "../../architectureGenerique/Constantes.hpp"
 #include "../../architectureGenerique/Case.hpp"
+using namespace std;
 
 class CaseEchelleSerpent : public Case {
 protected:
@@ -10,8 +11,8 @@ protected:
 
 
 public:
-  CaseEchelleSerpent(int, int, int, int, bool); //(abs, ord, nbPionsMax, nbPions, varianteCaseOrangeVerte)
-  CaseEchelleSerpent(int, int, int, int, forward_list<Pion>, int*, bool); //(abs, ord, nbPionsMax, nbPions, listePions, tableauIdJoueurs, varianteCaseOrangeVerte)
+  CaseEchelleSerpent(int, int, int, int, string); // abs, ord, nbPionsMax, nbPions, nomVariante
+  CaseEchelleSerpent(int, int, int, int, forward_list<Pion>, int*, string); // abs, ord, nbPionsMax, nbPions, listePions, tableauIdJoueurs, nomVariante
   // Sert pour la premiere case ou se trouvent tous les pions au debut, ou pour modifier une case en cours de partie si un jeu le permet
   virtual ~CaseEchelleSerpent();
 
@@ -21,6 +22,7 @@ public:
   void setSpecificite(int);
 
 private:
+  string nomVariante;
   bool variante;
   int specificite;
 

@@ -1,6 +1,7 @@
 #include <iostream>
-#include "Case.hpp"
 #include <forward_list>
+#include "Constantes.hpp"
+#include "Case.hpp"
 using namespace std;
 
 

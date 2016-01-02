@@ -41,7 +41,7 @@ public:
   void setListePions(forward_list<Pion>);
   //void setTableauPions(Pion*);
 
-  const int NB_JOUEURS_MAX = 4;
+  //const int NB_JOUEURS_MAX = 4;
 
 
 private:

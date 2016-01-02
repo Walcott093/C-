@@ -1,6 +1,7 @@
 #ifndef PLATEAU_HPP
 #define PLATEAU_HPP
 
+#include "Jeu.hpp"
 #include "Case.hpp"
 using namespace std;
 
@@ -9,21 +10,24 @@ using namespace std;
 //template <class T> // Contient le type de case
 class Plateau {
 public:
-  Plateau(int, int, string);
+  Plateau(Jeu*, int, int); // jeu, nbLignes, nbColonnes
+  //Plateau(Jeu*, int, int, Case**); // jeu, nbLignes, nbColonnes, plateau
   virtual ~Plateau();
 
+  Jeu* getJeu();
   int getNbLignes();
   int getNbColonnes();
   //T** getPlateau();
   Case** getPlateau();
+  void setJeu(Jeu*);
   void setNbLignes(int);
   void setNbColonnes(int);
   void setPlateau(Case**);
 
 private:  
+  Jeu* jeu;
   int nbLignes;
   int nbColonnes;
-  string jeu;
 
   //T** plateau; // + fonction initPlateau()
   Case** plateau; // en fonction abstract CA VA PLUTOT ETRE CA JE PENSE

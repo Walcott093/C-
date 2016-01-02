@@ -2,13 +2,13 @@
 #include "EchelleSerpent.hpp"
 using namespace std;
 
-EchelleSerpent::EchelleSerpent(int nbHumains, int nbTotal):
-  Jeu(nbHumains, nbTotal) {
+EchelleSerpent::EchelleSerpent(string nom, int nbHumains, int nbTotal, int nbPionsParJoueur):
+  Jeu(nom, nbHumains, nbTotal, nbPionsParJoueur){
   cout << "Construction d'un jeu EchelleSerpent" << endl;
 }
 
-EchelleSerpent::EchelleSerpent(int nbHumains, int nbTotal, int* tab):
-  Jeu(nbHumains, nbTotal, tab) {
+EchelleSerpent::EchelleSerpent(string nom, int nbHumains, int nbTotal, int nbPionsParJoueur, int* tab):
+  Jeu(nom, nbHumains, nbTotal, nbPionsParJoueur, tab) {
   cout << "Construction d'un jeu EchelleSerpent" << endl;
 }
 
@@ -36,6 +36,7 @@ bool EchelleSerpent::finDePartie(Plateau plateau) {
     return false;
   }
 }
+
 
 int EchelleSerpent::deplacementPion(Plateau plateau, Pion pion) {
 

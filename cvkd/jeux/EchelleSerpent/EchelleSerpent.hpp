@@ -2,6 +2,7 @@
 #define ECHELLE_SERPENT_HPP
 
 #include "../../architectureGenerique/Jeu.hpp"
+using namespace std;
 
 class EchelleSerpent : public Jeu {
 protected:
@@ -9,9 +10,11 @@ protected:
   int deplacementPion(Plateau, Pion);
 
 public:
-  EchelleSerpent(int, int); // nbJoueursHumains, nbJoueursTotal
-  EchelleSerpent(int, int, int*); // nbJoueursHumains, nbJoueursTotal, tableauScoreJoueur
+  EchelleSerpent(string, int, int, int); // nomJeuOuVariante, nbJoueursHumains, nbJoueursTotal, nbPionsParJoueur
+  EchelleSerpent(string, int, int, int, int*); // nomJeuOuVariante, nbJoueursHumains, nbJoueursTotal, nbPionsParJoueur, tableauScoreJoueur
   virtual ~EchelleSerpent();
+
+
 };
 
 #endif //ECHELLE_SERPENT_HPP

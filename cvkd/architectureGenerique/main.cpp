@@ -15,10 +15,10 @@ using namespace std;
 int main() {
   const int NB_JOUEURS_MAX = 4;
   const string LISTE_DES_JEUX = "1. Serpent-Echelle \n2. Serpent-Echelle (variante cases bonus/malus) \n3. Serpent-Echelle (variante pedagogique) \n4. Serpent-Echelle (variante a plusieurs pions) \n5. Cartagena (variante) \n6. Numeri";
-  const string SERPENT_ECHELLE = "SerpentEchelle";
-  const string SERPENT_ECHELLE_ORANGE_VERTE = "SerpentEchelleOrangeVerte";
-  const string SERPENT_ECHELLE_PEDAGOGIQUE = "SerpentEchellePedagogique";
-  const string SERPENT_ECHELLE_PLUSIEURS_PIONS = "SerpentEchellePlusieursPions";
+  const string ECHELLE_SERPENT = "EchelleSerpent";
+  const string ECHELLE_SERPENT_ORANGE_VERTE = "EchelleSerpentOrangeVerte";
+  const string ECHELLE_SERPENT_PEDAGOGIQUE = "EchelleSerpentPedagogique";
+  const string ECHELLE_SERPENT_PLUSIEURS_PIONS = "EchelleSerpentPlusieursPions";
   const string CARTAGENA_VARIANTE = "CartagenaVariante";
   const string NUMERI = "Numeri";
 
@@ -38,16 +38,16 @@ int main() {
   /****** DEBUT : CHOIX DU JEU  ******/
   switch(choixJeu) {
   case 1:
-    //jeu = new SerpentEchelle(...);
+    //jeu = new EchelleSerpent(...);
     break;
   case 2:
-    //jeu = new SerpentEchelleBonusMalus(...);
+    //jeu = new EchelleSerpent(...); // OrangeVerte
     break;
   case 3:
-    //jeu = new SerpentEchellePedagogique(...);
+    //jeu = new EchelleSerpent(...); // Pedagogique
     break;
   case 4:
-    //jeu = new SerpentEchellePlusieursPions(...);
+    //jeu = new EchelleSerpent(...); // PlusieursPions
     break;
   case 5:
     //jeu = new CartagenaVariante(...);

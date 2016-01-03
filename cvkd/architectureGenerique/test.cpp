@@ -4,19 +4,86 @@
 #include "Constantes.hpp"
 #include "Pion.hpp"
 #include "Case.hpp"
+#include "Joueur.hpp"
 #include "CaseNormale.hpp"
 #include "../jeux/EchelleSerpent/CaseEchelleSerpent.hpp"
 using namespace std;
 
+static int idJoueur = 0;
+static int joueursHumainsCrees = 0;
+static int joueursRobotsCrees = 0;
+static int nbJoueursHumains = 2;
+static int nbJoueursTotal = 4;
+static int nbPionsParJoueur = 4;
+
+
+Joueur* creationJoueur() {
+  string nom;
+  if(joueursHumainsCrees < nbJoueursHumains) {
+    cout << "Entrez le nom du joueur :" << endl;
+    cin >> nom;
+    joueursHumainsCrees++;
+  }
+  else {
+    switch(joueursRobotsCrees++) {
+    case 0:
+      nom = NOM_1;
+      break;
+    case 1:
+      nom = NOM_2;
+      break;
+    case 2:
+      nom = NOM_3;
+      break;
+    case 3:
+      nom = NOM_4;
+      break;
+    default:
+      nom = NOM_1;
+      break;
+    }
+  }
+
+  int score = 0;
+
+  string couleur;
+  if(idJoueur == 0) couleur = COULEUR_1;
+  else if(idJoueur == 1) couleur = COULEUR_2;
+  else if(idJoueur == 2) couleur = COULEUR_3;
+  else couleur = COULEUR_4; // if(idJoueur == 3)
+  idJoueur++;
+  
+  int idPion = 0;
+  Pion** tab = new Pion*[nbPionsParJoueur];
+  for(int i=0 ; i<nbPionsParJoueur ; i++) {
+    tab[i] = new Pion(idJoueur, idPion++, couleur, 0, 0);
+  }
+  return new Joueur(idJoueur, nom, score, nbPionsParJoueur, tab);
+}
 
 
 int main() {
   cout << "Hello !" << endl;
 
- 
-  
+
+  Joueur** tableauJoueurs = new Joueur*[nbJoueursTotal];
+  for(int i=0 ; i<nbJoueursTotal ; i++) {
+    tableauJoueurs[i] = creationJoueur();
+  }
+
+  for(int i=0 ; i<nbJoueursTotal ; i++)
+    cout << "Joueur[" << i << "] =\n" << *tableauJoueurs[i] << endl;
+
+
+
+
+
+
+
+
+
+  /*
   int idPion = 0;
-  
   Pion** tab = new Pion*[5];
   
   for(int i=0; i<5 ; i++) {
@@ -26,11 +93,10 @@ int main() {
     cout << "tab[i] = " << *tab[i] << endl;
   }
   
-  
   for(int i=0 ; i<5 ; i++) {
     cout << "tab[" << i << "] = " << *tab[i] << endl;
   }
-
+*/
 
   
   /*

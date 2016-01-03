@@ -7,7 +7,7 @@ EchelleSerpent::EchelleSerpent(string nom, int nbHumains, int nbTotal, int nbPio
   cout << "Construction d'un jeu EchelleSerpent" << endl;
 }
 
-EchelleSerpent::EchelleSerpent(string nom, int nbHumains, int nbTotal, int nbPionsParJoueur, Joueur* tab, int nbLignes, int nbColonnes, int nbE, int nbS, int nbO, int nbV):
+EchelleSerpent::EchelleSerpent(string nom, int nbHumains, int nbTotal, int nbPionsParJoueur, Joueur** tab, int nbLignes, int nbColonnes, int nbE, int nbS, int nbO, int nbV):
   Jeu(nom, nbHumains, nbTotal, nbPionsParJoueur, tab), taillePlateauLignes(nbLignes), taillePlateauColonnes(nbColonnes), nbCasesEchelles(2*nbE), nbCasesSerpents(2*nbS), nbCasesOranges(nbO), nbCasesVertes(nbV)  {
   cout << "Construction d'un jeu EchelleSerpent" << endl;
 }

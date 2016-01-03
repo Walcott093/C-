@@ -60,9 +60,10 @@ const string COULEUR_4 = "Jaune";
 // Used in "Joueur.hpp" pour les noms des robots
 
 const string NOM_1 = "Picasso";
-const string NOM_2 = "Malabar";
+const string NOM_2 = "Saitama";
 const string NOM_3 = "KitKat";
-const string NOM_4 = "Saitama";
+const string NOM_4 = "Malabar";
+const string NOM_DEFAULT = "M&M's";
 /********** FIN : OPTIONS DISPENSABLES DE JEU  **********/
 
 #endif //CONSTANTES_HPP

@@ -17,10 +17,10 @@ protected:
 public:
   Jeu();
   Jeu(string, int, int, int); // nomJeuOuVariante, nbJoueursHumains, nbJoueursTotal, nbPionsParJoueur
-  Jeu(string, int, int, int, Joueur*); // nomJeuOuVariante, nbJoueursHumains, nbJoueursTotal, nbPionsParJoueur, tableauJoueurs
+  Jeu(string, int, int, int, Joueur**); // nomJeuOuVariante, nbJoueursHumains, nbJoueursTotal, nbPionsParJoueur, tableauJoueurs
   virtual ~Jeu();
 
-  Joueur creationJoueur();
+  Joueur* creationJoueur(); // VAUT-IL MIEUX RENVOYER UN JOUEUR OU UN JOUEUR* ???
   int getScoreJoueur(int); //Recuperer le score d'un joueur en donnant son id
   void getScores(); //Afficher les scores de tous les joueurs
 
@@ -28,15 +28,15 @@ public:
   int getNbJoueursHumains();
   int getNbJoueursTotal();
   int getNbPionsParJoueur();
-  Joueur* getTableauJoueurs();
+  Joueur** getTableauJoueurs();
 
   void setNomJeuOuVariante(string);
   void setNbJoueursHumains(int);
   void setNbJoueursTotal(int);
   void setNbPionsParJoueur(int);
-  void setTableauJoueurs(Joueur*);
+  void setTableauJoueurs(Joueur**);
 
-  Joueur operator[](int);
+  Joueur* operator[](int);
   
 
 protected:
@@ -44,7 +44,7 @@ protected:
   int nbJoueursHumains; //Parametre donne par l'utilisateur
   int nbJoueursTotal; // (=humains + robots) //Parametre donne par l'utilisateur
   int nbPionsParJoueur;
-  Joueur* tableauJoueurs;
+  Joueur** tableauJoueurs;
   
   //static int idJoueur;
   //static int joueursHumainsCrees;

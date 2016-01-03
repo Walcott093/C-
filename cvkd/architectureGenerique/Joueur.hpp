@@ -7,26 +7,29 @@ using namespace std;
 class Joueur {
 public:
   Joueur();
-  Joueur(int, string, int, Pion*); // id, nom, score, tabPions
+  Joueur(int, string, int, int, Pion**); // id, nom, score, nbPions, tabPions
   virtual ~Joueur();
 
   int getId();
   string getNom();
   int getScore();
-  Pion* getTabPions();
+  int getNbPions();
+  Pion** getTabPions();
 
   void setId(int);
   void setNom(string);
   void setScore(int);
-  void setTabPions(Pion*);
+  void setNbPions(int);
+  void setTabPions(Pion**);
 
 private:
   int id;
   string nom;
   int score;
-  Pion* tabPions;
+  int nbPions;
+  Pion** tabPions;
 
-
+  friend ostream& operator<<(ostream&, Joueur&);
 };
 
 #endif //JOUEUR_HPP

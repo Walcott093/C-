@@ -46,8 +46,6 @@ protected:
   int nbPionsParJoueur;
   Joueur** tableauJoueurs;
   
-  //static int idJoueur;
-  //static int joueursHumainsCrees;
 };
 
 #endif //JEU_HPP

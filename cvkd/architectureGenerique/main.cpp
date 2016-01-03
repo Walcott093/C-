@@ -14,32 +14,18 @@ using namespace std;
 
 
 int main() {
-  /*
-  const int NB_JOUEURS_MAX = 4;
-  const string LISTE_DES_JEUX = "1. Serpent-Echelle \n2. Serpent-Echelle (variante cases bonus/malus) \n3. Serpent-Echelle (variante pedagogique) \n4. Serpent-Echelle (variante a plusieurs pions) \n5. Cartagena (variante) \n6. Numeri";
-  const string ECHELLE_SERPENT = "EchelleSerpent";
-  const string ECHELLE_SERPENT_ORANGE_VERTE = "EchelleSerpentOrangeVerte";
-  const string ECHELLE_SERPENT_PEDAGOGIQUE = "EchelleSerpentPedagogique";
-  const string ECHELLE_SERPENT_PLUSIEURS_PIONS = "EchelleSerpentPlusieursPions";
-  const string CARTAGENA_VARIANTE = "CartagenaVariante";
-  const string NUMERI = "Numeri";
-  */
-
   int choixJeu, nbJoueursHumains, nbJoueursDisponibles, nbJoueursRobots, nbJoueursTotal, nbPionsParJoueur, nbLignesPlateau, nbColonnesPlateau, nbBonus, nbMalus, difficultePedagogique;
-  //int choixTypePlateau, plateauCarreTaille, 
-  //char charCaseSpeciale;
-  //bool boolCaseSpeciale; // Surtout utile pour le jeu Echelle-Serpent et pour l'addition de nouveaux jeux qui laisseraient le choix d'utilisation des cases speciales
 
   Jeu* jeu;
   
 
 
 
-  /****** DEBUT : CHOIX DU NOMBRE DE JOUEURS ROBOTS  ******/
+  /****** DEBUT : CHOIX DU JEU  ******/
   cout << "Choix du jeu :\n" << LISTE_DES_JEUX << endl;
   cin >> choixJeu;
   cin.clear(); // A securiser encore plus si time
-  /****** FIN : CHOIX DU NOMBRE DE JOUEURS ROBOTS  ******/
+  /****** FIN : CHOIX DU JEU  ******/
 
 
 
@@ -86,6 +72,7 @@ int main() {
   case 3:
   case 4:
     nbJoueursTotal = nbJoueursHumains + nbJoueursRobots;
+    cout << "Il y a " << nbJoueursTotal << " joueurs (" << nbJoueursHumains << " humains et " << nbJoueursRobots << " robots)" << endl;
     break;
   default:
     cout << "[main.cpp] : Erreur sur le nombre de joueurs" << endl;
@@ -104,6 +91,9 @@ int main() {
     cin.clear(); // A securiser encore plus si time
   } while(nbLignesPlateau < 4 || 10 < nbLignesPlateau);
   /****** FIN : CHOIX DE LA TAILLE DU PLATEAU (NOMBRE DE LIGNES) ******/
+
+
+
 
   /****** DEBUT : CHOIX DE LA TAILLE DU PLATEAU (NOMBRE DE COLONNES) ******/
   do {

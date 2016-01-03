@@ -10,6 +10,7 @@ static int idJoueur = 0;
 static int joueursHumainsCrees = 0;
 static int joueursRobotsCrees = 0;
 
+/********** DEBUT : CONSTRUCTEURS / DESTRUCTEURS **********/
 Jeu::Jeu(): nomJeuOuVariante(""), nbJoueursHumains(0), nbJoueursTotal(0), nbPionsParJoueur(0), tableauJoueurs(nullptr) {
   cout << "Construction d'un Jeu" << endl;
 }
@@ -31,7 +32,37 @@ Jeu::Jeu(string nom, int nbHumains, int nbTotal, int nbPions, Joueur** tab):
 }
 
 Jeu::~Jeu() { cout << "Destruction d'un Jeu" << endl; }
+/********** FIN : CONSTRUCTEURS / DESTRUCTEURS **********/
 
+
+
+
+/********** DEBUT : ACCESSEURS ET REDEFINITION D'OPERATEUR(S) **********/
+string Jeu::getNomJeuOuVariante() { return nomJeuOuVariante; }
+int Jeu::getNbJoueursHumains() { return nbJoueursHumains; }
+int Jeu::getNbJoueursTotal() { return nbJoueursTotal; }
+int Jeu::getNbPionsParJoueur() { return nbPionsParJoueur; }
+Joueur** Jeu::getTableauJoueurs() { return tableauJoueurs; }
+
+void Jeu::setNomJeuOuVariante(string nom) { nomJeuOuVariante = nom; }
+void Jeu::setNbJoueursHumains(int nb) { nbJoueursHumains = nb; }
+void Jeu::setNbJoueursTotal(int nb) { nbJoueursTotal = nb; }
+void Jeu::setNbPionsParJoueur(int nb) { nbPionsParJoueur = nb; }
+void Jeu::setTableauJoueurs(Joueur** tab) { tableauJoueurs = tab; } //=========================> marche avec l'histoire de pointeur en argument ???
+
+Joueur* Jeu::operator[](int i) { return tableauJoueurs[i]; }
+/********** FIN : ACCESSEURS ET REDEFINITION D'OPERATEUR(S) **********/
+
+
+
+
+/********** DEBUT : FONCTIONS SUPPLEMENTAIRES **********/
+int Jeu::getScoreJoueur(int joueur) { return tableauJoueurs[joueur]->getScore(); }
+
+void Jeu::getScores() {
+  for(int i=0 ; i<nbJoueursTotal ; i++)
+    cout << "Score joueur " << i << ": " << tableauJoueurs[i]->getScore() << endl;
+}
 
 Joueur* Jeu::creationJoueur() {
   string nom;
@@ -76,25 +107,4 @@ Joueur* Jeu::creationJoueur() {
   }
   return new Joueur(idJoueur, nom, score, nbPionsParJoueur, tab);
 }
-
-
-int Jeu::getScoreJoueur(int joueur) { return tableauJoueurs[joueur]->getScore(); }
-
-void Jeu::getScores() {
-  for(int i=0 ; i<nbJoueursTotal ; i++)
-    cout << "Score joueur " << i << ": " << tableauJoueurs[i]->getScore() << endl;
-}
-
-string Jeu::getNomJeuOuVariante() { return nomJeuOuVariante; }
-int Jeu::getNbJoueursHumains() { return nbJoueursHumains; }
-int Jeu::getNbJoueursTotal() { return nbJoueursTotal; }
-int Jeu::getNbPionsParJoueur() { return nbPionsParJoueur; }
-Joueur** Jeu::getTableauJoueurs() { return tableauJoueurs; }
-
-void Jeu::setNomJeuOuVariante(string nom) { nomJeuOuVariante = nom; }
-void Jeu::setNbJoueursHumains(int nb) { nbJoueursHumains = nb; }
-void Jeu::setNbJoueursTotal(int nb) { nbJoueursTotal = nb; }
-void Jeu::setNbPionsParJoueur(int nb) { nbPionsParJoueur = nb; }
-void Jeu::setTableauJoueurs(Joueur** tab) { tableauJoueurs = tab; } //=========================> marche avec l'histoire de pointeur en argument ???
-
-Joueur* Jeu::operator[](int i) { return tableauJoueurs[i]; }
+/********** FIN : FONCTIONS SUPPLEMENTAIRES **********/

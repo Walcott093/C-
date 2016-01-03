@@ -3,12 +3,12 @@
 using namespace std;
 
 EchelleSerpent::EchelleSerpent(string nom, int nbHumains, int nbTotal, int nbPionsParJoueur, int nbLignes, int nbColonnes, int nbE, int nbS, int nbO, int nbV):
-  Jeu(nom, nbHumains, nbTotal, nbPionsParJoueur), taillePlateauLignes(nbLignes), taillePlateauColonnes(nbColonnes), nbCasesEchelles(nbE), nbCasesSerpents(nbS), nbCasesOranges(nbO), nbCasesVertes(nbV) {
+  Jeu(nom, nbHumains, nbTotal, nbPionsParJoueur), taillePlateauLignes(nbLignes), taillePlateauColonnes(nbColonnes), nbCasesEchelles(2*nbE), nbCasesSerpents(2*nbS), nbCasesOranges(nbO), nbCasesVertes(nbV) {
   cout << "Construction d'un jeu EchelleSerpent" << endl;
 }
 
-EchelleSerpent::EchelleSerpent(string nom, int nbHumains, int nbTotal, int nbPionsParJoueur, int* tab, int nbLignes, int nbColonnes, int nbE, int nbS, int nbO, int nbV):
-  Jeu(nom, nbHumains, nbTotal, nbPionsParJoueur, tab), taillePlateauLignes(nbLignes), taillePlateauColonnes(nbColonnes), nbCasesEchelles(nbE), nbCasesSerpents(nbS), nbCasesOranges(nbO), nbCasesVertes(nbV)  {
+EchelleSerpent::EchelleSerpent(string nom, int nbHumains, int nbTotal, int nbPionsParJoueur, Joueur* tab, int nbLignes, int nbColonnes, int nbE, int nbS, int nbO, int nbV):
+  Jeu(nom, nbHumains, nbTotal, nbPionsParJoueur, tab), taillePlateauLignes(nbLignes), taillePlateauColonnes(nbColonnes), nbCasesEchelles(2*nbE), nbCasesSerpents(2*nbS), nbCasesOranges(nbO), nbCasesVertes(nbV)  {
   cout << "Construction d'un jeu EchelleSerpent" << endl;
 }
 
@@ -18,7 +18,7 @@ EchelleSerpent::~EchelleSerpent() {
 
 
 bool EchelleSerpent::finDePartie(Plateau plateau) {
-  Case* c = plateau[plateau.getNbColonnes() -1][plateau.getNbLignes() -1];
+  Case* c = &plateau.getPlateau()[plateau.getNbColonnes() -1][plateau.getNbLignes() -1];
   if(c->getNbPions() >= nbPionsParJoueur) {
     forward_list<Pion> list = c->getListePions();
     int idJoueur = (*list.begin()).getIdJoueur();
@@ -39,7 +39,7 @@ bool EchelleSerpent::finDePartie(Plateau plateau) {
 
 
 int EchelleSerpent::deplacementPion(Plateau plateau, Pion pion) {
-
+  return -1;
 }
 
 

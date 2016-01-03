@@ -3,6 +3,7 @@
 
 #include "Plateau.hpp"
 #include "Pion.hpp"
+#include "Joueur.hpp"
 using namespace std;
 
 /***** CLASSE ABSTRAITE *****/
@@ -16,9 +17,10 @@ protected:
 public:
   Jeu();
   Jeu(string, int, int, int); // nomJeuOuVariante, nbJoueursHumains, nbJoueursTotal, nbPionsParJoueur
-  Jeu(string, int, int, int, int*); // nomJeuOuVariante, nbJoueursHumains, nbJoueursTotal, nbPionsParJoueur, tableauScoreJoueur
+  Jeu(string, int, int, int, Joueur*); // nomJeuOuVariante, nbJoueursHumains, nbJoueursTotal, nbPionsParJoueur, tableauJoueurs
   virtual ~Jeu();
 
+  Joueur creationJoueur();
   int getScoreJoueur(int); //Recuperer le score d'un joueur en donnant son id
   void getScores(); //Afficher les scores de tous les joueurs
 
@@ -26,23 +28,26 @@ public:
   int getNbJoueursHumains();
   int getNbJoueursTotal();
   int getNbPionsParJoueur();
-  int* getTableauScoreJoueur();
+  Joueur* getTableauJoueurs();
+
   void setNomJeuOuVariante(string);
   void setNbJoueursHumains(int);
   void setNbJoueursTotal(int);
-  void setTableauScoreJoueur(int*);
   void setNbPionsParJoueur(int);
+  void setTableauJoueurs(Joueur*);
 
-  int operator[](int);
+  Joueur operator[](int);
   
 
-private:
+protected:
   string nomJeuOuVariante;
   int nbJoueursHumains; //Parametre donne par l'utilisateur
   int nbJoueursTotal; // (=humains + robots) //Parametre donne par l'utilisateur
-  int* tableauScoreJoueur; // (length = nbJoueursTotal + 1 : [0] = nbJoueursTotal : pour que J1 commence a l'indice 1)
   int nbPionsParJoueur;
+  Joueur* tableauJoueurs;
   
+  //static int idJoueur;
+  //static int joueursHumainsCrees;
 };
 
 #endif //JEU_HPP

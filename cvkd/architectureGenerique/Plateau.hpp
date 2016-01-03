@@ -1,7 +1,6 @@
 #ifndef PLATEAU_HPP
 #define PLATEAU_HPP
 
-#include "Jeu.hpp"
 #include "Case.hpp"
 using namespace std;
 
@@ -10,33 +9,39 @@ using namespace std;
 //template <class T> // Contient le type de case
 class Plateau {
 public:
-  Plateau(Jeu*, int, int); // jeu, nbLignes, nbColonnes
-  //Plateau(Jeu*, int, int, Case**); // jeu, nbLignes, nbColonnes, plateau
+  Plateau(int, int, string, int, int); // nbLignes, nbColonnes, plateauNomJeu, plateauNbPionsParJoueur, plateauNbJoueursTotal
+  //Plateau(Jeu*, int, int, Case**); // nbLignes, nbColonnes, plateau, plateauNomJeu, plateauNbPionsParJoueur, plateauNbJoueursTotal
   virtual ~Plateau();
 
-  Jeu* getJeu();
   int getNbLignes();
   int getNbColonnes();
-  //T** getPlateau();
+  string getPlateauNomJeu();
+  int getPlateauNbPionsParJoueur();
+  int getPlateauNbJoueursTotal();
   Case** getPlateau();
-  void setJeu(Jeu*);
+
   void setNbLignes(int);
   void setNbColonnes(int);
+  void setPlateauNomJeu(string);
+  void setPlateauNbPionsParJoueur(int);
+  void setPlateauNbJoueursTotal(int);
   void setPlateau(Case**);
 
 private:  
-  Jeu* jeu;
   int nbLignes;
   int nbColonnes;
+  string plateauNomJeu;
+  int plateauNbPionsParJoueur;
+  int plateauNbJoueursTotal;
 
   //T** plateau; // + fonction initPlateau()
   Case** plateau; // en fonction abstract CA VA PLUTOT ETRE CA JE PENSE
-  // EN UTLILISATN UN STRING POUR SAVOIR DE QUEL TYPE DE CASE IL S'AGIT
+  // EN UTILISANT UN STRING POUR SAVOIR DE QUEL TYPE DE CASE IL S'AGIT
 
   //int nbCasesSpeciales;
   friend ostream& operator<<(ostream&, Plateau&);
   //Case* operator[](int, int);
-  Case* operator[][](int, int);
+  //Case* operator[][](int, int);
 };
 
 #endif //PLATEAU_HPP

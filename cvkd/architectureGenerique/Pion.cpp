@@ -2,7 +2,7 @@
 #include "Pion.hpp"
 using namespace std;
 
-Pion::Pion() {
+Pion::Pion(): idJoueur(0), id(0), couleur(""), x(0), y(0) {
   cout << "                              Construction d'un Pion par defaut" << endl;
 }
 

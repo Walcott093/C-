@@ -15,7 +15,8 @@ public:
   Case();
   
   Case(int, int, int, int);
-  Case(int, int, int, int, forward_list<Pion>, int*); // Sert pour la premiere case ou se trouvent tous les pions au debut, ou pour modifier une case en cours de partie si un jeu le permet
+  Case(int, int, int, int, forward_list<Pion>); // Sert pour la premiere case ou se trouvent tous les pions au debut, ou pour modifier une case en cours de partie si un jeu le permet
+  //  Case(int, int, int, int, forward_list<Pion>, int*); // Sert pour la premiere case ou se trouvent tous les pions au debut, ou pour modifier une case en cours de partie si un jeu le permet
   virtual ~Case();
 
   bool isEmpty();
@@ -30,21 +31,21 @@ public:
   int getY();
   int getNbPionsMax();
   int getNbPions();
-  int* getTableauIdJoueurs();
+  //int* getTableauIdJoueurs();
   forward_list<Pion> getListePions();
   //Pion* getTableauPions();
   void setX(int);
   void setY(int);
   void setNbPionsMax(int);
   void setNbPions(int);
-  void setTableauIdJoueurs(int*);
+  //void setTableauIdJoueurs(int*);
   void setListePions(forward_list<Pion>);
   //void setTableauPions(Pion*);
 
   //const int NB_JOUEURS_MAX = 4;
 
 
-private:
+protected:
   int x;
   int y;
 
@@ -52,7 +53,7 @@ private:
   int nbPions;
   forward_list<Pion> listePions;
   //Pion* tableauPions; // Tableau de pointeurs de Pion
-  int* tableauIdJoueurs; // (length = Jeu::nbJoueursTotal + 1 : [0] = nbJoueursTotal : pour que J1 commence a l'indice 1)
+  //int* tableauIdJoueurs; // (length = Jeu::nbJoueursTotal + 1 : [0] = nbJoueursTotal : pour que J1 commence a l'indice 1)
 
   //protected:
 

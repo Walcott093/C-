@@ -13,6 +13,40 @@ using namespace std;
 int main() {
   cout << "Hello !" << endl;
 
+ 
+  
+  int idPion = 0;
+  
+  Pion** tab = new Pion*[5];
+  
+  for(int i=0; i<5 ; i++) {
+    //Pion p(0, idPion++, "BLEU", 0, 0);
+    //tab[i] = &p;
+    tab[i] = new Pion(0, idPion++, "BLEU", 0, 0);
+    cout << "tab[i] = " << *tab[i] << endl;
+  }
+  
+  
+  for(int i=0 ; i<5 ; i++) {
+    cout << "tab[" << i << "] = " << *tab[i] << endl;
+  }
+
+
+  
+  /*
+  Pion p1(1, 1, "bleu", 0, 0);
+  cout << "p1= \n" << p1 << endl;
+  
+  Pion p2(4, 2, "violet", 6, 7);
+  cout << "p2= \n" << p2 << endl;
+
+  Pion p3(1, 2, "rose", 1, 1);
+  cout << "p3= \n" << p3 << endl;
+  */
+  
+
+
+  /*
   int nbCases, nbCasesNonNeutres;
   cout << "(nbCases, nbCasesNonNeutres) : " << endl;
   cin >> nbCases;
@@ -25,10 +59,9 @@ int main() {
   srand(time(nullptr));
 
   do {
-    switch(nomVariante) {
-    case ECHELLE_SERPENT:
-    case ECHELLE_SERPENT_PEDAGOGIQUE:
-    case ECHELLE_SERPENT_PLUSIEURS_PIONS:
+    if(nomVariante == ECHELLE_SERPENT
+       || nomVariante == ECHELLE_SERPENT_PEDAGOGIQUE
+       || nomVariante == ECHELLE_SERPENT_PLUSIEURS_PIONS) {
       x = (rand() % nbCases--) +1;
       if(1 <= x && x <= nbCasesNonNeutres) {  
 	ret = (rand() % NB_SPECIFICITES_ES) +1; // 1 (ECHELLE) ou 2 (SERPENT)
@@ -36,9 +69,8 @@ int main() {
       }
       else
 	ret = NEUTRE; // 0
-      break;
-
-    case ECHELLE_SERPENT_ORANGE_VERTE:
+    }
+    else if(nomVariante == ECHELLE_SERPENT_ORANGE_VERTE) {
       x = (rand() % nbCases--) +1;
       if(1 <= x && x <= nbCasesNonNeutres) {  
 	ret = (rand() % NB_SPECIFICITES_ESOV) +1; // 1 (ECHELLE) ou 2 (SERPENT) ou 3 (ORANGE) ou 4 (VERTE)
@@ -46,15 +78,15 @@ int main() {
       }
       else
 	ret = NEUTRE; // 0
-      break;
-
-    default:
-      cout << "[CaseEchelleSerpent.cpp] Erreur : Nom de variante non reconnu" << endl;
-      break;
     }
-    
+    else
+      cout << "[CaseEchelleSerpent.cpp] Erreur : Nom de variante non reconnu" << endl;
+
     cout << "ret = " << ret << endl;
-  } while(nbCases == 0);
+  } while(nbCases > 0);
+*/
+
+
 
 
 
@@ -242,3 +274,29 @@ int main() {
  
   return 0;
 }
+
+
+
+
+/*
+GOALS = test
+HEADERS_DIR = .
+ES_DIR = ../jeux/EchelleSerpent/
+all : $(GOALS)
+
+test : Pion.o Case.o CaseNormale.o ../jeux/EchelleSerpent/CaseEchelleSerpent.o test.o
+	g++ -std=c++11 -o test Pion.o Case.o CaseNormale.o CaseEchelleSerpent.o test.o
+Pion.o : Pion.cpp Case.hpp
+	g++ -std=c++11 -Wall -I $(HEADERS_DIR) -c Pion.cpp
+Case.o : Case.cpp Pion.hpp Constantes.hpp
+	g++ -std=c++11 -Wall -I $(HEADERS_DIR) -c Case.cpp
+CaseNormale.o : CaseNormale.cpp Case.hpp
+	g++ -std=c++11 -Wall -I $(HEADERS_DIR) -c CaseNormale.cpp
+ ../jeux/EchelleSerpent/CaseEchelleSerpent.o :  ../jeux/EchelleSerpent/CaseEchelleSerpent.cpp  Case.hpp
+	g++ -std=c++11 -Wall -I $(HEADERS_DIR) -c  ../jeux/EchelleSerpent/CaseEchelleSerpent.cpp
+test.o : test.cpp Constantes.hpp Pion.hpp Case.hpp CaseNormale.hpp ../jeux/EchelleSerpent/CaseEchelleSerpent.hpp
+	g++ -std=c++11 -Wall -I $(HEADERS_DIR) -c test.cpp
+
+clean :
+	rm *.o $(GOALS)
+*/

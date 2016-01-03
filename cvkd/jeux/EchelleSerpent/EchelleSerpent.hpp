@@ -11,7 +11,7 @@ protected:
 
 public:
   EchelleSerpent(string, int, int, int, int, int, int, int, int, int); // nomJeuOuVariante, nbJoueursHumains, nbJoueursTotal, nbPionsParJoueur, taillePlateauLignes, taillePlateauColonnes, nbCasesEchelles, nbCasesSerpents, nbCasesOranges, nbCasesVertes
-  EchelleSerpent(string, int, int, int, int*, int, int, int, int, int, int); // nomJeuOuVariante, nbJoueursHumains, nbJoueursTotal, nbPionsParJoueur, tableauScoreJoueur, taillePlateauLignes, taillePlateauColonnes, nbCasesEchelles, nbCasesSerpents, nbCasesOranges, nbCasesVertes
+  EchelleSerpent(string, int, int, int, Joueur*, int, int, int, int, int, int); // nomJeuOuVariante, nbJoueursHumains, nbJoueursTotal, nbPionsParJoueur, tableauJoueurs, taillePlateauLignes, taillePlateauColonnes, nbCasesEchelles, nbCasesSerpents, nbCasesOranges, nbCasesVertes
   virtual ~EchelleSerpent();
 
   int getTaillePlateauLignes();

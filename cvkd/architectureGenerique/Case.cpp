@@ -17,8 +17,10 @@ Case::~Case() {
 Case::Case(int abs, int ord, int nbMax, int nb):
   x(abs), y(ord), nbPionsMax(nbMax), nbPions(nb) {
 
+  /*
   tableauIdJoueurs = new int[NB_JOUEURS_MAX +1];
   tableauIdJoueurs[0] = 0;
+  */
 
   // forward_list par defaut vide
   //tableauPions = new Pion[nbMax];
@@ -26,11 +28,16 @@ Case::Case(int abs, int ord, int nbMax, int nb):
   cout << "                              Construction de la case : " << *this << endl;
 }
 
+Case::Case(int abs, int ord, int nbMax, int nb, forward_list<Pion> pions):
+  x(abs), y(ord), nbPionsMax(nbMax), nbPions(nb), listePions(pions) {
+  cout << "                              Construction de la case : " << *this <<endl;
+}
+/*
 Case::Case(int abs, int ord, int nbMax, int nb, forward_list<Pion> pions, int* tabId):
   x(abs), y(ord), nbPionsMax(nbMax), nbPions(nb), listePions(pions), tableauIdJoueurs(tabId) {
   cout << "                              Construction de la case : " << *this <<endl;
 }
-
+*/
 
 
 
@@ -109,7 +116,7 @@ int Case::getX() { return x; }
 int Case::getY() { return y; }
 int Case::getNbPionsMax() { return nbPionsMax; }
 int Case::getNbPions() { return nbPions; }
-int* Case::getTableauIdJoueurs() { return tableauIdJoueurs; }
+//int* Case::getTableauIdJoueurs() { return tableauIdJoueurs; }
 forward_list<Pion> Case::getListePions() { return listePions; }
 //Pion* Case::getTableauPions() { return tableauPions; }
 
@@ -117,7 +124,7 @@ void Case::setX(int new_x) { x = new_x; }
 void Case::setY(int new_y) { y = new_y; }
 void Case::setNbPionsMax(int a) { nbPionsMax = a; }
 void Case::setNbPions(int a) { nbPions = a; }
-void Case::setTableauIdJoueurs(int* a) { tableauIdJoueurs = a; }
+//void Case::setTableauIdJoueurs(int* a) { tableauIdJoueurs = a; }
 void Case::setListePions(forward_list<Pion> fl) { listePions = fl; }
 //void Case::setTableauPions(Pion* a) { tableauPions = a; }
 
@@ -125,7 +132,8 @@ ostream& operator<<(ostream& o, Case& c) {
   //o << "\n";
   o << "<CASE: (" << c.x << ", " << c.y << "), "
     << "nbPions=" << c.nbPions << ", "
-    << "nbPionsMax=" << c.nbPionsMax << ", "
+    << "nbPionsMax=" << c.nbPionsMax << ", ";
+    /*
     << "tableauIdJoueurs=[";
 
   for(int i=1 ; i<c.tableauIdJoueurs[0]; i++)
@@ -134,7 +142,7 @@ ostream& operator<<(ostream& o, Case& c) {
     o << c.tableauIdJoueurs[c.tableauIdJoueurs[0]] << "], ";
   else
     o << "], ";
-
+    */
 
   o << "listePions=[";
   switch(c.nbPions) {

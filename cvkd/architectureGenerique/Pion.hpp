@@ -1,29 +1,23 @@
 #ifndef PION_HPP
 #define PION_HPP
 
-//#include "Case.hpp"
 using namespace std;
 
 class Pion {
 public:
   Pion();
-  //Pion(int, int, string, Case);
-  Pion(int, int, string, int, int);
+  Pion(int, int, string, int); //idJoueur, id, couleur, position
   virtual ~Pion();
   
   int getIdJoueur();
   int getId();
   string getCouleur();
-  //Case* getCase();
-  int getX();
-  int getY();
+  int getPosition();
   
   void setIdJoueur(int);
   void setId(int);
   void setCouleur(string);
-  //void setCase(Case*);
-  void setX(int);
-  void setY(int);
+  void setPosition(int);
 
   bool operator==(const Pion&);
   
@@ -31,10 +25,8 @@ private:
   int idJoueur;
   int id;
   string couleur;
-  //Case* case;
-  int x;
-  int y;
-  
+  int position; // position sur le plateau (Case*)
+
   friend ostream& operator<<(ostream&, Pion&);
 
 };

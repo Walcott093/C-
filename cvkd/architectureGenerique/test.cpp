@@ -1,12 +1,14 @@
 #include <iostream>
 #include <forward_list>
-
+/*
 #include "Constantes.hpp"
 #include "Pion.hpp"
 #include "Case.hpp"
 #include "Joueur.hpp"
 #include "CaseNormale.hpp"
 #include "../jeux/EchelleSerpent/CaseEchelleSerpent.hpp"
+//#include "Plateau.hpp"
+*/
 using namespace std;
 
 static int idJoueur = 0;
@@ -16,11 +18,66 @@ static int nbJoueursHumains = 2;
 static int nbJoueursTotal = 4;
 static int nbPionsParJoueur = 4;
 
-Joueur* creationJoueur();
+//Joueur* creationJoueur();
 
+
+
+void affichage(int* p, int nbCases, int nbLignes, int nbColonnes){
+  int cptLignes = nbLignes; //int cptLignes = p.getNbLignes();
+  int cptColonnes = nbColonnes; //int cptColonnes = p.getNbColonnes(); //= 1;
+  for(int i=nbCases ; i>=1 ; i-=nbColonnes) {
+    cout << "|";
+    if(cptLignes % 2 == 1) { // Si ligne impaire : sensPion = g->d ; sensAffichage = d->g
+      for(int c=nbColonnes-1 ; c>=0 ; c--)//for(int c=p.getNbColonnes()-1 ; c>=0 ; c--)
+	cout << p[i -c -1] << "|"; //o << p.plateau[i -c] << "|";
+      cout << endl;
+      cptLignes--;
+    }
+    else { // Si ligne paire : sensPion = d->g ; sensAffichage = g->d
+      for(int c=0 ; c<=nbColonnes-1 ; c++) { //for(int c=0 ; c<=p.getNbColonnes()-1 ; c++) {
+	cout << p[i -c -1] << "|"; //o << p.plateau[i -c] << "|";
+      }
+      cout << endl;
+      cptLignes--;
+    }
+  }
+
+  /*
+  for(int i=p.getNbCases() ; i>=1 ; i-=p.getNbColonnes()) {
+    o << "|";
+    if(cptLignes % 2 == 1) { // Si ligne impaire : sensPion = g->d ; sensAffichage = d->g
+      for(int c=p.getNbColonnes()-1 ; c>=0 ; c--)
+	o << p.plateau[i -c] << "|";
+      cptLignes--;
+    }
+    else { // Si ligne paire : sensPion = d->g ; sensAffichage = g->d
+      for(int c=0 ; c<=p.getNbColonnes()-1 ; c++) {
+	o << p.plateau[i -c] << "|";
+      }
+      cptLignes--;
+    }
+  }
+
+  return o;
+*/
+}
 
 int main() {
   cout << "Hello !" << endl;
+
+  int p[50];
+  for(int i=0 ; i<50 ; i++)
+    p[i] = i;
+  
+  affichage(p, 12, 3, 4);
+  cout << endl;
+  affichage(p, 12, 4, 3);
+  cout << endl;
+  affichage(p, 25, 5, 5);
+  cout << endl;
+  affichage(p, 49, 7, 7);
+  cout << endl;
+  affichage(p, 36, 6, 6);
 
 
   /*
@@ -300,31 +357,9 @@ int main() {
 
 
 
+
+
 /*
-GOALS = test
-HEADERS_DIR = .
-ES_DIR = ../jeux/EchelleSerpent/
-all : $(GOALS)
-
-test : Pion.o Case.o CaseNormale.o ../jeux/EchelleSerpent/CaseEchelleSerpent.o test.o
-	g++ -std=c++11 -o test Pion.o Case.o CaseNormale.o CaseEchelleSerpent.o test.o
-Pion.o : Pion.cpp Case.hpp
-	g++ -std=c++11 -Wall -I $(HEADERS_DIR) -c Pion.cpp
-Case.o : Case.cpp Pion.hpp Constantes.hpp
-	g++ -std=c++11 -Wall -I $(HEADERS_DIR) -c Case.cpp
-CaseNormale.o : CaseNormale.cpp Case.hpp
-	g++ -std=c++11 -Wall -I $(HEADERS_DIR) -c CaseNormale.cpp
- ../jeux/EchelleSerpent/CaseEchelleSerpent.o :  ../jeux/EchelleSerpent/CaseEchelleSerpent.cpp  Case.hpp
-	g++ -std=c++11 -Wall -I $(HEADERS_DIR) -c  ../jeux/EchelleSerpent/CaseEchelleSerpent.cpp
-test.o : test.cpp Constantes.hpp Pion.hpp Case.hpp CaseNormale.hpp ../jeux/EchelleSerpent/CaseEchelleSerpent.hpp
-	g++ -std=c++11 -Wall -I $(HEADERS_DIR) -c test.cpp
-
-clean :
-	rm *.o $(GOALS)
-*/
-
-
-
 Joueur* creationJoueur() {
   string nom;
   if(joueursHumainsCrees < nbJoueursHumains) {
@@ -368,3 +403,4 @@ Joueur* creationJoueur() {
   }
   return new Joueur(idJoueur, nom, score, nbPionsParJoueur, tab);
 }
+*/

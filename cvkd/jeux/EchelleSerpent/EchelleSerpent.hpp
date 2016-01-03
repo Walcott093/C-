@@ -20,6 +20,7 @@ public:
   int getNbCasesSerpents();
   int getNbCasesOranges();
   int getNbCasesVertes();
+
   void setTaillePlateauLignes(int);
   void setTaillePlateauColonnes(int);
   void setNbCasesEchelles(int);

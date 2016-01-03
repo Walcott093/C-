@@ -13,10 +13,8 @@ protected:
 
 
 public:
-  CaseEchelleSerpent(int, int, int, int, EchelleSerpent, bool); // abs, ord, nbPionsMax, nbPions, jeuVariante, isObjetEchelleSerpent
-  CaseEchelleSerpent(int, int, int, int, forward_list<Pion>, EchelleSerpent, bool); // abs, ord, nbPionsMax, nbPions, listePions, jeuVariante, isObjetEchelleSerpent
-  // Sert pour la premiere case ou se trouvent tous les pions au debut, ou pour modifier une case en cours de partie si un jeu le permet
-  //CaseEchelleSerpent(int, int, int, int, forward_list<Pion>, int*, EchelleSerpent, bool); // abs, ord, nbPionsMax, nbPions, listePions, tableauIdJoueurs, jeuVariante, isObjetEchelleSerpent
+  CaseEchelleSerpent(int, int, int, EchelleSerpent, bool); // position, nbPionsMax, nbPions, jeuVariante, isObjetEchelleSerpent
+  CaseEchelleSerpent(int, int, int, forward_list<Pion>, EchelleSerpent, bool); // position, nbPionsMax, nbPions, listePions, jeuVariante, isObjetEchelleSerpent
   // Sert pour la premiere case ou se trouvent tous les pions au debut, ou pour modifier une case en cours de partie si un jeu le permet
   virtual ~CaseEchelleSerpent();
 
@@ -24,25 +22,17 @@ public:
   bool getIsObjetEchelleSerpent();
   ObjetEchelleSerpent* getObj();
   int getSpecificiteCase();
-  int getNbCases();
-  int getNbCasesNonNeutres();
-  bool getTeteQueue();
 
   void setJeuVariante(EchelleSerpent);
   void setIsObjetEchelleSerpent(bool);
   void setObj(ObjetEchelleSerpent*);
   void setSpecificiteCase(int);
-  void setNbCases(int);
-  void setNbCasesNonNeutres(int);
-  void setTeteQueue(bool);
   
 private:
   EchelleSerpent jeuVariante;
-  int specificiteCase;
-
   bool isObjetEchelleSerpent;
   ObjetEchelleSerpent* obj;
-
+  int specificiteCase;
 
   //bool variantePedagogique;
   //bool variantePlusieursPions;

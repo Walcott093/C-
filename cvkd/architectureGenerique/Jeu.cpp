@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Jeu.hpp"
-#include "Constantes.hpp"
 using namespace std;
 
 /***** CLASSE ABSTRAITE *****/

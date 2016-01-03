@@ -1,26 +1,19 @@
 #include <iostream>
 #include "Plateau.hpp"
 
-#include "Constantes.hpp"
-#include "../jeux/EchelleSerpent/CaseEchelleSerpent.hpp"
-//#include "../jeux/CartagenaVariante/CaseCartagena.hpp"
-//#include "../jeux/Numeri/CaseNumeri.hpp"
-
 using namespace std;
 
 
-
-// MODIFIER DE TELLE SORTE A METTRE BONUS ET MALUS
-
+/********** DEBUT : CONSTRUCTEURS / DESTRUCTEURS **********/
 Plateau::Plateau(int rangeOrd, int rangeAbs, string nom, int nbPJ, int nbJT):
-  nbLignes(rangeOrd), nbColonnes(rangeAbs), plateauNomJeu(nom), plateauNbPionsParJoueur(nbPJ), plateauNbJoueursTotal(nbJT) {
+  nbLignes(rangeOrd), nbColonnes(rangeAbs), nbCases(rangeOrd*rangeAbs), plateauNomJeu(nom), plateauNbPionsParJoueur(nbPJ), plateauNbJoueursTotal(nbJT) {
 
-  /*
+  
   if(plateauNomJeu == ECHELLE_SERPENT) {
     int nbPionsMax = plateauNbPionsParJoueur * plateauNbJoueursTotal;
-    for(int i=0 ; i<rangeAbs -1 ; i++)
-      for(int j=0 ; j<rangeOrd -1 ; j++)
-	plateau[i][j] = new CaseEchelleSerpent(i, j, nbPionsMax, 0, ...);
+    for(int i=0 ; i<nbCases ; i++)
+      plateau[i] = new CaseEchelleSerpent(i, nbPionsMax, 0, 
+
   }
 
   /*
@@ -70,40 +63,53 @@ Plateau::Plateau(int rangeOrd, int rangeAbs, string nom, int nbPJ, int nbJT):
   cout << "Creation d'un Plateau de taille : " << nbLignes << "*" << nbColonnes << endl;
 }
 
-
 Plateau::~Plateau() {
   cout << "Destruction d'un Plateau" << endl;
 }
+/********** FIN : CONSTRUCTEURS / DESTRUCTEURS **********/
 
 
+
+
+/********** DEBUT : ACCESSEURS ET REDEFINITION D'OPERATEUR(S) **********/
 int Plateau::getNbLignes() { return nbLignes; }
 int Plateau::getNbColonnes() { return nbColonnes; }
+int Plateau::getNbCases() { return nbCases; }
 string Plateau::getPlateauNomJeu() { return plateauNomJeu; }
 int Plateau::getPlateauNbPionsParJoueur() { return plateauNbPionsParJoueur; }
 int Plateau::getPlateauNbJoueursTotal() { return plateauNbJoueursTotal; }
-Case** Plateau::getPlateau() { return plateau; }
+Case* Plateau::getPlateau() { return plateau; }
+
 void Plateau::setNbLignes(int a) { nbLignes = a; }
 void Plateau::setNbColonnes(int a) { nbColonnes = a; }
+void Plateau::setNbCases(int a) { nbCases = a; }
 void Plateau::setPlateauNomJeu(string s) { plateauNomJeu = s; }
 void Plateau::setPlateauNbPionsParJoueur(int i) { plateauNbPionsParJoueur = i; }
 void Plateau::setPlateauNbJoueursTotal(int i) { plateauNbJoueursTotal = i; }
-void Plateau::setPlateau(Case** c) { plateau = c; }
-
+void Plateau::setPlateau(Case* c) { plateau = c; }
 
 ostream& operator<<(ostream& o,Plateau& p){
-  for(int i=p.getNbLignes()-1 ; i>=0 ; i --){
-      o << "|";
-    for(int j=0 ; j<p.getNbColonnes() ; j++)
-      o << p.plateau[i][j] << "|";
-    o << endl;
+  int cptLignes = p.getNbLignes();
+  int cptColonnes = p.getNbColonnes(); //= 1;
+  for(int i=p.getNbCases() ; i>=1 ; i-=p.getNbColonnes()) {
+    o << "|";
+    if(cptLignes % 2 == 1) { // Si ligne impaire : sensPion = g->d ; sensAffichage = d->g
+      for(int c=p.getNbColonnes()-1 ; c>=0 ; c--)
+	o << p.plateau[i -c -1] << "|";
+      o << endl;
+      cptLignes--;
+    }
+    else { // Si ligne paire : sensPion = d->g ; sensAffichage = g->d
+      for(int c=0 ; c<=p.getNbColonnes()-1 ; c++)
+	o << p.plateau[i -c -1] << "|";
+      o << endl;
+      cptLignes--;
+    }
   }
   return o;
 }
 
-/*
-Case* Plateau::operator[](int x, int y) {
-  return &(plateau[x][y]);
-Case* Plateau::operator[][](int x, int y) {
-  return &plateau[x][y];
+Case Plateau::operator[](int pos) {
+  return plateau[pos];
 }
-*/
+/********** FIN : ACCESSEURS ET REDEFINITION D'OPERATEUR(S) **********/

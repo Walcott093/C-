@@ -1,6 +1,7 @@
 #ifndef JEU_HPP
 #define JEU_HPP
 
+#include "Constantes.hpp"
 #include "Plateau.hpp"
 #include "Pion.hpp"
 #include "Joueur.hpp"

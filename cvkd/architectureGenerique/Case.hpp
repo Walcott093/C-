@@ -1,6 +1,7 @@
 #ifndef CASE_HPP
 #define CASE_HPP
 
+#include "Constantes.hpp"
 #include "Pion.hpp"
 #include <forward_list>
 
@@ -13,49 +14,33 @@ protected:
 
 public:
   Case();
-  
-  Case(int, int, int, int);
-  Case(int, int, int, int, forward_list<Pion>); // Sert pour la premiere case ou se trouvent tous les pions au debut, ou pour modifier une case en cours de partie si un jeu le permet
-  //  Case(int, int, int, int, forward_list<Pion>, int*); // Sert pour la premiere case ou se trouvent tous les pions au debut, ou pour modifier une case en cours de partie si un jeu le permet
+
+  Case(int, int, int); //position, nbPionsMax, nbPions
+  Case(int, int, int, forward_list<Pion>); //position, nbPionsMax, nbPions, listePions  // Sert pour la premiere case ou se trouvent tous les pions au debut, ou pour modifier une case en cours de partie si un jeu le permet
   virtual ~Case();
 
   bool isEmpty();
   bool ajouterPion(Pion);
   bool ajouterPions(forward_list<Pion>, int);
-  //bool ajouterPions(Pion*, int);
   bool retirerPion(Pion);
   bool retirerPions(forward_list<Pion>, int);
-  //bool retirerPions(Pion*, int);
 
-  int getX();
-  int getY();
+  int getPosition();
   int getNbPionsMax();
   int getNbPions();
-  //int* getTableauIdJoueurs();
   forward_list<Pion> getListePions();
-  //Pion* getTableauPions();
-  void setX(int);
-  void setY(int);
+
+  void setPosition(int);
   void setNbPionsMax(int);
   void setNbPions(int);
-  //void setTableauIdJoueurs(int*);
   void setListePions(forward_list<Pion>);
-  //void setTableauPions(Pion*);
-
-  //const int NB_JOUEURS_MAX = 4;
 
 
 protected:
-  int x;
-  int y;
-
-  int nbPionsMax; //= Jeu::nbJoueursTotal * (Jeu::nbPionsParJoueur -1) +1 (dès qu'un joueur a mis tous ses pions la partie se termine)
+  int position; // position sur le plateau (Case*)
+  int nbPionsMax; //= Jeu::nbJoueursTotal * Jeu::nbPionsParJoueur
   int nbPions;
   forward_list<Pion> listePions;
-  //Pion* tableauPions; // Tableau de pointeurs de Pion
-  //int* tableauIdJoueurs; // (length = Jeu::nbJoueursTotal + 1 : [0] = nbJoueursTotal : pour que J1 commence a l'indice 1)
-
-  //protected:
 
   friend ostream& operator<<(ostream&, Case&);
 };

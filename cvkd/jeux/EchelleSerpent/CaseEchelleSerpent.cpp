@@ -1,5 +1,4 @@
 #include <iostream>
-//#include "../../architectureGenerique/Constantes.hpp"
 #include "CaseEchelleSerpent.hpp"
 using namespace std;
 
@@ -7,12 +6,15 @@ using namespace std;
 /*** DEBUT : Sert a la repartition des cases par probabilite ***/
 static int nbCases;
 static int nbCasesNonNeutres;
-static bool teteQueue;
+static bool teteQueue; // pe inutile avec la classe ObjetEchelleSerpent
 /*** FIN : Sert a la repartition des cases par probabilite ***/
 
 
-CaseEchelleSerpent::CaseEchelleSerpent(int abs, int ord, int nbMax, int nb, EchelleSerpent jeu, bool boo):
-  Case(abs, ord, nbMax, nb), jeuVariante(jeu), isObjetEchelleSerpent(boo) {
+
+
+/********** DEBUT : CONSTRUCTEURS / DESTRUCTEURS **********/
+CaseEchelleSerpent::CaseEchelleSerpent(int position, int nbMax, int nb, EchelleSerpent jeu, bool boo):
+  Case(position, nbMax, nb), jeuVariante(jeu), isObjetEchelleSerpent(boo) {
 
   if(isObjetEchelleSerpent)
     obj = new ObjetEchelleSerpent();
@@ -30,26 +32,37 @@ CaseEchelleSerpent::CaseEchelleSerpent(int abs, int ord, int nbMax, int nb, Eche
   cout << "                              Construction de la CaseEchelleSerpent : " << *this << endl;
 }
 
-CaseEchelleSerpent::CaseEchelleSerpent(int abs, int ord, int nbMax, int nb, forward_list<Pion> pions, EchelleSerpent jeu, bool boo):
-  Case(abs, ord, nbMax, nb, pions), jeuVariante(jeu), isObjetEchelleSerpent(boo) {
+CaseEchelleSerpent::CaseEchelleSerpent(int position, int nbMax, int nb, forward_list<Pion> pions, EchelleSerpent jeu, bool boo):
+  Case(position, nbMax, nb, pions), jeuVariante(jeu), isObjetEchelleSerpent(boo) {
   specificiteCase = randomSpecificite();
 
   cout << "                              Construction de la CaseEchelleSerpent : " << *this <<endl;
 }
-/*
-CaseEchelleSerpent::CaseEchelleSerpent(int abs, int ord, int nbMax, int nb, forward_list<Pion> pions, int* tabId, EchelleSerpent jeu, bool boo):
-  Case(abs, ord, nbMax, nb, pions, tabId), jeuVariante(jeu), isObjetEchelleSerpent(boo) {
-  specificiteCase = randomSpecificite();
-
-  cout << "                              Construction de la CaseEchelleSerpent : " << *this <<endl;
-}
-*/
 
 CaseEchelleSerpent::~CaseEchelleSerpent() {
   cout << "                              Destruction de la CaseEchelleSerpent : " << *this << endl;
 }
+/********** FIN : CONSTRUCTEURS / DESTRUCTEURS **********/
 
 
+
+
+/********** DEBUT : ACCESSEURS ET REDEFINITION D'OPERATEUR(S) **********/
+EchelleSerpent CaseEchelleSerpent::getJeuVariante() { return jeuVariante; }
+bool CaseEchelleSerpent::getIsObjetEchelleSerpent() { return isObjetEchelleSerpent; }
+ObjetEchelleSerpent* CaseEchelleSerpent::getObj() { return obj; }
+int CaseEchelleSerpent::getSpecificiteCase() { return specificiteCase; }
+
+void CaseEchelleSerpent::setJeuVariante(EchelleSerpent es) { jeuVariante = es; }
+void CaseEchelleSerpent::setIsObjetEchelleSerpent(bool b) { isObjetEchelleSerpent = b; }
+void CaseEchelleSerpent::setObj(ObjetEchelleSerpent* oes) { obj = oes; }
+void CaseEchelleSerpent::setSpecificiteCase(int s) { specificiteCase = s; }
+/********** FIN : ACCESSEURS ET REDEFINITION D'OPERATEUR(S) **********/
+
+
+
+
+/********** DEBUT : FONCTIONS SUPPLEMENTAIRES **********/
 int CaseEchelleSerpent::randomSpecificite() {
   int ret = 0;
   int x = 0;
@@ -81,20 +94,4 @@ int CaseEchelleSerpent::randomSpecificite() {
   
   return ret;
 }
-
-
-EchelleSerpent CaseEchelleSerpent::getJeuVariante() { return jeuVariante; }
-bool CaseEchelleSerpent::getIsObjetEchelleSerpent() { return isObjetEchelleSerpent; }
-ObjetEchelleSerpent* CaseEchelleSerpent::getObj() { return obj; }
-int CaseEchelleSerpent::getSpecificiteCase() { return specificiteCase; }
-int CaseEchelleSerpent::getNbCases() { return nbCases; }
-int CaseEchelleSerpent::getNbCasesNonNeutres() { return nbCasesNonNeutres; }
-bool CaseEchelleSerpent::getTeteQueue() { return teteQueue; }
-
-void CaseEchelleSerpent::setJeuVariante(EchelleSerpent es) { jeuVariante = es; }
-void CaseEchelleSerpent::setIsObjetEchelleSerpent(bool b) { isObjetEchelleSerpent = b; }
-void CaseEchelleSerpent::setObj(ObjetEchelleSerpent* oes) { obj = oes; }
-void CaseEchelleSerpent::setSpecificiteCase(int s) { specificiteCase = s; }
-void CaseEchelleSerpent::setNbCases(int s) { nbCases = s; }
-void CaseEchelleSerpent::setNbCasesNonNeutres(int s) { nbCasesNonNeutres = s; }
-void CaseEchelleSerpent::setTeteQueue(bool b) { teteQueue = b; }
+/********** FIN : FONCTIONS SUPPLEMENTAIRES **********/

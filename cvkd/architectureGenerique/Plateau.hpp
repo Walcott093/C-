@@ -2,46 +2,54 @@
 #define PLATEAU_HPP
 
 #include "Case.hpp"
+#include "Constantes.hpp"
+#include "../jeux/EchelleSerpent/CaseEchelleSerpent.hpp"
+//#include "../jeux/CartagenaVariante/CaseCartagena.hpp"
+//#include "../jeux/Numeri/CaseNumeri.hpp"
+
 using namespace std;
 
 /* template <int n, class T>  (template <int nbBonus, CaseEchelleSerpent>) */
-
 //template <class T> // Contient le type de case
 class Plateau {
 public:
-  Plateau(int, int, string, int, int); // nbLignes, nbColonnes, plateauNomJeu, plateauNbPionsParJoueur, plateauNbJoueursTotal
-  //Plateau(Jeu*, int, int, Case**); // nbLignes, nbColonnes, plateau, plateauNomJeu, plateauNbPionsParJoueur, plateauNbJoueursTotal
+  Plateau(int, int, string, int, int); // nbLignes, nbColonnes, (nbCases: pase necessaire de donner en arg car = nbLignes*nbColonnes), plateauNomJeu, plateauNbPionsParJoueur, plateauNbJoueursTotal
   virtual ~Plateau();
 
   int getNbLignes();
   int getNbColonnes();
+  int getNbCases();
   string getPlateauNomJeu();
   int getPlateauNbPionsParJoueur();
   int getPlateauNbJoueursTotal();
-  Case** getPlateau();
+  Case* getPlateau();
+  /*
+ _ _ _ _
+|_|_|_|_|
+|_|_|_|_|
+|_|_|_|_|
 
+  */
   void setNbLignes(int);
   void setNbColonnes(int);
+  void setNbCases(int);
   void setPlateauNomJeu(string);
   void setPlateauNbPionsParJoueur(int);
   void setPlateauNbJoueursTotal(int);
-  void setPlateau(Case**);
+  void setPlateau(Case*);
 
 private:  
   int nbLignes;
   int nbColonnes;
+  int nbCases;
   string plateauNomJeu;
   int plateauNbPionsParJoueur;
   int plateauNbJoueursTotal;
 
-  //T** plateau; // + fonction initPlateau()
-  Case** plateau; // en fonction abstract CA VA PLUTOT ETRE CA JE PENSE
-  // EN UTILISANT UN STRING POUR SAVOIR DE QUEL TYPE DE CASE IL S'AGIT
-
-  //int nbCasesSpeciales;
+  Case* plateau;
+   
   friend ostream& operator<<(ostream&, Plateau&);
-  //Case* operator[](int, int);
-  //Case* operator[][](int, int);
-};
+  Case operator[](int);
+  };
 
 #endif //PLATEAU_HPP

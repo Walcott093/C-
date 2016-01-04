@@ -22,11 +22,12 @@ const string NUMERI = "Numeri";
 const int NB_JOUEURS_MAX = 4;
 
 // Used in "Plateau.cpp"
-const int DELAY = 2;
+const int DELAY_ROBOT = 2;
+const int DELAY_DE = 1;
 
-const int DIFFICULTE_FACILE = 10;
-const int DIFFICULTE_MOYENNE = 100;
-const int DIFFICULTE_DIFFICILE = 1000;
+const int DIFFICULTE_FACILE = 1;
+const int DIFFICULTE_MOYENNE = 10;
+const int DIFFICULTE_DIFFICILE = 100;
 /********** FIN : PARAMETRE DE JEU  **********/
 
 

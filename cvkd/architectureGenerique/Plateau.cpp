@@ -262,17 +262,25 @@ int Plateau::deplacement(Joueur* joueur) {
   int choixPion;
 
   if(joueur->getEstHumain() == false) {
-    this_thread::sleep_for(chrono::seconds(DELAY));
+    this_thread::sleep_for(chrono::seconds(DELAY_ROBOT));
 
     if(nomJeu == ECHELLE_SERPENT
        || nomJeu == ECHELLE_SERPENT_ORANGE_VERTE
        || nomJeu == ECHELLE_SERPENT_PEDAGOGIQUE) {
-      cout << "Lancer de de . . . " << de << " !" << endl;
+      cout << "Lancer de de . . . " << endl;
+      this_thread::sleep_for(chrono::seconds(DELAY_DE));
+      cout << "------------------- " << de << " !" << endl;
       ret = deplacementPion(pion, de);
     }
 
     else if(nomJeu == ECHELLE_SERPENT_PLUSIEURS_PIONS) {
+      srand(time(nullptr));
+      cout << "Lancer de de . . . " << endl;
+      this_thread::sleep_for(chrono::seconds(DELAY_DE));
+      cout << "------------------- " << de << " !" << endl;
 
+      pion = joueur->getTabPions()[rand() % joueur->getNbPions()];
+      ret = deplacementPion(pion, de);      
     }
 
     else if(nomJeu == CARTAGENA) {
@@ -295,8 +303,9 @@ int Plateau::deplacement(Joueur* joueur) {
 	cin >> commande;
 	cin.clear();
       } while(commande != 'd');
-      
-      cout << "Lancer de de . . . " << de << " !" << endl;
+      cout << "Lancer de de . . . " << endl;
+      this_thread::sleep_for(chrono::seconds(DELAY_DE));
+      cout << "------------------- " << de << " !" << endl;
       
       if(nomJeu == ECHELLE_SERPENT_PEDAGOGIQUE) {
 	int reponse = question(); // Affiche le calcule et renvoie le resultat
@@ -327,12 +336,17 @@ int Plateau::deplacement(Joueur* joueur) {
 	  cin >> choixPion;
 	  cin.clear();
 	} while(choixPion < 0 || (joueur->getNbPions()-1) < choixPion);
+	cout << "Lancer de de . . . " << endl;
+	this_thread::sleep_for(chrono::seconds(DELAY_DE));
+	cout << "------------------- " << de << " !" << endl;
 
 	pion = joueur->getTabPions()[choixPion];
 	ret = deplacementPion(pion, de);
       }
       else { // if(commande == 'd')
-	cout << "Lancer de de . . . " << de << " !" << endl;
+	cout << "Lancer de de . . . " << endl;
+	this_thread::sleep_for(chrono::seconds(DELAY_DE));
+	cout << "------------------- " << de << " !" << endl;
 
 	do {
 	  cout << "Choix du pion :" << endl;

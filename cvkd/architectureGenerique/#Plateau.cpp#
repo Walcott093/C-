@@ -8,7 +8,7 @@ using namespace std;
 Plateau::Plateau(Jeu* j, int rangeOrd, int rangeAbs):
   jeu(j), nbLignes(rangeOrd), nbColonnes(rangeAbs), nbCases(rangeOrd*rangeAbs), plateauNomJeu(j->getNomJeuOuVariante()), plateauNbPionsParJoueur(j->getNbPionsParJoueur()), plateauNbJoueursTotal(j->getNbJoueursTotal()) {
 
-  plateau = new Case*[nbCases];
+  plateau = new Case
   int nbPionsMax = plateauNbPionsParJoueur * plateauNbJoueursTotal;
  
   if(plateauNomJeu == ECHELLE_SERPENT) {
@@ -311,7 +311,6 @@ void Plateau::lancer() {
   int choixPion = 0;
 
   while(!finDePartie()) {
-    cout << this << endl;
     tourJoueur = tourJoueur % plateauNbJoueursTotal;
     joueur = (jeu->getTableauJoueurs())[tourJoueur];
     cout << "Tour de " << joueur->getNom() << endl;

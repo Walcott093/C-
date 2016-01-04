@@ -103,6 +103,7 @@ bool Case::ajouterPion(Pion p) {
   if(nbPions < nbPionsMax) {
     listePions.push_front(p);
     nbPions++;
+    p.setPosition(position);
   }
   else {
     cout << "[Case.cpp/ajouterPion] Erreur : Impossible de rajouter le pion. Case remplie." << endl;
@@ -119,6 +120,9 @@ bool Case::ajouterPions(forward_list<Pion> fl, int nbPionsToAdd) {
   else {
     listePions.splice_after(listePions.before_begin(), fl);
     nbPions += nbPionsToAdd;
+    
+    for(auto it=fl.begin() ; it!=fl.end() ; ++it)
+      (*it).setPosition(position);
     
     return true;
   }

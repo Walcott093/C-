@@ -31,7 +31,7 @@ void Joueur::setTabPions(Pion** t) { tabPions = t; }
 
 
 ostream& operator<<(ostream& o, Joueur& j) {
-  if(estHumain)
+  if(j.estHumain)
     o << "<JOUEUR: Humain, idJoueur=" << j.idJoueur << ", ";
   else
     o << "<JOUEUR: Robot, idJoueur=" << j.idJoueur << ", ";

@@ -45,19 +45,20 @@ void Case::setListePions(forward_list<Pion*> fl) { listePions = fl; }
 void Case::setObj(ObjetEchelleSerpent* oes) { obj = oes; }
 
 ostream& operator<<(ostream& o, Case*& c) {
-  string type = (c->obj)->getType();
-  int idOES = (c->obj)->getIdOES();
-  if(c->specificite == ECHELLE || c->specificite == SERPENT) {
-    if(type == TYPE_ECHELLE_BAS)
-      o << BLANC << "e" << idOES << SUFFIXE_COULEUR;
-    if(type == TYPE_ECHELLE_HAUT)
-      o << BLANC << "E" << idOES << SUFFIXE_COULEUR;
-    if(type == TYPE_SERPENT_QUEUE)
-      o << NOIR << "s" << idOES << SUFFIXE_COULEUR;
-    if(type == TYPE_SERPENT_TETE)
-      o << NOIR << "S" << idOES << SUFFIXE_COULEUR;
-  }
-  
+  if(c->obj != nullptr) {
+    string type = (c->obj)->getType();
+    int idOES = (c->obj)->getIdOES();
+    if(c->specificite == ECHELLE || c->specificite == SERPENT) {
+      if(type == TYPE_ECHELLE_BAS)
+	o << BLANC << "e" << idOES << SUFFIXE_COULEUR;
+      if(type == TYPE_ECHELLE_HAUT)
+	o << BLANC << "E" << idOES << SUFFIXE_COULEUR;
+      if(type == TYPE_SERPENT_QUEUE)
+	o << NOIR << "s" << idOES << SUFFIXE_COULEUR;
+      if(type == TYPE_SERPENT_TETE)
+	o << NOIR << "S" << idOES << SUFFIXE_COULEUR;
+    }
+  }  
   
 
   switch(c->nbPions) {

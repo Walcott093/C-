@@ -71,6 +71,8 @@ Plateau::~Plateau() {
 
 
 
+
+
 /********** DEBUT : ACCESSEURS ET REDEFINITION D'OPERATEUR(S) **********/
 Jeu* Plateau::getJeu() { return jeu; }
 int Plateau::getNbLignes() { return nbLignes; }
@@ -97,7 +99,7 @@ ostream& operator<<(ostream& o,Plateau& p){
     if(cptLignes % 2 == 1) { // Si ligne impaire : sensPion = g->d ; sensAffichage = d->g
       for(int c=p.getNbColonnes()-1 ; c>=0 ; c--)
 	o << (p.plateau[i -c -1]) << "|";
-      o << endl;
+       o << endl;
       cptLignes--;
     }
     else { // Si ligne paire : sensPion = d->g ; sensAffichage = g->d
@@ -346,6 +348,7 @@ int Plateau::deplacement(Joueur* joueur) {
 
 
 void Plateau::lancer() {
+  cout << "Debut de la partie !" << endl;
   string nomJeu = jeu->getNomJeuOuVariante();
 
   int ret = 0;
@@ -363,15 +366,17 @@ void Plateau::lancer() {
     }
     else {
       tourJoueur = tourJoueur % plateauNbJoueursTotal;
+ 
       joueur = (jeu->getTableauJoueurs())[tourJoueur];
+ 	
       cout << "Tour de " << joueur->getNom() << endl;
-    
+ 
       ret = deplacement(joueur);
       if(ret == 1)
 	tourJoueur--;
       else if(ret == -1)
 	passeTourJoueur = tourJoueur;
-
+   
       cout << *this << endl;
       tourJoueur++;
     }

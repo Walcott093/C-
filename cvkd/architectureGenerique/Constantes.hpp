@@ -24,14 +24,25 @@ const int NB_JOUEURS_MAX = 4;
 // Used in "Plateau.cpp"
 const int DELAY = 2;
 
-/*const int DIFFICULTE_FACILE = 10;
+const int DIFFICULTE_FACILE = 10;
 const int DIFFICULTE_MOYENNE = 100;
-const int DIFFICULTE_DIFFICILE = 1000;*/
+const int DIFFICULTE_DIFFICILE = 1000;
 
 // Used in "Plateau.cpp"
 // Affiche la question sur le terminal et renvoie la reponse au return
-int question() {
-  return 0;
+int question(const int DIFFICULTE) {
+  srand(time(nullptr));
+  int nb1 = (rand() % DIFFICULTE) +1;
+  int nb2 = (rand() % DIFFICULTE) +1;
+  int op = (rand() % 4); //entre 0 et 3
+  cout << "Quelle est le resultat de : ";
+  switch(op){
+  case 0: cout << nb1 << " + " << nb2 << " ?" << endl;return nb1+nb2;
+  case 1: cout << nb1 << " - " << nb2 << " ?" << endl;return nb1-nb2;
+  case 2: cout << nb1 << " * " << nb2 << " ?" << endl;return nb1*nb2;
+  case 3: cout << nb1 << " / " << nb2 << " ?" << endl;return nb1/nb2;
+  default: return 0;
+  }
 }
 /********** FIN : PARAMETRE DE JEU  **********/
 

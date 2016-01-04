@@ -1,16 +1,17 @@
 #include <iostream>
 #include <forward_list>
+
+//#include "Constantes.hpp"
+//#include "Pion.hpp"
 /*
-#include "Constantes.hpp"
-#include "Pion.hpp"
 #include "Case.hpp"
 #include "Joueur.hpp"
 #include "CaseNormale.hpp"
 #include "../jeux/EchelleSerpent/CaseEchelleSerpent.hpp"
 //#include "Plateau.hpp"
 */
-#include "A.hpp"
-#include "B.hpp"
+//#include "A.hpp"
+//#include "B.hpp"
 #include <thread>
 #include <chrono>
 using namespace std;
@@ -50,22 +51,54 @@ void affichage(int* p, int nbCases, int nbLignes, int nbColonnes){
 }
 int main() {
   cout << "Hello !" << endl;
- 
+
+  cout << 5/2 << endl;
+  
   /*
-  int delay;
-  cin >> delay;
-  this_thread::sleep_for(chrono::seconds(delay));
-  cout << "Delayed Ack" << endl;
+  int i;
+  cin >> i;
+  switch(i) {
+  case 1:
+  case 2:
+    cout << "A B" << endl;
+  case 0:
+    cout << "0 1 2" << endl;
+    break;
+  }
+  */
+
+  /*
+  cout << "\033[1;31mR\033[0m" << endl;
+  cout << "\033[1;32mV\033[0m" << endl;
+  cout << "\033[1;34mB\033[0m" << endl;
+  cout << "\033[1;33mJ\033[0m" << endl;
+  cout << "\033[1;37mB\033[0m" << endl;
+  cout << "\033[1;36mC\033[0m" << endl;
+
+  Pion* p1 = new Pion(1, 1, ROUGE, 0);
+  cout << p1 << endl;
+  Pion* p2 = new Pion(2, 4, MAGENTA, 4);
+  cout << p2 << endl;
   */
 
 
 
+  /*
+  int delay;
+  cin >> delay;
+
+  this_thread::sleep_for(chrono::seconds(delay));
+
+  cout << "Delayed Ack" << endl;
+*/
+
+
+  /*
   A* a = new A();
   B* b = new B();
 
   cout << "test" << endl;
-
-  /*  //B* b0 = new A();
+  //B* b0 = new A();
   A* a0 = new B();
   cout << "a0.getA()=" << a0->getA() << endl;
   cout << "a0.getB()=" << a0->b << endl;

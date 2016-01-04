@@ -112,9 +112,11 @@ int CaseEchelleSerpent::randomSpecificite() {
 	queueTeteSerpent = true;
       }
       else { // if(queueTeteSerpent == true)
+	jeuVariante->setNbCasesSerpentsRestantes( jeuVariante->getNbCasesSerpentsRestantes() -1 );
 	caseTeteSerpent = this;
-	caseQueueSerpent->obj = new ObjetEchelleSerpent(TYPE_SERPENT_QUEUE, caseTeteSerpent->getPosition(), caseQueueSerpent->getPosition());
-	caseTeteSerpent->obj = new ObjetEchelleSerpent(TYPE_SERPENT_TETE, caseTeteSerpent->getPosition(), caseQueueSerpent->getPosition());
+	int idOES = jeuVariante->getNbCasesSerpents() - jeuVariante->getNbCasesSerpentsRestantes();
+	caseQueueSerpent->obj = new ObjetEchelleSerpent(idOES/2, TYPE_SERPENT_QUEUE, caseTeteSerpent->getPosition(), caseQueueSerpent->getPosition());
+	caseTeteSerpent->obj = new ObjetEchelleSerpent(idOES/2, TYPE_SERPENT_TETE, caseTeteSerpent->getPosition(), caseQueueSerpent->getPosition());
       }
     }
     

@@ -66,21 +66,24 @@ int CaseEchelleSerpent::randomSpecificite() {
   srand(time(nullptr));
 
   int val = jeuVariante->getNbCasesPlateauRestantes();
-  cout << "avant val" << endl;
+
   x = (rand() % val) +1;
   jeuVariante->setNbCasesPlateauRestantes(val -1); // <=> jeuVariante.nbCasesPlateauRestantes--; on retire car on traite une case qui ne sera donc plus a traiter
   
   if(1 <= x && x <= jeuVariante->getNbCasesNonNeutres()) {
+    cout << "**nbCasesNonNeutres= " << jeuVariante->getNbCasesNonNeutres() << endl;
     jeuVariante->setNbCasesNonNeutres( jeuVariante->getNbCasesNonNeutres() -1 ); // <=> jeuVariante.nbCasesNonNeutres--;
-
+    cout << "**nbCasesNonNeutres= " << jeuVariante->getNbCasesNonNeutres() << endl;
     do {
       if(nomVariante == ECHELLE_SERPENT_ORANGE_VERTE) {
-	cout << "avant NB_SPECIFICITES_ESOV" << endl;
+	cout << "** ** dans ECHELLE SERPENT ORANGE VERTE" << endl;
 	ret = (rand() % NB_SPECIFICITES_ESOV) +1; // 1 (ECHELLE) ou 2 (SERPENT) ou 3 (ORANGE) ou 4 (VERTE)
+	cout << "** ** ** ret = " << ret << endl;
       }
       else {
-	cout << "avant NB_SPECIFICITES_ES" << endl;
+	cout << "** ** dans ECHELLE SERPENT" << endl;
 	ret = (rand() % NB_SPECIFICITES_ES) +1; // 1 (ECHELLE) ou 2 (SERPENT)
+	cout << "** ** ** ret = " << ret << endl;
       }
       cout << "[CaseEchelleSerpent.cpp] : do while" << endl;
     } while((ret == ECHELLE && jeuVariante->getNbCasesEchellesRestantes() == 0)
@@ -88,15 +91,16 @@ int CaseEchelleSerpent::randomSpecificite() {
 	    || (ret == ORANGE && jeuVariante->getNbCasesOrangesRestantes() == 0)
 	    || (ret == VERTE && jeuVariante->getNbCasesVertesRestantes() == 0));
     
-    
+    cout << "** SORTI : ret = " << ret << endl;
+
     if(ret == ECHELLE) {
       jeuVariante->setNbCasesEchellesRestantes( jeuVariante->getNbCasesEchellesRestantes() -1 );
+
       if(basHautEchelle == false) {
 	caseBasEchelle = this;
 	basHautEchelle = true;
       }
       else { // if(basHautEchelle == true)
-	jeuVariante->setNbCasesEchellesRestantes( jeuVariante->getNbCasesEchellesRestantes() -1 );
 	caseHautEchelle = this;
 	int idOES = jeuVariante->getNbCasesEchelles() - jeuVariante->getNbCasesEchellesRestantes();
 	caseBasEchelle->obj = new ObjetEchelleSerpent(idOES/2, TYPE_ECHELLE_BAS, caseHautEchelle->getPosition(), caseBasEchelle->getPosition());
@@ -107,12 +111,12 @@ int CaseEchelleSerpent::randomSpecificite() {
       
     else if(ret == SERPENT) {
       jeuVariante->setNbCasesSerpentsRestantes( jeuVariante->getNbCasesSerpentsRestantes() -1 );
+
       if(queueTeteSerpent == false) {
 	caseQueueSerpent = this;
 	queueTeteSerpent = true;
       }
       else { // if(queueTeteSerpent == true)
-	jeuVariante->setNbCasesSerpentsRestantes( jeuVariante->getNbCasesSerpentsRestantes() -1 );
 	caseTeteSerpent = this;
 	int idOES = jeuVariante->getNbCasesSerpents() - jeuVariante->getNbCasesSerpentsRestantes();
 	caseQueueSerpent->obj = new ObjetEchelleSerpent(idOES/2, TYPE_SERPENT_QUEUE, caseTeteSerpent->getPosition(), caseQueueSerpent->getPosition());

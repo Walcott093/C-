@@ -14,10 +14,11 @@ using namespace std;
 
 
 int main() {
-  int choixJeu, nbJoueursHumains, nbJoueursDisponibles, nbJoueursRobots, nbJoueursTotal, nbPionsParJoueur, nbLignesPlateau, nbColonnesPlateau, nbCasesPlateau, nbEchelles, nbSerpents, nbCasesOranges, nbCasesVertes, difficultePedagogique;
+  int choixJeu, nbJoueursHumains, nbJoueursDisponibles, nbJoueursRobots, nbJoueursTotal, nbPionsParJoueur, nbLignesPlateau, nbColonnesPlateau, nbCasesPlateau, nbEchelles, nbSerpents, nbCasesOranges, nbCasesVertes, nbCasesOrangesVertesDispo, difficultePedagogique;
 
   Jeu* jeu;
   
+
 
 
 
@@ -26,6 +27,8 @@ int main() {
   cin >> choixJeu;
   cin.clear(); // A securiser encore plus si time
   /****** FIN : CHOIX DU JEU  ******/
+
+
 
 
 
@@ -60,6 +63,8 @@ int main() {
 
 
 
+
+
   /****** DEBUT : CHOIX DU NOMBRE DE JOUEURS ROBOTS  ******/
   cout << "Nombre de joueurs robots (" << nbJoueursDisponibles << " disponible(s)) :" << endl;
   cin >> nbJoueursRobots;
@@ -79,6 +84,9 @@ int main() {
     exit(EXIT_FAILURE);
   }
   /****** FIN : CHOIX DU NOMBRE DE JOUEURS ROBOTS  ******/
+
+
+
 
 
 
@@ -107,10 +115,12 @@ int main() {
 
 
 
-  /****** DEBUT : CREATION DU JEU  ******/
-  switch(choixJeu) {
-  case 1:  // EchelleSerpentStandard
 
+
+
+  /****** DEBUT : RELEVE DES PARAMETRES POUR LES EchelleSerpent...  ******/
+  switch(choixJeu) {
+  case 1:
     /**** DEBUT : CHOIX DU NOMBRE D'ECHELLES (et non pas de caseEchelles car cela est deja pris en compte EchelleSerpent) ****/
     do {
       nbEchelles = 0;
@@ -129,22 +139,67 @@ int main() {
     } while(nbSerpents < 0 || 4 < nbSerpents);
     /**** FIN : CHOIX DU NOMBRE DE SERPENTS ****/
 
-    jeu = new EchelleSerpent(ECHELLE_SERPENT, nbJoueursHumains, nbJoueursTotal, 1, nbCasesPlateau, nbEchelles, nbSerpents, 0, 0);
     break;
 
 
-  case 2: // EchelleSerpentOrangeVerte
-    // il faudra mettre nbEchelles max plus petit pour pouvoir avoir des cases oranges (idem pour serpents)
-    // FAIRE QCH QUI DEPEND DES CHOIX PRECEDENTS (si moins d'echelles et serpents alors possibilites de plein de cases oranges et vertes)
+  case 2:
+  case 3:
+  case 4:
+    /**** DEBUT : CHOIX DU NOMBRE D'ECHELLES (et non pas de caseEchelles car cela est deja pris en compte EchelleSerpent) ****/
+    do {
+      nbEchelles = 0;
+      cout << "Nombre d'echelles (entre 0 et 4) :" << endl;
+      cin >> nbEchelles;
+      cin.clear(); // A securiser encore plus si time
+    } while(nbEchelles < 0 || 4 < nbEchelles);
+    /**** FIN : CHOIX DU NOMBRE D'ECHELLES ****/
 
-    //jeu = new EchelleSerpent(ECHELLE_SERPENT_ORANGE_VERTE, nbJoueursHumains, nbJoueursTotal, 1);
+    /**** DEBUT : CHOIX DU NOMBRE DE SERPENTS ****/
+    do {
+      nbSerpents = 0;
+      cout << "Nombre de serpents (entre 0 et 4) :" << endl;
+      cin >> nbSerpents;
+      cin.clear(); // A securiser encore plus si time
+    } while(nbSerpents < 0 || 4 < nbSerpents);
+    /**** FIN : CHOIX DU NOMBRE DE SERPENTS ****/
+
+
+    /**** DEBUT : CHOIX DU NOMBRE DE CASES ORANGES ****/
+    int nbCasesOrangesVertesDispo = 0;
+    if(nbEchelles + nbSerpents == 0)
+      nbCasesOrangesVertesDispo = nbCasesPlateau/2;
+    else
+      nbCasesOrangesVertesDispo = nbCasesPlateau/2 - (nbEchelles+nbSerpents)/2;
+    do {
+      nbCasesOranges = 0;
+      cout << "Nombre de cases oranges (" << nbCasesOrangesVertesDispo/2 << "dispo.) :" << endl;
+      cin >> nbCasesOranges;
+      cin.clear(); // A securiser encore plus si time
+    } while(nbCasesOranges < 0 || nbCasesOrangesVertesDispo/2 < nbCasesOranges);
+    /**** FIN : CHOIX DU NOMBRE DE CASES ORANGES ****/
+
+    /**** DEBUT : CHOIX DU NOMBRE DE CASES VERTES ****/
+    do {
+      nbCasesVertes = 0;
+      cout << "Nombre de cases vertes (" << nbCasesOrangesVertesDispo/2 << "dispo.) :" << endl;
+      cin >> nbCasesVertes;
+      cin.clear(); // A securiser encore plus si time
+    } while(nbCasesVertes < 0 || nbCasesOrangesVertesDispo/2 < nbCasesVertes);
+    /**** FIN : CHOIX DU NOMBRE DE CASES VERTES ****/
+
     break;
+  }
+  /****** FIN : RELEVE DES PARAMETRES POUR LES EchelleSerpent...  ******/
 
 
-  case 3: // EchelleSerpentPedagogique
-    //jeu = new EchelleSerpent(ECHELLE_SERPENT_PEDAGOGIQUE, nbJoueursHumains, nbJoueursTotal, 1);
-    break;
-  case 4:  // EchelleSerpentPlusieursPions
+
+
+
+  /****** DEBUT : RELEVE DES PARAMETRES POUR LES JEUX A PLUSIEURS PIONS  ******/
+  switch(choixJeu) {
+  case 4:
+  case 5:
+  case 6:
     /****** DEBUT : CHOIX DU NOMBRE DE PIONS PAR JOUEUR ******/
     do {
       nbPionsParJoueur = 0;
@@ -153,15 +208,49 @@ int main() {
       cin.clear(); // A securiser encore plus si time
     } while(nbPionsParJoueur < 2 || 4 < nbPionsParJoueur);
     /****** FIN : CHOIX DU NOMBRE DE PIONS PAR JOUEUR ******/
-
-    //jeu = new EchelleSerpent(ECHELLE_SERPENT_PLUSIEURS_PIONS, nbJoueursHumains, nbJoueursTotal, nbPionsParJoueur);
-
     break;
+  }
+  /****** DEBUT : RELEVE DES PARAMETRES POUR LES JEUX A PLUSIEURS PIONS  ******/
+
+
+
+  /****** DEBUT : CREATION DU JEU  ******/
+  switch(choixJeu) {
+  case 1:  // EchelleSerpentStandard
+
+    jeu = new EchelleSerpent(ECHELLE_SERPENT, nbJoueursHumains, nbJoueursTotal, 1, nbCasesPlateau, nbEchelles, nbSerpents, 0, 0);
+    break;
+
+  case 2: // EchelleSerpentOrangeVerte
+
+    jeu = new EchelleSerpent(ECHELLE_SERPENT_ORANGE_VERTE, nbJoueursHumains, nbJoueursTotal, 1, nbCasesPlateau, nbEchelles, nbSerpents, nbCasesOranges, nbCasesVertes);
+    break;
+
+  case 3: // EchelleSerpentPedagogique
+    /**** DEBUT : CHOIX DE LA DIFFICULTE DES QUESTIONS ****
+    do {
+      difficultePedagogique = 0;
+      cout << "Niveau de difficulté (Facile = 1, Moyen = 2, Difficile = 3) :" << endl;
+      cin >> difficultePedagogique;
+      cin.clear(); // A securiser encore plus si time
+    } while(difficultePedagogique < 1 || 3 < difficultePedagogique);
+    /**** FIN : CHOIX DE LA DIFFICULTE DES QUESTIONS ****/
+
+    jeu = new EchelleSerpent(ECHELLE_SERPENT_PEDAGOGIQUE, nbJoueursHumains, nbJoueursTotal, 1, nbCasesPlateau, nbEchelles, nbSerpents, nbCasesOranges, nbCasesVertes);
+    break;
+
+
+  case 4:  // EchelleSerpentPlusieursPions
+
+    jeu = new EchelleSerpent(ECHELLE_SERPENT_PLUSIEURS_PIONS, nbJoueursHumains, nbJoueursTotal, nbPionsParJoueur, nbCasesPlateau, nbEchelles, nbSerpents, nbCasesOranges, nbCasesVertes);
+    break;
+
 
 
   case 5: // Cartagena
     //jeu = new Cartagena(CARTAGENA, nbJoueursHumains, nbJoueursTotal, ...);
     break;
+
 
 
   case 6: // Numeri
@@ -178,22 +267,13 @@ int main() {
 
 
 
+
+
   /****** DEBUT : CREATION DU PLATEAU ET LANCEMENT DU JEU ******/
   Plateau p(jeu, nbLignesPlateau, nbColonnesPlateau);
 
   p.lancer();
-
-  cout << "Game Over!" << endl;
   /****** FIN : CREATION DU PLATEAU ET LANCEMENT DU JEU ******/
-
-
-
-
-
-
- 
-
-
 
   return 0;
 }

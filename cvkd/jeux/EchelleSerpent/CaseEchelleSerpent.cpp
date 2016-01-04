@@ -4,6 +4,8 @@ using namespace std;
 
 
 /*** DEBUT : Sert a la repartition des cases par probabilite ***/
+static int nbEchellesRestantes;
+static int nbSerpentsRestants;
 static bool basHautEchelle = false;
 static bool queueTeteSerpent = false; // pe inutile avec la classe ObjetEchelleSerpent
 static Case* caseBasEchelle;
@@ -94,9 +96,11 @@ int CaseEchelleSerpent::randomSpecificite() {
 	basHautEchelle = true;
       }
       else { // if(basHautEchelle == true)
+	jeuVariante->setNbCasesEchellesRestantes( jeuVariante->getNbCasesEchellesRestantes() -1 );
 	caseHautEchelle = this;
-	caseBasEchelle->obj = new ObjetEchelleSerpent(TYPE_ECHELLE_BAS, caseHautEchelle->getPosition(), caseBasEchelle->getPosition());
-	caseHautEchelle->obj = new ObjetEchelleSerpent(TYPE_ECHELLE_HAUT, caseHautEchelle->getPosition(), caseBasEchelle->getPosition());
+	int idOES = jeuVariante->getNbCasesEchelles() - jeuVariante->getNbCasesEchellesRestantes();
+	caseBasEchelle->obj = new ObjetEchelleSerpent(idOES/2, TYPE_ECHELLE_BAS, caseHautEchelle->getPosition(), caseBasEchelle->getPosition());
+	caseHautEchelle->obj = new ObjetEchelleSerpent(idOES/2, TYPE_ECHELLE_HAUT, caseHautEchelle->getPosition(), caseBasEchelle->getPosition());
 	basHautEchelle = false;
       }
     }

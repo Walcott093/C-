@@ -22,7 +22,17 @@ const string NUMERI = "Numeri";
 const int NB_JOUEURS_MAX = 4;
 
 // Used in "Plateau.cpp"
-const int DELAY = 1;
+const int DELAY = 2;
+
+/*const int DIFFICULTE_FACILE = 10;
+const int DIFFICULTE_MOYENNE = 100;
+const int DIFFICULTE_DIFFICILE = 1000;*/
+
+// Used in "Plateau.cpp"
+// Affiche la question sur le terminal et renvoie la reponse au return
+int question() {
+  return 0;
+}
 /********** FIN : PARAMETRE DE JEU  **********/
 
 
@@ -56,14 +66,15 @@ const string TYPE_SERPENT_TETE = "TypeSerpentTete";
 
 /********** DEBUT : OPTIONS DISPENSABLES DE JEU  **********/
 // Used in "Jeu.cpp" pour la creation des pions lors de la creation des joueurs
-const string NOIR = "30";
-const string ROUGE = "31";
-const string VERT = "32";
-const string JAUNE = "33";
-const string BLEU = "34";
-const string MAGENTA = "35";
-const string CYAN = "36";
-const string BLANC = "37";
+const string NOIR = "\033[1;30m";
+const string ROUGE = "\033[1;31m";
+const string VERT = "\033[1;32m";
+const string JAUNE = "\033[1;33m";
+const string BLEU = "\033[1;34m";
+const string MAGENTA = "\033[1;35m";
+const string CYAN = "\033[1;36m";
+const string BLANC = "\033[1;37m";
+const string SUFFIXE_COULEUR = "\033[0m";
 
 const string COULEUR_1 = "31"; // ROUGE
 const string COULEUR_2 = "34"; // BLEU

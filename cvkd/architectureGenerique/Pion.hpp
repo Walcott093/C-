@@ -1,6 +1,7 @@
 #ifndef PION_HPP
 #define PION_HPP
 
+#include "Constantes.hpp"
 using namespace std;
 
 class Pion {
@@ -19,8 +20,8 @@ public:
   void setCouleur(string);
   void setPosition(int);
 
-  bool operator==(const Pion&);
-  friend ostream& operator<<(ostream&, Pion&);
+  bool operator==(const Pion*&);
+  friend ostream& operator<<(ostream&, Pion*&);
 
 private:
   int idJoueur;

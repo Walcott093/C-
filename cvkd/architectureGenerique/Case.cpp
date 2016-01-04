@@ -45,7 +45,15 @@ void Case::setListePions(forward_list<Pion*> fl) { listePions = fl; }
 void Case::setObj(ObjetEchelleSerpent* oes) { obj = oes; }
 
 ostream& operator<<(ostream& o, Case*& c) {
-  //o << "\n";
+  if(c->specificite == ECHELLE || c->specificite == SERPENT) {
+
+
+     // s : OES->TYPE_SERPENT_QUEUE
+     // S : OES->TYPE_SERPENT_TETE
+     // e : OES->TYPE_ECHELLE_BAS
+     // E : OES->TYPE_ECHELLE_HAUT
+  }
+  
   switch(c->nbPions) {
   case 0:
     o << "    ";
@@ -56,7 +64,7 @@ ostream& operator<<(ostream& o, Case*& c) {
   default:
     int cpt = 0;
     for(auto it=c->listePions.begin() ; it!=c->listePions.end(); ++it) {
-      o << *(*it); // OU O << *IT; ????
+      o << *it;
     }
     break;
     }

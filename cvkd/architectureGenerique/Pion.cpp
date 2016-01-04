@@ -8,11 +8,11 @@ Pion::Pion(): idJoueur(0), idPion(0), couleur(""), position(0) {
 }
 
 Pion::Pion(int idPlayer, int identifiant, string colour, int pos): idJoueur(idPlayer), idPion(identifiant), couleur(colour), position(pos) {
-  cout << "                              Contruction du Pion : " << *this << endl;
+  cout << "                              Contruction du Pion : " << this << endl;
 }
 
 Pion::~Pion() {
-  cout << "                              Destruction du Pion : " << *this << endl;
+  cout << "                              Destruction du Pion : " << this << endl;
 }
 /********** FIN : CONSTRUCTEURS / DESTRUCTEURS **********/
 
@@ -31,8 +31,8 @@ void Pion::setIdPion(int identifiant) { idPion = identifiant; }
 void Pion::setCouleur(string colour) { couleur = colour; }
 void Pion::setPosition(int new_pos) { position = new_pos; }
 
-ostream& operator<<(ostream& o, Pion& p) {
-  o << "(" << p.idJoueur << ", " << p.idPion << ")" << endl;
+ostream& operator<<(ostream& o, Pion*& p) { // Pion*&  ???
+  o << p->getCouleur() << p->getIdPion() << SUFFIXE_COULEUR;
   return o;
 }
 /*
@@ -44,12 +44,12 @@ ostream& operator<<(ostream& o, Pion& p) {
   return o;
 }
 */
-bool Pion::operator==(const Pion& other) {
+bool Pion::operator==(const Pion*& other) {
 
-  if(idJoueur == other.idJoueur
-     && idPion == other.idPion
-     && couleur == other.couleur
-     && position == other.position)
+  if(idJoueur == other->idJoueur
+     && idPion == other->idPion
+     && couleur == other->couleur
+     && position == other->position)
     return true;
   else
     return false;     

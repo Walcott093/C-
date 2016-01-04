@@ -44,15 +44,15 @@ ostream& operator<<(ostream& o, Joueur& j) {
     o << "]>";
     break;
   case 1:
-    o << "\n  " << *(j.tabPions[0]) << "]>";
+    o << "\n  " << j.tabPions[0] << "]>";
     break;
   default:
     int cpt = 0;
     for(int i=0 ; i<j.nbPions ; i++) {
       if(cpt++ == j.nbPions -1)
-	o << "\n  " << *(j.tabPions[i]) << "]>";
+	o << "\n  " << j.tabPions[i] << "]>";
       else 
-	o << "\n  " << *(j.tabPions[i]) << ",";
+	o << "\n  " << j.tabPions[i] << ",";
     }
     break;
   }

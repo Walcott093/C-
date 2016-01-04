@@ -2,27 +2,27 @@
 #include "CaseNormale.hpp"
 using namespace std;
 
-CaseNormale::CaseNormale(int abs, int ord, int nbMax, int nb):
-  Case(abs, ord, nbMax, nb) {
+/********** DEBUT : CONSTRUCTEURS / DESTRUCTEURS **********/
+CaseNormale::CaseNormale(int spe, int pos, int nbMax, int nb):
+  Case(spe, pos, nbMax, nb) {
   cout << "                              Construction de la CaseNormale : " << *this << endl;
 }
 
-CaseNormale::CaseNormale(int abs, int ord, int nbMax, int nb, forward_list<Pion> pions):
-  Case(abs, ord, nbMax, nb, pions) {
+CaseNormale::CaseNormale(int spe, int pos, int nbMax, int nb, forward_list<Pion> pions, ObjetEchelleSerpent* eos):
+  Case(spe, pos, nbMax, nb, pions, oes) {
   cout << "                              Construction de la CaseNormale : " << *this <<endl;
 }
-/*
-CaseNormale::CaseNormale(int abs, int ord, int nbMax, int nb, forward_list<Pion> pions, int* tabId):
-  Case(abs, ord, nbMax, nb, pions, tabId) {
-  cout << "                              Construction de la CaseNormale : " << *this <<endl;
-}
-*/
 
 CaseNormale::~CaseNormale() {
   cout << "                              Destruction de la CaseNormale : " << *this << endl;
 }
+/********** FIN : CONSTRUCTEURS / DESTRUCTEURS **********/
 
 
+
+
+/********** DEBUT : FONCTIONS SUPPLEMENTAIRES **********/
 int CaseNormale::randomSpecificite() {
-  return 0;
+  return NEUTRE; // 0
 }
+/********** FIN : FONCTIONS SUPPLEMENTAIRES **********/

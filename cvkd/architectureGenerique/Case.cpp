@@ -9,15 +9,16 @@ Case::Case() {
   cout << "                              Creation d'une Case par defaut" << endl;
 }
 
-Case::Case(int pos, int nbMax, int nb):
-  position(pos), nbPionsMax(nbMax), nbPions(nb) {
+Case::Case(int spe, int pos, int nbMax, int nb):
+  specificite(spe), position(pos), nbPionsMax(nbMax), nbPions(nb) {
 
   // forward_list par defaut vide
+  obj = nullptr;
   cout << "                              Construction de la case : " << *this << endl;
 }
 
-Case::Case(int pos, int nbMax, int nb, forward_list<Pion> pions):
-  position(pos), nbPionsMax(nbMax), nbPions(nb), listePions(pions) {
+Case::Case(int spe, int pos, int nbMax, int nb, forward_list<Pion> pions, ObjetEchelleSerpent* o):
+  specificite(spe), position(pos), nbPionsMax(nbMax), nbPions(nb), listePions(pions), obj(o) {
   cout << "                              Construction de la case : " << *this <<endl;
 }
 Case::~Case() {
@@ -29,28 +30,32 @@ Case::~Case() {
 
 
 /********** DEBUT : ACCESSEURS ET REDEFINITION D'OPERATEUR(S) **********/
+int Case::getSpecificite() { return specificite; }
 int Case::getPosition() { return position; }
 int Case::getNbPionsMax() { return nbPionsMax; }
 int Case::getNbPions() { return nbPions; }
 forward_list<Pion> Case::getListePions() { return listePions; }
+ObjetEchelleSerpent* Case::getObj() { return obj; }
 
+void Case::setSpecificite(int spe) { specificite = spe; }
 void Case::setPosition(int new_pos) { position = new_pos; }
 void Case::setNbPionsMax(int a) { nbPionsMax = a; }
 void Case::setNbPions(int a) { nbPions = a; }
 void Case::setListePions(forward_list<Pion> fl) { listePions = fl; }
+void Case::setObj(ObjetEchelleSerpent* oes) { obj = oes; }
 
-ostream& operator<<(ostream& o, Case& c) {
+ostream& operator<<(ostream& o, Case*& c) {
   //o << "\n";
-  switch(c.nbPions) {
+  switch(c->nbPions) {
   case 0:
     o << "    ";
     break;
   case 1:
-    o << *c.listePions.begin() << "   ";
+    o << *c->listePions.begin() << "   ";
     break;
   default:
     int cpt = 0;
-    for(auto it=c.listePions.begin() ; it!=c.listePions.end(); ++it) {
+    for(auto it=c->listePions.begin() ; it!=c->listePions.end(); ++it) {
       o << *it;
     }
     break;
@@ -58,24 +63,25 @@ ostream& operator<<(ostream& o, Case& c) {
   return o;
 }
 /*
-ostream& operator<<(ostream& o, Case& c) {
+ostream& operator<<(ostream& o, Case*& c) {
   //o << "\n";
-  o << "<CASE: position=" << c.position << ", "
-    << "nbPions=" << c.nbPions << ", "
-    << "nbPionsMax=" << c.nbPionsMax << ", ";
+  o << "<CASE: specificite=" << c->specificite << ", "
+  << "position=" << c->position << ", "
+    << "nbPions=" << c->nbPions << ", "
+    << "nbPionsMax=" << c->nbPionsMax << ", ";
 
   o << "listePions=[";
-  switch(c.nbPions) {
+  switch(c->nbPions) {
   case 0:
     o << "]>";
     break;
   case 1:
-    o << "\n  " << *c.listePions.begin() << "]>";
+    o << "\n  " << *c->listePions.begin() << "]>";
     break;
   default:
     int cpt = 0;
-    for(auto it=c.listePions.begin() ; it!=c.listePions.end(); ++it) {
-      if(cpt++ == c.nbPions -1)
+    for(auto it=c->listePions.begin() ; it!=c->listePions.end(); ++it) {
+      if(cpt++ == c->nbPions -1)
 	o << "\n  " << *it << "]>";
       else 
 	o << "\n  " << *it << ",";

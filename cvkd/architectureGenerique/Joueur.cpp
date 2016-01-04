@@ -2,11 +2,11 @@
 #include "Joueur.hpp"
 using namespace std;
 
-Joueur::Joueur(): id(0), nom("toto"), score(0), nbPions(0), tabPions(nullptr) {
+Joueur::Joueur(): estHumain(false), idJoueur(0), nom("toto"), score(0), nbPions(0), tabPions(nullptr) {
   cout << "Creation d'un Joueur par defaut" << endl;
 }
-Joueur::Joueur(int i, string s, int sc, int nb, Pion** tab):
-  id(i), nom(s), score(sc), nbPions(nb), tabPions(tab) {
+Joueur::Joueur(bool humanity, int i, string s, int sc, int nb, Pion** tab):
+  estHumain(humanity), idJoueur(i), nom(s), score(sc), nbPions(nb), tabPions(tab) {
   cout << "Creation d'un Joueur" << endl;
 }
 Joueur::~Joueur() {
@@ -15,13 +15,15 @@ Joueur::~Joueur() {
 
 
 
-int Joueur::getId() { return id; }
+bool Joueur::getEstHumain() { return estHumain; }
+int Joueur::getIdJoueur() { return idJoueur; }
 string Joueur::getNom() { return nom; }
 int Joueur::getScore() { return score; }
 int Joueur::getNbPions() { return nbPions; }
 Pion** Joueur::getTabPions() { return tabPions; }
 
-void Joueur::setId(int i) { id = i; }
+void Joueur::setEstHumain(bool boo) { estHumain = boo; }
+void Joueur::setIdJoueur(int i) { idJoueur = i; }
 void Joueur::setNom(string s) { nom = s; }
 void Joueur::setScore(int i) { score = i; }
 void Joueur::setNbPions(int i) { nbPions = i; }
@@ -29,8 +31,11 @@ void Joueur::setTabPions(Pion** t) { tabPions = t; }
 
 
 ostream& operator<<(ostream& o, Joueur& j) {
-  o << "<JOUEUR: id=" << j.id << ", "
-    << "nom=" << j.nom << ", "
+  if(estHumain)
+    o << "<JOUEUR: Humain, idJoueur=" << j.idJoueur << ", ";
+  else
+    o << "<JOUEUR: Robot, idJoueur=" << j.idJoueur << ", ";
+  o << "nom=" << j.nom << ", "
     << "score=" << j.score << ", "
     << "tabPions=[";
 

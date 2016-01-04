@@ -14,12 +14,13 @@ public:
   string getType();
   Case* getTete();
   Case* getQueue();
+
   void setType(string);
   void setTete(Case*);
   void setQueue(Case*);
 
 private:
-  string type; // Echelle ou Serpent
+  string type; // TYPE_ECHELLE_BAS ou TYPE_ECHELLE_HAUT ou TYPE_SERPENT_QUEUE ou TYPE_SERPENT_TETE
   Case* tete;
   Case* queue;
 

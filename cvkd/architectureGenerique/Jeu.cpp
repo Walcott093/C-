@@ -2,7 +2,7 @@
 #include "Jeu.hpp"
 using namespace std;
 
-/***** CLASSE ABSTRAITE *****/
+/***** CLASSE CONCRETE ET NON PLUS ABSTRAITE *****/
 
 
 static int idJoueur = 0;
@@ -65,10 +65,12 @@ void Jeu::getScores() {
 
 Joueur* Jeu::creationJoueur() {
   string nom;
+  bool estHumain = false;
   if(joueursHumainsCrees < nbJoueursHumains) {
     cout << "Entrez le nom du joueur :" << endl;
     cin >> nom;
     joueursHumainsCrees++;
+    estHumain = true;
   }
   else {
     switch(joueursRobotsCrees++) {
@@ -93,10 +95,10 @@ Joueur* Jeu::creationJoueur() {
   int score = 0;
 
   string couleur;
-  if(idJoueur == 0) couleur = COULEUR_1;
-  else if(idJoueur == 1) couleur = COULEUR_2;
-  else if(idJoueur == 2) couleur = COULEUR_3;
-  else couleur = COULEUR_4; // if(idJoueur == 3)
+  if(idJoueur == 0) couleur = ROUGE;
+  else if(idJoueur == 1) couleur = BLEU;
+  else if(idJoueur == 2) couleur = VERT;
+  else couleur = JAUNE; // if(idJoueur == 3)
   idJoueur++;
   
   int idPion = 0;
@@ -104,6 +106,6 @@ Joueur* Jeu::creationJoueur() {
   for(int i=0 ; i<nbPionsParJoueur ; i++) {
     tab[i] = new Pion(idJoueur, idPion++, couleur, 0, 0);
   }
-  return new Joueur(idJoueur, nom, score, nbPionsParJoueur, tab);
+  return new Joueur(estHumain, idJoueur, nom, score, nbPionsParJoueur, tab);
 }
 /********** FIN : FONCTIONS SUPPLEMENTAIRES **********/

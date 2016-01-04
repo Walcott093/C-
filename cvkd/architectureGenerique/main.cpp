@@ -1,8 +1,8 @@
 #include <iostream>
 #include "Constantes.hpp"
-#include "Jeu.hpp" // Il faudra surement ajouter le jeu en question (ex: Numeri.hpp)
 #include "Plateau.hpp"
-
+#include "Jeu.hpp"
+#include "../jeux/EchelleSerpent/EchelleSerpent.hpp"
 using namespace std;
 
 
@@ -14,7 +14,7 @@ using namespace std;
 
 
 int main() {
-  int choixJeu, nbJoueursHumains, nbJoueursDisponibles, nbJoueursRobots, nbJoueursTotal, nbPionsParJoueur, nbLignesPlateau, nbColonnesPlateau, nbBonus, nbMalus, difficultePedagogique;
+  int choixJeu, nbJoueursHumains, nbJoueursDisponibles, nbJoueursRobots, nbJoueursTotal, nbPionsParJoueur, nbLignesPlateau, nbColonnesPlateau, nbCasesPlateau, nbEchelles, nbSerpents, nbCasesOranges, nbCasesVertes, difficultePedagogique;
 
   Jeu* jeu;
   
@@ -82,43 +82,69 @@ int main() {
 
 
 
-
-  /****** DEBUT : CHOIX DE LA TAILLE DU PLATEAU (NOMBRE DE LIGNES) ******/
+  /****** DEBUT : CHOIX DE LA TAILLE DU PLATEAU ******/
+  /**** DEBUT : CHOIX DU NOMBRE DE LIGNES ****/
   do {
     nbLignesPlateau = 0;
     cout << "Taille du plateau > nombre de lignes (entre 4 et 10) :" << endl;
     cin >> nbLignesPlateau;
     cin.clear(); // A securiser encore plus si time
   } while(nbLignesPlateau < 4 || 10 < nbLignesPlateau);
-  /****** FIN : CHOIX DE LA TAILLE DU PLATEAU (NOMBRE DE LIGNES) ******/
+  /**** FIN : CHOIX DU NOMBRE DE LIGNES ****/
 
 
-
-
-  /****** DEBUT : CHOIX DE LA TAILLE DU PLATEAU (NOMBRE DE COLONNES) ******/
+  /**** DEBUT : CHOIX DU NOMBRE DE COLONNES ****/
   do {
     nbColonnesPlateau = 0;
     cout << "Taille du plateau > nombre de colonnes (entre 4 et 10) :" << endl;
     cin >> nbColonnesPlateau;
     cin.clear(); // A securiser encore plus si time
   } while(nbColonnesPlateau < 4 || 10 < nbColonnesPlateau);
-  /****** FIN : CHOIX DE LA TAILLE DU PLATEAU (NOMBRE DE COLONNES) ******/
+  /**** FIN : CHOIX DU NOMBRE DE COLONNES ****/
 
+  nbCasesPlateau = nbLignesPlateau * nbColonnesPlateau;
+  /****** FIN : CHOIX DE LA TAILLE DU PLATEAU ******/
 
 
 
   /****** DEBUT : CREATION DU JEU  ******/
   switch(choixJeu) {
-  case 1:
-    //jeu = new EchelleSerpent(ECHELLE_SERPENT, nbJoueursHumains, nbJoueursTotal, 1, nbLignesPlateau, nbColonnesPlateau); // Standard
+  case 1:  // EchelleSerpentStandard
+
+    /**** DEBUT : CHOIX DU NOMBRE D'ECHELLES (et non pas de caseEchelles car cela est deja pris en compte EchelleSerpent) ****/
+    do {
+      nbEchelles = 0;
+      cout << "Nombre d'echelles (entre 0 et 4) :" << endl;
+      cin >> nbEchelles;
+      cin.clear(); // A securiser encore plus si time
+    } while(nbEchelles < 0 || 4 < nbEchelles);
+    /**** FIN : CHOIX DU NOMBRE D'ECHELLES ****/
+
+    /**** DEBUT : CHOIX DU NOMBRE DE SERPENTS ****/
+    do {
+      nbSerpents = 0;
+      cout << "Nombre de serpents (entre 0 et 4) :" << endl;
+      cin >> nbSerpents;
+      cin.clear(); // A securiser encore plus si time
+    } while(nbSerpents < 0 || 4 < nbSerpents);
+    /**** FIN : CHOIX DU NOMBRE DE SERPENTS ****/
+
+    jeu = new EchelleSerpent(ECHELLE_SERPENT, nbJoueursHumains, nbJoueursTotal, 1, nbCasesPlateau, nbEchelles, nbSerpents, 0, 0);
     break;
-  case 2:
-    //jeu = new EchelleSerpent(ECHELLE_SERPENT_ORANGE_VERTE, nbJoueursHumains, nbJoueursTotal, 1, nbLignesPlateau, nbColonnesPlateau); // OrangeVerte
+
+
+  case 2: // EchelleSerpentOrangeVerte
+    // il faudra mettre nbEchelles max plus petit pour pouvoir avoir des cases oranges (idem pour serpents)
+    // FAIRE QCH QUI DEPEND DES CHOIX PRECEDENTS (si moins d'echelles et serpents alors possibilites de plein de cases oranges et vertes)
+
+    //jeu = new EchelleSerpent(ECHELLE_SERPENT_ORANGE_VERTE, nbJoueursHumains, nbJoueursTotal, 1);
     break;
-  case 3:
-    //jeu = new EchelleSerpent(ECHELLE_SERPENT_PEDAGOGIQUE, nbJoueursHumains, nbJoueursTotal, 1, nbLignesPlateau, nbColonnesPlateau); // Pedagogique
+
+
+  case 3: // EchelleSerpentPedagogique
+    //jeu = new EchelleSerpent(ECHELLE_SERPENT_PEDAGOGIQUE, nbJoueursHumains, nbJoueursTotal, 1);
     break;
-  case 4:
+  case 4:  // EchelleSerpentPlusieursPions
     /****** DEBUT : CHOIX DU NOMBRE DE PIONS PAR JOUEUR ******/
     do {
       nbPionsParJoueur = 0;
@@ -128,17 +154,21 @@ int main() {
     } while(nbPionsParJoueur < 2 || 4 < nbPionsParJoueur);
     /****** FIN : CHOIX DU NOMBRE DE PIONS PAR JOUEUR ******/
 
-    //jeu = new EchelleSerpent(ECHELLE_SERPENT_PLUSIEURS_PIONS, nbJoueursHumains, nbJoueursTotal, nbPionsParJoueur, nbLignesPlateau, nbColonnesPlateau); // PlusieursPions
-
-
+    //jeu = new EchelleSerpent(ECHELLE_SERPENT_PLUSIEURS_PIONS, nbJoueursHumains, nbJoueursTotal, nbPionsParJoueur);
 
     break;
-  case 5:
-    //jeu = new CartagenaVariante(CARTAGENA_VARIANTE, nbJoueursHumains, nbJoueursTotal, ...);
+
+
+  case 5: // Cartagena
+    //jeu = new Cartagena(CARTAGENA, nbJoueursHumains, nbJoueursTotal, ...);
     break;
-  case 6:
+
+
+  case 6: // Numeri
     //jeu = new Numeri(NUMERI, nbJoueursHumains, nbJoueursTotal, ...);
     break;
+
+
   default:
     cout << "[main.cpp] : Erreur sur le choix du jeu" << endl;
     exit(EXIT_FAILURE);
@@ -148,10 +178,13 @@ int main() {
 
 
 
-  /****** DEBUT : CREATION DU PLATEAU  ******/
+  /****** DEBUT : CREATION DU PLATEAU ET LANCEMENT DU JEU ******/
+  Plateau p(jeu, nbLignesPlateau, nbColonnesPlateau);
 
+  p.lancer();
 
-  /****** FIN : CREATION DU PLATEAU  ******/
+  cout << "Game Over!" << endl;
+  /****** FIN : CREATION DU PLATEAU ET LANCEMENT DU JEU ******/
 
 
 
@@ -164,57 +197,3 @@ int main() {
 
   return 0;
 }
-
-
-
-
-
-
-
-/*
-  cout << "Utilisation des cases speciales ? y/n" << endl;
-  cin >> charCaseSpeciale;
-  cin.clear(); // A securiser encore plus si time
-
-  switch(charCaseSpeciale) {
-  case 'y':
-    boolCaseSpeciale = true;
-    break;
-  case 'n':
-    boolCaseSpeciale = false;
-    break;
-  default:
-    cout << "Erreur sur la question des cases speciales" << endl;
-    exit(EXIT_FAILURE);
-  }
-*/
-
-
-
- /*
-  cout << "Type du plateau : 1. Carre  /  2. Rectangle" << endl;
-  cin >> choixTypePlateau;
-  cin.clear(); // A securiser encore plus si time
-
-  switch(choixTypePlateau) {
-  case 1:
-    cout << "Taille du plateau (entre 3 et 10) : " << endl;
-    cin >> plateauCarreTaille;
-    cin.clear(); // A securiser encore plus si time
-
-    break;
-  case 2:
-    cout << "Nombre de lignes du plateau (entre 3 et 10) : " << endl;
-    cin >> plateauRectangleNbLignes;
-    cin.clear(); // A securiser encore plus si time
-
-    cout << "Nombre de colonnes du plateau (entre 3 et 10) : " << endl;
-    cin >> plateauRectangleNbColonnes;
-    cin.clear(); // A securiser encore plus si time
-
-    break;
-  default:
-    cout << "Erreur sur le type du plateau" << endl;
-    exit(EXIT_FAILURE);
-  }
-  */

@@ -1,11 +1,17 @@
 #ifndef PLATEAU_HPP
 #define PLATEAU_HPP
 
-#include "Case.hpp"
+#include <thread>
+#include <chrono>
+#include <forward_list>
 #include "Constantes.hpp"
+#include "Pion.hpp"
+#include "Jeu.hpp"
+#include "Case.hpp"
 #include "../jeux/EchelleSerpent/CaseEchelleSerpent.hpp"
-//#include "../jeux/CartagenaVariante/CaseCartagena.hpp"
+//#include "../jeux/Cartagena/CaseCartagena.hpp"
 //#include "../jeux/Numeri/CaseNumeri.hpp"
+
 
 using namespace std;
 
@@ -13,16 +19,17 @@ using namespace std;
 //template <class T> // Contient le type de case
 class Plateau {
 public:
-  Plateau(int, int, string, int, int); // nbLignes, nbColonnes, (nbCases: pase necessaire de donner en arg car = nbLignes*nbColonnes), plateauNomJeu, plateauNbPionsParJoueur, plateauNbJoueursTotal
+  Plateau(Jeu*, int, int); // jeu, nbLignes, nbColonnes, (nbCases: pase necessaire de donner en arg car = nbLignes*nbColonnes), (plateauNomJeu: recuperer via jeu), (plateauNbPionsParJoueur: recuperer via jeu), (plateauNbJoueursTotal: recuperer via jeu)
   virtual ~Plateau();
 
+  Jeu* getJeu();
   int getNbLignes();
   int getNbColonnes();
   int getNbCases();
   string getPlateauNomJeu();
   int getPlateauNbPionsParJoueur();
   int getPlateauNbJoueursTotal();
-  Case* getPlateau();
+  Case** getPlateau();
   /*
  _ _ _ _
 |_|_|_|_|
@@ -30,26 +37,34 @@ public:
 |_|_|_|_|
 
   */
+  void setJeu(Jeu*);
   void setNbLignes(int);
   void setNbColonnes(int);
   void setNbCases(int);
   void setPlateauNomJeu(string);
   void setPlateauNbPionsParJoueur(int);
   void setPlateauNbJoueursTotal(int);
-  void setPlateau(Case*);
+  void setPlateau(Case**);
+
+  friend ostream& operator<<(ostream&, Plateau&);
+  Case* operator[](int);
+
+  bool finDePartie();
+  //void deplacementPion(Pion);
+  void deplacement(Joueur*);
+  void deplacementPion(Pion, int);
+  void lancer();
 
 private:  
+  Jeu* jeu;
   int nbLignes;
   int nbColonnes;
   int nbCases;
   string plateauNomJeu;
   int plateauNbPionsParJoueur;
   int plateauNbJoueursTotal;
-
-  Case* plateau;
+  Case** plateau; // Doit etre Case** car Case est abstraite
    
-  friend ostream& operator<<(ostream&, Plateau&);
-  Case operator[](int);
-  };
+};
 
 #endif //PLATEAU_HPP

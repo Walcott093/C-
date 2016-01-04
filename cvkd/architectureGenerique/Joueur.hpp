@@ -7,29 +7,33 @@ using namespace std;
 class Joueur {
 public:
   Joueur();
-  Joueur(int, string, int, int, Pion**); // id, nom, score, nbPions, tabPions
+  Joueur(bool, int, string, int, int, Pion**); // estHumain, idJoueur, nom, score, nbPions, tabPions
   virtual ~Joueur();
 
-  int getId();
+  bool getEstHumain();
+  int getIdJoueur();
   string getNom();
   int getScore();
   int getNbPions();
   Pion** getTabPions();
 
-  void setId(int);
+  void setEstHumain(bool);
+  void setIdJoueur(int);
   void setNom(string);
   void setScore(int);
   void setNbPions(int);
   void setTabPions(Pion**);
 
+  friend ostream& operator<<(ostream&, Joueur&);
+
 private:
-  int id;
+  bool estHumain;
+  int idJoueur;
   string nom;
   int score;
   int nbPions;
-  Pion** tabPions;
+  Pion** tabPions; // Pion** car l'ordre importe, et l'acces est plus facile
 
-  friend ostream& operator<<(ostream&, Joueur&);
 };
 
 #endif //JOUEUR_HPP

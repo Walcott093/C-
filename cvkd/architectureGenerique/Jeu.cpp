@@ -104,7 +104,7 @@ Joueur* Jeu::creationJoueur() {
   int idPion = 0;
   Pion** tab = new Pion*[nbPionsParJoueur];
   for(int i=0 ; i<nbPionsParJoueur ; i++) {
-    tab[i] = new Pion(idJoueur, idPion++, couleur, 0, 0);
+    tab[i] = new Pion(idJoueur, idPion++, couleur, 0);
   }
   return new Joueur(estHumain, idJoueur, nom, score, nbPionsParJoueur, tab);
 }

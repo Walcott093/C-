@@ -4,12 +4,12 @@ using namespace std;
 
 /********** DEBUT : CONSTRUCTEURS / DESTRUCTEURS **********/
 ObjetEchelleSerpent::ObjetEchelleSerpent():
-  type(""), tete(nullptr), queue(nullptr) {
+  type(""), positionTete(0), positionQueue(0) {
   cout << "Creation d'un ObjetEchelleSerpent par defaut" << endl;
 }
 
-ObjetEchelleSerpent::ObjetEchelleSerpent(string s, Case* t, Case* q):
-  type(s), tete(t), queue(q) {
+ObjetEchelleSerpent::ObjetEchelleSerpent(string s, int t, int q):
+  type(s), positionTete(t), positionQueue(q) {
   cout << "Creation d'un ObjetEchelleSerpent" << endl;
 }
 ObjetEchelleSerpent::~ObjetEchelleSerpent() {
@@ -22,10 +22,10 @@ ObjetEchelleSerpent::~ObjetEchelleSerpent() {
 
 /********** DEBUT : ACCESSEURS ET REDEFINITION D'OPERATEUR(S) **********/
 string ObjetEchelleSerpent::getType() { return type; }
-Case* ObjetEchelleSerpent::getTete() { return tete; }
-Case* ObjetEchelleSerpent::getQueue() { return queue; }
+int ObjetEchelleSerpent::getPositionTete() { return positionTete; }
+int ObjetEchelleSerpent::getPositionQueue() { return positionQueue; }
 
 void ObjetEchelleSerpent::setType(string s) { type = s; }
-void ObjetEchelleSerpent::setTete(Case* c) { tete = c; }
-void ObjetEchelleSerpent::setQueue(Case* c) { queue = c; }
+void ObjetEchelleSerpent::setPositionTete(int c) { positionTete = c; }
+void ObjetEchelleSerpent::setPositionQueue(int c) { positionQueue = c; }
 /********** FIN : ACCESSEURS ET REDEFINITION D'OPERATEUR(S) **********/

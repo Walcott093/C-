@@ -50,19 +50,22 @@ void affichage(int* p, int nbCases, int nbLignes, int nbColonnes){
 }
 int main() {
   cout << "Hello !" << endl;
+ 
+  /*
   int delay;
   cin >> delay;
-
   this_thread::sleep_for(chrono::seconds(delay));
-
   cout << "Delayed Ack" << endl;
+  */
 
-  /*
+
+
   A* a = new A();
   B* b = new B();
 
   cout << "test" << endl;
-  //B* b0 = new A();
+
+  /*  //B* b0 = new A();
   A* a0 = new B();
   cout << "a0.getA()=" << a0->getA() << endl;
   cout << "a0.getB()=" << a0->b << endl;

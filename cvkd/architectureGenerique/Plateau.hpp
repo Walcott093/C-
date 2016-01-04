@@ -8,6 +8,7 @@
 #include "Pion.hpp"
 #include "Jeu.hpp"
 #include "Case.hpp"
+#include "../jeux/EchelleSerpent/EchelleSerpent.hpp"
 #include "../jeux/EchelleSerpent/CaseEchelleSerpent.hpp"
 //#include "../jeux/Cartagena/CaseCartagena.hpp"
 //#include "../jeux/Numeri/CaseNumeri.hpp"

@@ -9,10 +9,11 @@ Plateau::Plateau(Jeu* j, int rangeOrd, int rangeAbs):
   jeu(j), nbLignes(rangeOrd), nbColonnes(rangeAbs), nbCases(rangeOrd*rangeAbs), plateauNomJeu(j->getNomJeuOuVariante()), plateauNbPionsParJoueur(j->getNbPionsParJoueur()), plateauNbJoueursTotal(j->getNbJoueursTotal()) {
 
   int nbPionsMax = plateauNbPionsParJoueur * plateauNbJoueursTotal;
-  
+  EchelleSerpent* jeuES = jeu;
+
   if(plateauNomJeu == ECHELLE_SERPENT) {
     for(int i=0 ; i<nbCases ; i++)
-      plateau[i] = new CaseEchelleSerpent(NEUTRE, i, nbPionsMax, 0, jeu); // On met la specificite de la case a NEUTRE et elle se chagera de changer sa specificite en fonction des parametres pertinents (nbCasesNonNeutres, etc.)
+      plateau[i] = new CaseEchelleSerpent(NEUTRE, i, nbPionsMax, 0, jeuES); // On met la specificite de la case a NEUTRE et elle se chagera de changer sa specificite en fonction des parametres pertinents (nbCasesNonNeutres, etc.)
 
     forward_list<Pion> list;    
     Joueur** tabJoueurs = jeu->getTableauJoueurs();
@@ -56,16 +57,16 @@ Plateau::Plateau(Jeu* j, int rangeOrd, int rangeAbs):
       for(int j=0 ; j<rangeOrd -1 ; j++)
 	plateau[i][j] = new CaseNumeri(NEUTRE, i, j, ...);
   }
-    *
+    
 
   else {
     cout << "[Plateau.cpp] Erreur : Le nom du jeu n'est pas repertorie." << endl;
     exit(EXIT_FAILURE);
-    /*
+    
     for(int i=0 ; i<rangeAbs -1 ; i++)
       for(int j=0 ; j<rangeOrd -1 ; j++)
 	plateau[i][j] = new CaseNormale(i, j, ...);
-    *
+    
 
   }
     */
@@ -177,60 +178,6 @@ bool Plateau::finDePartie() {
 
 
 
-/*
-void Plateau::deplacementPion(Pion pion) {
-  string nomJeu = jeu->getNomJeuOuVariante();
-  
-
-  /* DEPLACEMENT DE PION [ECHELLE_SERPENT] : AVEC UN LANCER DE DE A 6 FACES *
-  if(nomJeu == ECHELLE_SERPENT
-     || nomJeu == ECHELLE_SERPENT_ORANGE_VERTE
-     || nomJeu == ECHELLE_SERPENT_PEDAGOGIQUE
-     || nomJeu == ECHELLE_SERPENT_PLUSIEURS_PIONS) {
-    
-    srand(time(nullptr));
-    int de = (rand() % 6) +1;
-    
-    //Case* casePion = plateau[pion.getPosition()];
-    CaseEchelleSerpent* casePion = plateau[pion.getPosition()];
-    casePion->retirerPion(pion);
-
-    int new_position = 0;
-    if(pion.getPosition() + de >= nbCases -1)
-      new_position = nbCases -1;
-    else
-      new_position = pion.getPosition() + de;
-    //Case* new_casePion = plateau[new_position];
-    CaseEchelleSerpent* new_casePion = plateau[new_position];
-
-    new_casePion->ajouterPion(pion);
-
-    ObjetEchelleSerpent* oes;
-    if(new_casePion->getSpecificite() == ECHELLE_BAS) {
-      oes = new_casePion->getObj();
-      (oes->getQueue())->retirerPion(pion);
-      (oes->getTete())->ajouterPion(pion);
-    }
-    else if(new_casePion->getSpecificite() == SERPENT_TETE) {
-      oes = new_casePion->getObj();
-      (oes->getTete())->retirerPion(pion);      
-      (oes->getQueue())->ajouterPion(pion);
-    }
-
-  }
-
-
-  /* DEPLACEMENT DE PION [CARTAGENA] : AVEC DES CARTES A SYMBOLE *
-  else if(nomJeu == CARTAGENA) {
-
-  }
-
-  /* DEPLACEMENT DE PION [NUMERI] : AVEC UN LANCER DE DE A 6 FACES *
-  else if(nomJeu == NUMERI) {
-
-  }
-  }*/
-
 
 void Plateau::deplacementPion(Pion pion, int distance) {
   Case* casePion = plateau[pion.getPosition()];
@@ -248,13 +195,13 @@ void Plateau::deplacementPion(Pion pion, int distance) {
   ObjetEchelleSerpent* oes;
   if(new_casePion->getSpecificite() == ECHELLE_BAS) {
     oes = new_casePion->getObj();
-    (oes->getQueue())->retirerPion(pion);
-    (oes->getTete())->ajouterPion(pion);
+    (plateau[oes->getPositionQueue()])->retirerPion(pion);
+    (plateau[oes->getPositionTete()])->ajouterPion(pion);
   }
   else if(new_casePion->getSpecificite() == SERPENT_TETE) {
     oes = new_casePion->getObj();
-    (oes->getTete())->retirerPion(pion);      
-    (oes->getQueue())->ajouterPion(pion);
+    (plateau[oes->getPositionTete()])->retirerPion(pion);      
+    (plateau[oes->getPositionQueue()])->ajouterPion(pion);
   }
 
 }

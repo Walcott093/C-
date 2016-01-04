@@ -8,6 +8,8 @@ public:
 
   string getA();
   string a = "AAA";
+private:
+  A a0;
 };
 
 #endif

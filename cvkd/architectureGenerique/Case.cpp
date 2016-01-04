@@ -14,15 +14,15 @@ Case::Case(int spe, int pos, int nbMax, int nb):
 
   // forward_list par defaut vide
   obj = nullptr;
-  cout << "                              Construction de la case : " << *this << endl;
+  cout << "                              Construction de la case : " << this << endl;
 }
 
 Case::Case(int spe, int pos, int nbMax, int nb, forward_list<Pion> pions, ObjetEchelleSerpent* o):
   specificite(spe), position(pos), nbPionsMax(nbMax), nbPions(nb), listePions(pions), obj(o) {
-  cout << "                              Construction de la case : " << *this <<endl;
+  cout << "                              Construction de la case : " << this <<endl;
 }
 Case::~Case() {
-  cout << "                              Destruction de la Case : " << *this << endl;
+  cout << "                              Destruction de la Case : " << this << endl;
 }
 /********** FIN : CONSTRUCTEURS / DESTRUCTEURS **********/
 
@@ -51,7 +51,7 @@ ostream& operator<<(ostream& o, Case*& c) {
     o << "    ";
     break;
   case 1:
-    o << *c->listePions.begin() << "   ";
+    o << *((c->listePions).begin()) << "   ";
     break;
   default:
     int cpt = 0;
@@ -59,7 +59,7 @@ ostream& operator<<(ostream& o, Case*& c) {
       o << *it;
     }
     break;
-  }
+    }
   return o;
 }
 /*

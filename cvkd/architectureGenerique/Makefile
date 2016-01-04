@@ -11,7 +11,7 @@ Joueur.o : Joueur.cpp Pion.hpp
 	g++ -std=c++11 -Wall -I $(HEADERS_DIR) -c Joueur.cpp
 Case.o : Case.cpp Constantes.hpp Pion.hpp $(ES_DIR)ObjetEchelleSerpent.hpp
 	g++ -std=c++11 -Wall -I $(HEADERS_DIR) -c Case.cpp
-Plateau.o : Plateau.cpp Constantes.hpp Pion.hpp Jeu.hpp Case.hpp $(ES_DIR)CaseEchelleSerpent.hpp
+Plateau.o : Plateau.cpp Constantes.hpp Pion.hpp Jeu.hpp Case.hpp $(ES_DIR)CaseEchelleSerpent.hpp $(ES_DIR)EchelleSerpent.hpp
 	g++ -std=c++11 -Wall -I $(HEADERS_DIR) -c Plateau.cpp
 Jeu.o : Jeu.cpp Constantes.hpp Pion.hpp Joueur.hpp
 	g++ -std=c++11 -Wall -I $(HEADERS_DIR) -c Jeu.cpp

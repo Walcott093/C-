@@ -71,7 +71,7 @@ ostream& operator<<(ostream& o, Case*& c) {
     int cpt = 0;
     for(auto it=c->listePions.begin() ; it!=c->listePions.end(); ++it) {
       o << *it;
-      cpt++
+      cpt++;
     }
     for(int i=0 ; i<cpt ; i++)
       o << " ";

@@ -4,7 +4,7 @@ ES_DIR = ../jeux/EchelleSerpent/
 all : $(GOALS)
 
 main : Pion.o Joueur.o Case.o Jeu.o Plateau.o CaseNormale.o $(ES_DIR)EchelleSerpent.o $(ES_DIR)ObjetEchelleSerpent.o $(ES_DIR)CaseEchelleSerpent.o main.o
-	g++ -std=c++11 -o test Pion.o Joueur.o Case.o Plateau.o Jeu.o CaseNormale.o EchelleSerpent.o ObjetEchelleSerpent.o CaseEchelleSerpent.o main.o
+	g++ -std=c++11 -o main Pion.o Joueur.o Case.o Plateau.o Jeu.o CaseNormale.o EchelleSerpent.o ObjetEchelleSerpent.o CaseEchelleSerpent.o main.o
 Pion.o : Pion.cpp
 	g++ -std=c++11 -Wall -I $(HEADERS_DIR) -c Pion.cpp
 Joueur.o : Joueur.cpp Pion.hpp

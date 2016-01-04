@@ -51,11 +51,11 @@ ostream& operator<<(ostream& o, Case*& c) {
     if(c->specificite == ECHELLE || c->specificite == SERPENT) {
       if(type == TYPE_ECHELLE_BAS)
 	o << BLANC << "e" << idOES << SUFFIXE_COULEUR;
-      if(type == TYPE_ECHELLE_HAUT)
+      else if(type == TYPE_ECHELLE_HAUT)
 	o << BLANC << "E" << idOES << SUFFIXE_COULEUR;
-      if(type == TYPE_SERPENT_QUEUE)
+      else if(type == TYPE_SERPENT_QUEUE)
 	o << NOIR << "s" << idOES << SUFFIXE_COULEUR;
-      if(type == TYPE_SERPENT_TETE)
+      else if(type == TYPE_SERPENT_TETE)
 	o << NOIR << "S" << idOES << SUFFIXE_COULEUR;
     }
   }  

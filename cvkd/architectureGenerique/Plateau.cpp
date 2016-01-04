@@ -11,10 +11,16 @@ Plateau::Plateau(Jeu* j, int rangeOrd, int rangeAbs):
   plateau = new Case*[nbCases];
   int nbPionsMax = plateauNbPionsParJoueur * plateauNbJoueursTotal;
  
-  if(plateauNomJeu == ECHELLE_SERPENT) {
+
+  if(plateauNomJeu == ECHELLE_SERPENT
+     || plateauNomJeu == ECHELLE_SERPENT_ORANGE_VERTE
+     || plateauNomJeu == ECHELLE_SERPENT_PEDAGOGIQUE
+     || plateauNomJeu == ECHELLE_SERPENT_PLUSIEURS_PIONS) {
     for(int i=0 ; i<nbCases ; i++)
       plateau[i] = new CaseEchelleSerpent(NEUTRE, i, nbPionsMax, 0, (EchelleSerpent*)jeu); // On met la specificite de la case a NEUTRE et elle se chagera de changer sa specificite en fonction des parametres pertinents (nbCasesNonNeutres, etc.)
 
+
+    // On place tous les pions sur la 1ere case
     forward_list<Pion*> list;    
     Joueur** tabJoueurs = jeu->getTableauJoueurs();
     for(int i=0 ; i<(jeu->getNbJoueursTotal()) ; i++) {
@@ -27,25 +33,8 @@ Plateau::Plateau(Jeu* j, int rangeOrd, int rangeAbs):
 
   }
 
-  /*
-  else if(plateauNomJeu == ECHELLE_SERPENT_ORANGE_VERTE) {
-    for(int i=0 ; i<rangeAbs -1 ; i++)
-      for(int j=0 ; j<rangeOrd -1 ; j++)
-	plateau[i][j] = new CaseEchelleSerpent(NEUTRE, i, j, ...);
-  }
   
-  else if(plateauNomJeu == ECHELLE_SERPENT_PEDAGOGIQUE) {
-    for(int i=0 ; i<rangeAbs -1 ; i++)
-      for(int j=0 ; j<rangeOrd -1 ; j++)
-	plateau[i][j] = new CaseEchelleSerpent(NEUTRE, i, j, ...);
-  }
-
-  else if(plateauNomJeu == ECHELLE_SERPENT_PLUSIEURS_PIONS) {
-    for(int i=0 ; i<rangeAbs -1 ; i++)
-      for(int j=0 ; j<rangeOrd -1 ; j++)
-	plateau[i][j] = new CaseEchelleSerpent(NEUTRE, i, j, ...);
-  }
-   
+  /* 
   else if(plateauNomJeu == CARTAGENA) {
     for(int i=0 ; i<rangeAbs -1 ; i++)
       for(int j=0 ; j<rangeOrd -1 ; j++)

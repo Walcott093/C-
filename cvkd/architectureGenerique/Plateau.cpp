@@ -95,17 +95,28 @@ void Plateau::setPlateau(Case** c) { plateau = c; }
 ostream& operator<<(ostream& o,Plateau& p){
   int cptLignes = p.getNbLignes();
   for(int i=p.getNbCases() ; i>=1 ; i-=p.getNbColonnes()) {
-    o << "|";
+    if(cptLignes%2 == 0 && i == p.getNbCases())
+      o << ROUGE << "|" << SUFFIXE_COULEUR;
+    else if(i <= p.getNbColonnes())
+      o << VERT << "|" << SUFFIXE_COULEUR;
+    else
+      o << "|";
+      
     if(cptLignes % 2 == 1) { // Si ligne impaire : sensPion = g->d ; sensAffichage = d->g
-      for(int c=p.getNbColonnes()-1 ; c>=0 ; c--)
-	o << (p.plateau[i -c -1]) << "|";
+      for(int c=p.getNbColonnes()-1 ; c>=0 ; c--) {
+	o << (p.plateau[i -c -1]);
+	if(c == 0 && i == p.getNbCases())
+	  o << ROUGE << "|" << SUFFIXE_COULEUR;
+	else
+	  o << "|";
+      }
        o << endl;
       cptLignes--;
     }
     else { // Si ligne paire : sensPion = d->g ; sensAffichage = g->d
       for(int c=0 ; c<=p.getNbColonnes()-1 ; c++)
 	o << (p.plateau[i -c -1]) << "|";
-      o << endl;
+       o << endl;
       cptLignes--;
     }
   }
@@ -168,6 +179,7 @@ bool Plateau::finDePartie() {
       forward_list<Pion*> list = caseFinale->getListePions();
       for(auto it=list.begin() ; it!=list.end() ; ++it) {
 	idJoueur = (*it)->getIdJoueur();
+	cout << "idJoueurs = " << idJoueur << endl; //X
 	cptPionsJoueurs[idJoueur]++;
       }
       for(int i=0 ; i<plateauNbJoueursTotal ; i++) {

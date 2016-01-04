@@ -14,7 +14,7 @@ protected:
 
 public:
   CaseEchelleSerpent(int, int, int, int, EchelleSerpent*); // specificite, position, nbPionsMax, nbPions, jeuVariante
-  CaseEchelleSerpent(int, int, int, int, forward_list<Pion>, ObjetEchelleSerpent*, EchelleSerpent*); // specificite, position, nbPionsMax, nbPions, listePions, obj, jeuVariante
+  CaseEchelleSerpent(int, int, int, int, forward_list<Pion*>, ObjetEchelleSerpent*, EchelleSerpent*); // specificite, position, nbPionsMax, nbPions, listePions, obj, jeuVariante
   // Sert pour la premiere case ou se trouvent tous les pions au debut, ou pour modifier une case en cours de partie si un jeu le permet
   virtual ~CaseEchelleSerpent();
 

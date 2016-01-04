@@ -15,13 +15,13 @@ Plateau::Plateau(Jeu* j, int rangeOrd, int rangeAbs):
     for(int i=0 ; i<nbCases ; i++)
       plateau[i] = new CaseEchelleSerpent(NEUTRE, i, nbPionsMax, 0, (EchelleSerpent*)jeu); // On met la specificite de la case a NEUTRE et elle se chagera de changer sa specificite en fonction des parametres pertinents (nbCasesNonNeutres, etc.)
 
-    forward_list<Pion> list;    
+    forward_list<Pion*> list;    
     Joueur** tabJoueurs = jeu->getTableauJoueurs();
     for(int i=0 ; i<(jeu->getNbJoueursTotal()) ; i++) {
       Joueur* joueur = tabJoueurs[i];
       Pion** tab = joueur->getTabPions();
       for(int j=0 ; j<(joueur->getNbPions()) ; j++)
-	list.push_front(*(tab[j]));
+	list.push_front(tab[j]);
     }
     plateau[0]->ajouterPions(list, nbPionsMax);
 
@@ -147,9 +147,9 @@ bool Plateau::finDePartie() {
     for(int i=0 ; i<plateauNbJoueursTotal ; i++)
       cptPionsJoueurs[i] = 0;
     if(caseFinale->getNbPions() >= plateauNbPionsParJoueur) {
-      forward_list<Pion> list = caseFinale->getListePions();
+      forward_list<Pion*> list = caseFinale->getListePions();
       for(auto it=list.begin() ; it!=list.end() ; ++it) {
-	idJoueur = (*it).getIdJoueur();
+	idJoueur = (*it)->getIdJoueur();
 	cptPionsJoueurs[idJoueur]++;
       }
       for(int i=0 ; i<plateauNbJoueursTotal ; i++)
@@ -178,15 +178,15 @@ bool Plateau::finDePartie() {
 
 
 
-void Plateau::deplacementPion(Pion pion, int distance) {
-  Case* casePion = plateau[pion.getPosition()];
+void Plateau::deplacementPion(Pion* pion, int distance) {
+  Case* casePion = plateau[pion->getPosition()];
   casePion->retirerPion(pion);
       
   int new_position = 0;
-  if(pion.getPosition() + distance >= nbCases -1)
+  if(pion->getPosition() + distance >= nbCases -1)
     new_position = nbCases -1;
   else
-    new_position = pion.getPosition() + distance;
+    new_position = pion->getPosition() + distance;
   Case* new_casePion = plateau[new_position];
       
   new_casePion->ajouterPion(pion);
@@ -212,7 +212,7 @@ void Plateau::deplacementPion(Pion pion, int distance) {
 
 void Plateau::deplacement(Joueur* joueur) {
   string nomJeu = jeu->getNomJeuOuVariante();
-  Pion pion = *(joueur->getTabPions()[0]);
+  Pion* pion = joueur->getTabPions()[0];
 
   srand(time(nullptr));
   int de = (rand() % 6) +1;
@@ -269,9 +269,8 @@ void Plateau::deplacement(Joueur* joueur) {
 	  cin >> choixPion;
 	  cin.clear();
 	} while(choixPion < 0 || (joueur->getNbPions()-1) < choixPion);
-	pion = *(joueur->getTabPions()[choixPion]);
 
-	pion = *(joueur->getTabPions()[choixPion]);
+	pion = joueur->getTabPions()[choixPion];
 	deplacementPion(pion, de);
       }
       else { // if(commande == 'd')
@@ -282,9 +281,8 @@ void Plateau::deplacement(Joueur* joueur) {
 	  cin >> choixPion;
 	  cin.clear();
 	} while(choixPion < 0 || (joueur->getNbPions()-1) < choixPion);
-	pion = *(joueur->getTabPions()[choixPion]);
 
-	pion = *(joueur->getTabPions()[choixPion]);
+	pion = joueur->getTabPions()[choixPion];
 	deplacementPion(pion, de);
       }
     }

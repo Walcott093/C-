@@ -24,7 +24,7 @@ CaseEchelleSerpent::CaseEchelleSerpent(int spe, int position, int nbMax, int nb,
   cout << "                              Construction de la CaseEchelleSerpent : " << this << endl;
 }
 
-CaseEchelleSerpent::CaseEchelleSerpent(int spe, int position, int nbMax, int nb, forward_list<Pion> pions, ObjetEchelleSerpent* oes, EchelleSerpent* jeu):
+CaseEchelleSerpent::CaseEchelleSerpent(int spe, int position, int nbMax, int nb, forward_list<Pion*> pions, ObjetEchelleSerpent* oes, EchelleSerpent* jeu):
   Case(spe, position, nbMax, nb, pions, oes), jeuVariante(jeu) {
   specificite = randomSpecificite();
 

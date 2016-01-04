@@ -10,7 +10,7 @@ protected:
 
 public:
   CaseNormale(int, int, int, int); //(specificite, position, nbPionsMax, nbPions)
-  CaseNormale(int, int, int, int, forward_list<Pion>, ObjetEchelleSerpent*); //(specificite, position, nbPionsMax, nbPions, listePions, obj)
+  CaseNormale(int, int, int, int, forward_list<Pion*>, ObjetEchelleSerpent*); //(specificite, position, nbPionsMax, nbPions, listePions, obj)
   // Sert pour la premiere case ou se trouvent tous les pions au debut, ou pour modifier une case en cours de partie si un jeu le permet
   virtual ~CaseNormale();
   

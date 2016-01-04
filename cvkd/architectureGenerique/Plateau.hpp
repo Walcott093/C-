@@ -53,7 +53,7 @@ public:
   bool finDePartie();
   //void deplacementPion(Pion);
   void deplacement(Joueur*);
-  void deplacementPion(Pion, int);
+  void deplacementPion(Pion*, int);
   void lancer();
 
 private:  

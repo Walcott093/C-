@@ -8,7 +8,7 @@ CaseNormale::CaseNormale(int spe, int pos, int nbMax, int nb):
   cout << "                              Construction de la CaseNormale : " << this << endl;
 }
 
-CaseNormale::CaseNormale(int spe, int pos, int nbMax, int nb, forward_list<Pion> pions, ObjetEchelleSerpent* oes):
+CaseNormale::CaseNormale(int spe, int pos, int nbMax, int nb, forward_list<Pion*> pions, ObjetEchelleSerpent* oes):
   Case(spe, pos, nbMax, nb, pions, oes) {
   cout << "                              Construction de la CaseNormale : " << this <<endl;
 }

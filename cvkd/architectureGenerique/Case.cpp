@@ -17,7 +17,7 @@ Case::Case(int spe, int pos, int nbMax, int nb):
   cout << "                              Construction de la case : " << this << endl;
 }
 
-Case::Case(int spe, int pos, int nbMax, int nb, forward_list<Pion> pions, ObjetEchelleSerpent* o):
+Case::Case(int spe, int pos, int nbMax, int nb, forward_list<Pion*> pions, ObjetEchelleSerpent* o):
   specificite(spe), position(pos), nbPionsMax(nbMax), nbPions(nb), listePions(pions), obj(o) {
   cout << "                              Construction de la case : " << this <<endl;
 }
@@ -34,14 +34,14 @@ int Case::getSpecificite() { return specificite; }
 int Case::getPosition() { return position; }
 int Case::getNbPionsMax() { return nbPionsMax; }
 int Case::getNbPions() { return nbPions; }
-forward_list<Pion> Case::getListePions() { return listePions; }
+forward_list<Pion*> Case::getListePions() { return listePions; }
 ObjetEchelleSerpent* Case::getObj() { return obj; }
 
 void Case::setSpecificite(int spe) { specificite = spe; }
 void Case::setPosition(int new_pos) { position = new_pos; }
 void Case::setNbPionsMax(int a) { nbPionsMax = a; }
 void Case::setNbPions(int a) { nbPions = a; }
-void Case::setListePions(forward_list<Pion> fl) { listePions = fl; }
+void Case::setListePions(forward_list<Pion*> fl) { listePions = fl; }
 void Case::setObj(ObjetEchelleSerpent* oes) { obj = oes; }
 
 ostream& operator<<(ostream& o, Case*& c) {
@@ -56,7 +56,7 @@ ostream& operator<<(ostream& o, Case*& c) {
   default:
     int cpt = 0;
     for(auto it=c->listePions.begin() ; it!=c->listePions.end(); ++it) {
-      o << *it;
+      o << *(*it); // OU O << *IT; ????
     }
     break;
     }
@@ -99,11 +99,11 @@ ostream& operator<<(ostream& o, Case*& c) {
 /********** DEBUT : FONCTIONS SUPPLEMENTAIRES **********/
 bool Case::isEmpty() { return nbPions == 0; }
 
-bool Case::ajouterPion(Pion p) {
+bool Case::ajouterPion(Pion* p) {
   if(nbPions < nbPionsMax) {
     listePions.push_front(p);
     nbPions++;
-    p.setPosition(position);
+    p->setPosition(position);
   }
   else {
     cout << "[Case.cpp/ajouterPion] Erreur : Impossible de rajouter le pion. Case remplie." << endl;
@@ -112,7 +112,7 @@ bool Case::ajouterPion(Pion p) {
   return true;
 }
 
-bool Case::ajouterPions(forward_list<Pion> fl, int nbPionsToAdd) {
+bool Case::ajouterPions(forward_list<Pion*> fl, int nbPionsToAdd) {
   if(nbPions + nbPionsToAdd > nbPionsMax) {
     cout << "[Case.cpp/ajouterPions] Erreur : Impossible de rajouter les pions. Pas assez de place." << endl;
     return false;
@@ -122,13 +122,13 @@ bool Case::ajouterPions(forward_list<Pion> fl, int nbPionsToAdd) {
     nbPions += nbPionsToAdd;
     
     for(auto it=fl.begin() ; it!=fl.end() ; ++it)
-      (*it).setPosition(position);
+      (*it)->setPosition(position);
     
     return true;
   }
 }
 
-bool Case::retirerPion(Pion p) {
+bool Case::retirerPion(Pion* p) {
   if(nbPions == 0) {
     cout << "[Case.cpp/retirerPion] Erreur : Impossible de retirer le pion. Case vide." << endl;
     return false;
@@ -147,7 +147,7 @@ bool Case::retirerPion(Pion p) {
   }
 }
 
-bool Case::retirerPions(forward_list<Pion> fl, int nbPionsToDel) {
+bool Case::retirerPions(forward_list<Pion*> fl, int nbPionsToDel) {
   bool all_deleted = true;
   if(nbPions - nbPionsToDel < 0) {
     cout << "[Case.cpp/retirerPions] Erreur : Impossible de retirer les pions. Pas assez de pions." << endl;

@@ -30,8 +30,15 @@ const int DIFFICULTE_DIFFICILE = 1000;
 
 // Used in "Plateau.cpp"
 // Affiche la question sur le terminal et renvoie la reponse au return
-int question(const int DIFFICULTE) {
+int question() {
   srand(time(nullptr));
+  int DIFFICULTE;
+  int diff = (rand() % 3); // entre 0 et 2
+  switch(diff){
+  case 0: DIFFICULTE = DIFFICULTE_FACILE;break;
+  case 1: DIFFICULTE = DIFFICULTE_MOYENNE;break;
+  case 2: DIFFICULTE = DIFFICULTE_DIFFICILE;break;   
+  }
   int nb1 = (rand() % DIFFICULTE) +1;
   int nb2 = (rand() % DIFFICULTE) +1;
   int op = (rand() % 4); //entre 0 et 3

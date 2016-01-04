@@ -58,23 +58,41 @@ ostream& operator<<(ostream& o, Case*& c) {
       else if(type == TYPE_SERPENT_TETE)
 	o << NOIR << "S" << idOES << SUFFIXE_COULEUR;
     }
-  }  
-  
+  }
+  if(c->specificite == ORANGE)
+    o << CYAN << "O " << SUFFIXE_COULEUR;
+  else if(c->specificite == VERTE)
+    o << MAGENTA << "V " << SUFFIXE_COULEUR;
 
+  int retrait = 0;
+  if(c->specificite == ECHELLE || c->specificite == SERPENT)
+    retrait = 2;
+  else if(c->specificite == ORANGE || c->specificite == VERTE)
+    retrait = 1;
+    
+  int maxEspace = 2 + c->getNbPionsMax();
+  
   switch(c->nbPions) {
   case 0:
-    o << "    ";
+    for(int i=0 ; i<maxEspace-retrait ; i++)
+      o << " ";
     break;
   case 1:
-    o << *((c->listePions).begin()) << "   ";
+    for(int i=0 ; i<retrait ; i++)
+      o << " ";
+    o << *((c->listePions).begin());
+    for(int i=0 ; i<maxEspace-1-retrait-retrait ; i++)
+      o << " ";
     break;
   default:
+    for(int i=0 ; i<retrait ; i++)
+      o << " ";
     int cpt = 0;
     for(auto it=c->listePions.begin() ; it!=c->listePions.end(); ++it) {
       o << *it;
       cpt++;
     }
-    for(int i=0 ; i<cpt ; i++)
+    for(int i=0 ; i<maxEspace-cpt-retrait-retrait ; i++)
       o << " ";
     break;
     }

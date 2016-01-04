@@ -64,6 +64,7 @@ void Jeu::getScores() {
 }
 
 Joueur* Jeu::creationJoueur() {
+  cout << "--- Creation de joueur ---" << endl;
   string nom;
   bool estHumain = false;
   if(joueursHumainsCrees < nbJoueursHumains) {

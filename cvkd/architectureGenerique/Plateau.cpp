@@ -8,6 +8,7 @@ using namespace std;
 Plateau::Plateau(Jeu* j, int rangeOrd, int rangeAbs):
   jeu(j), nbLignes(rangeOrd), nbColonnes(rangeAbs), nbCases(rangeOrd*rangeAbs), plateauNomJeu(j->getNomJeuOuVariante()), plateauNbPionsParJoueur(j->getNbPionsParJoueur()), plateauNbJoueursTotal(j->getNbJoueursTotal()) {
 
+  plateau = new Case*[nbCases];
   int nbPionsMax = plateauNbPionsParJoueur * plateauNbJoueursTotal;
  
   if(plateauNomJeu == ECHELLE_SERPENT) {

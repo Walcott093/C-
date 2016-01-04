@@ -29,7 +29,7 @@ public:
 
   Joueur* operator[](int);
   
-  virtual Joueur* creationJoueur(); //VAUT-IL MIEUX RENVOYER UN JOUEUR OU UN JOUEUR* ???
+  virtual Joueur* creationJoueur(); // =0; ABSTRAITE ou NON ? ...
   int getScoreJoueur(int); //Recuperer le score d'un joueur en donnant son id
   void getScores(); //Afficher les scores de tous les joueurs
 

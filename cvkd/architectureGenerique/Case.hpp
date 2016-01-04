@@ -41,13 +41,14 @@ public:
   bool retirerPion(Pion);
   bool retirerPions(forward_list<Pion>, int);
 
+  ObjetEchelleSerpent* obj; // Sert pour les CaseEchelleSerpent
+
 protected:
   int specificite;
   int position; // position sur le plateau (Case*)
   int nbPionsMax; //= Jeu::nbJoueursTotal * Jeu::nbPionsParJoueur
   int nbPions;
   forward_list<Pion> listePions; // forward_list car peu importe l'ordre
-  ObjetEchelleSerpent* obj; // Sert pour les CaseEchelleSerpent
 
 };
 

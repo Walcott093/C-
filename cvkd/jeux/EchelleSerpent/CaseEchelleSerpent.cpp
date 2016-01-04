@@ -21,18 +21,18 @@ CaseEchelleSerpent::CaseEchelleSerpent(int spe, int position, int nbMax, int nb,
 
   specificite = randomSpecificite();
   // if specificite != ECHELLE, SERPENT => alors obj = nullptr
-  cout << "                              Construction de la CaseEchelleSerpent : " << *this << endl;
+  cout << "                              Construction de la CaseEchelleSerpent : " << this << endl;
 }
 
 CaseEchelleSerpent::CaseEchelleSerpent(int spe, int position, int nbMax, int nb, forward_list<Pion> pions, ObjetEchelleSerpent* oes, EchelleSerpent* jeu):
   Case(spe, position, nbMax, nb, pions, oes), jeuVariante(jeu) {
   specificite = randomSpecificite();
 
-  cout << "                              Construction de la CaseEchelleSerpent : " << *this <<endl;
+  cout << "                              Construction de la CaseEchelleSerpent : " << this <<endl;
 }
 
 CaseEchelleSerpent::~CaseEchelleSerpent() {
-  cout << "                              Destruction de la CaseEchelleSerpent : " << *this << endl;
+  cout << "                              Destruction de la CaseEchelleSerpent : " << this << endl;
 }
 /********** FIN : CONSTRUCTEURS / DESTRUCTEURS **********/
 
@@ -79,41 +79,41 @@ int CaseEchelleSerpent::randomSpecificite() {
     } while((ret == ECHELLE && jeuVariante->getNbCasesEchellesRestantes() == 0)
 	    || (ret == SERPENT && jeuVariante->getNbCasesSerpentsRestantes() == 0)
 	    || (ret == ORANGE && jeuVariante->getNbCasesOrangesRestantes() == 0)
-	    || (ret == VERTES && jeuVariante->getNbCasesVertesRestantes() == 0))
+	    || (ret == VERTE && jeuVariante->getNbCasesVertesRestantes() == 0));
     
-
+    
     if(ret == ECHELLE) {
-      jeuVariante.setNbCasesEchellesRestantes( jeuVariante.getNbCasesEchellesRestantes() -1 );
+      jeuVariante->setNbCasesEchellesRestantes( jeuVariante->getNbCasesEchellesRestantes() -1 );
       if(basHautEchelle == false) {
 	caseBasEchelle = this;
 	basHautEchelle = true;
       }
       else { // if(basHautEchelle == true)
 	caseHautEchelle = this;
-	caseBasEchelle->obj = new ObjetEchelleSerpent(TYPE_ECHELLE_BAS, caseHautEchelle, caseBasEchelle);
-	caseHautEchelle->obj = new ObjetEchelleSerpent(TYPE_ECHELLE_HAUT, caseHautEchelle, caseBasEchelle);
+	caseBasEchelle->obj = new ObjetEchelleSerpent(TYPE_ECHELLE_BAS, caseHautEchelle->getPosition(), caseBasEchelle->getPosition());
+	caseHautEchelle->obj = new ObjetEchelleSerpent(TYPE_ECHELLE_HAUT, caseHautEchelle->getPosition(), caseBasEchelle->getPosition());
 	basHautEchelle = false;
       }
     }
       
     else if(ret == SERPENT) {
-      jeuVariante.setNbCasesSerpentsRestantes( jeuVariante.getNbCasesSerpentsRestantes() -1 );
+      jeuVariante->setNbCasesSerpentsRestantes( jeuVariante->getNbCasesSerpentsRestantes() -1 );
       if(queueTeteSerpent == false) {
 	caseQueueSerpent = this;
 	queueTeteSerpent = true;
       }
       else { // if(queueTeteSerpent == true)
 	caseTeteSerpent = this;
-	caseQueueSerpent->obj = new ObjetEchelleSerpent(TYPE_SERPENT_QUEUE, caseTeteSerpent, caseQueueSerpent);
-	caseTeteSerpent->obj = new ObjetEchelleSerpent(TYPE_SERPENT_TETE, caseTeteSerpent, caseQueueSerpent);
+	caseQueueSerpent->obj = new ObjetEchelleSerpent(TYPE_SERPENT_QUEUE, caseTeteSerpent->getPosition(), caseQueueSerpent->getPosition());
+	caseTeteSerpent->obj = new ObjetEchelleSerpent(TYPE_SERPENT_TETE, caseTeteSerpent->getPosition(), caseQueueSerpent->getPosition());
       }
     }
     
     else if(ret == ORANGE)
-      jeuVariante.setNbCasesOrangesRestantes( jeuVariante.getNbCasesOrangesRestantes() -1 );
+      jeuVariante->setNbCasesOrangesRestantes( jeuVariante->getNbCasesOrangesRestantes() -1 );
 
     else if(ret == VERTE)
-      jeuVariante.setNbCasesVertesRestantes( jeuVariante.getNbCasesVertesRestantes() -1 );
+      jeuVariante->setNbCasesVertesRestantes( jeuVariante->getNbCasesVertesRestantes() -1 );
   }
     
   return ret;

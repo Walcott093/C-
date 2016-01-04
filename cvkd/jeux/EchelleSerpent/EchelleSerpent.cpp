@@ -51,9 +51,9 @@ void EchelleSerpent::setNbCasesSerpents(int a) { nbCasesSerpents = a; }
 void EchelleSerpent::setNbCasesOranges(int a) { nbCasesOranges = a; }
 void EchelleSerpent::setNbCasesVertes(int a) { nbCasesVertes = a; }
 void EchelleSerpent::setNbCasesNonNeutres(int a) { nbCasesNonNeutres = a; }
-void EchelleSerpent::setNbCasesPlateauRestantes(int) { nbCasesPlateauRestantes = a; }
-void EchelleSerpent::setNbCasesEchellesRestantes(int) { nbCasesEchellesRestantes = a; }
-void EchelleSerpent::setNbCasesSerpentsRestantes(int) { nbCasesSerpentsRestantes = a; }
-void EchelleSerpent::setNbCasesOrangesRestantes(int) { nbCasesOrangesRestantes = a; }
-void EchelleSerpent::setNbCasesVertesRestantes(int) { nbCasesVertesRestantes = a; }
+void EchelleSerpent::setNbCasesPlateauRestantes(int a) { nbCasesPlateauRestantes = a; }
+void EchelleSerpent::setNbCasesEchellesRestantes(int a) { nbCasesEchellesRestantes = a; }
+void EchelleSerpent::setNbCasesSerpentsRestantes(int a) { nbCasesSerpentsRestantes = a; }
+void EchelleSerpent::setNbCasesOrangesRestantes(int a) { nbCasesOrangesRestantes = a; }
+void EchelleSerpent::setNbCasesVertesRestantes(int a) { nbCasesVertesRestantes = a; }
 /********** FIN : ACCESSEURS ET REDEFINITION D'OPERATEUR(S) **********/

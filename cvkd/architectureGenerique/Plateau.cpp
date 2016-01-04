@@ -9,11 +9,10 @@ Plateau::Plateau(Jeu* j, int rangeOrd, int rangeAbs):
   jeu(j), nbLignes(rangeOrd), nbColonnes(rangeAbs), nbCases(rangeOrd*rangeAbs), plateauNomJeu(j->getNomJeuOuVariante()), plateauNbPionsParJoueur(j->getNbPionsParJoueur()), plateauNbJoueursTotal(j->getNbJoueursTotal()) {
 
   int nbPionsMax = plateauNbPionsParJoueur * plateauNbJoueursTotal;
-  EchelleSerpent* jeuES = jeu;
-
+ 
   if(plateauNomJeu == ECHELLE_SERPENT) {
     for(int i=0 ; i<nbCases ; i++)
-      plateau[i] = new CaseEchelleSerpent(NEUTRE, i, nbPionsMax, 0, jeuES); // On met la specificite de la case a NEUTRE et elle se chagera de changer sa specificite en fonction des parametres pertinents (nbCasesNonNeutres, etc.)
+      plateau[i] = new CaseEchelleSerpent(NEUTRE, i, nbPionsMax, 0, (EchelleSerpent*)jeu); // On met la specificite de la case a NEUTRE et elle se chagera de changer sa specificite en fonction des parametres pertinents (nbCasesNonNeutres, etc.)
 
     forward_list<Pion> list;    
     Joueur** tabJoueurs = jeu->getTableauJoueurs();
@@ -103,18 +102,17 @@ void Plateau::setPlateau(Case** c) { plateau = c; }
 
 ostream& operator<<(ostream& o,Plateau& p){
   int cptLignes = p.getNbLignes();
-  int cptColonnes = p.getNbColonnes(); //= 1;
   for(int i=p.getNbCases() ; i>=1 ; i-=p.getNbColonnes()) {
     o << "|";
     if(cptLignes % 2 == 1) { // Si ligne impaire : sensPion = g->d ; sensAffichage = d->g
       for(int c=p.getNbColonnes()-1 ; c>=0 ; c--)
-	o << *(p.plateau[i -c -1]) << "|";
+	o << (p.plateau[i -c -1]) << "|";
       o << endl;
       cptLignes--;
     }
     else { // Si ligne paire : sensPion = d->g ; sensAffichage = g->d
       for(int c=0 ; c<=p.getNbColonnes()-1 ; c++)
-	o << *(p.plateau[i -c -1]) << "|";
+	o << (p.plateau[i -c -1]) << "|";
       o << endl;
       cptLignes--;
     }
@@ -148,7 +146,7 @@ bool Plateau::finDePartie() {
     for(int i=0 ; i<plateauNbJoueursTotal ; i++)
       cptPionsJoueurs[i] = 0;
     if(caseFinale->getNbPions() >= plateauNbPionsParJoueur) {
-      forward_list<Pion> list = c->getListePions();
+      forward_list<Pion> list = caseFinale->getListePions();
       for(auto it=list.begin() ; it!=list.end() ; ++it) {
 	idJoueur = (*it).getIdJoueur();
 	cptPionsJoueurs[idJoueur]++;
@@ -193,17 +191,19 @@ void Plateau::deplacementPion(Pion pion, int distance) {
   new_casePion->ajouterPion(pion);
 
   ObjetEchelleSerpent* oes;
-  if(new_casePion->getSpecificite() == ECHELLE_BAS) {
+  if(new_casePion->getSpecificite() == ECHELLE
+     || new_casePion->getSpecificite() == SERPENT) {
     oes = new_casePion->getObj();
-    (plateau[oes->getPositionQueue()])->retirerPion(pion);
-    (plateau[oes->getPositionTete()])->ajouterPion(pion);
+  
+    if(oes->getType() == TYPE_ECHELLE_BAS) {
+      (plateau[oes->getPositionQueue()])->retirerPion(pion);
+      (plateau[oes->getPositionTete()])->ajouterPion(pion);
+    }
+    else if(oes->getType() == TYPE_SERPENT_TETE) {
+      (plateau[oes->getPositionTete()])->retirerPion(pion);      
+      (plateau[oes->getPositionQueue()])->ajouterPion(pion);
+    }
   }
-  else if(new_casePion->getSpecificite() == SERPENT_TETE) {
-    oes = new_casePion->getObj();
-    (plateau[oes->getPositionTete()])->retirerPion(pion);      
-    (plateau[oes->getPositionQueue()])->ajouterPion(pion);
-  }
-
 }
 
 
@@ -211,11 +211,12 @@ void Plateau::deplacementPion(Pion pion, int distance) {
 
 void Plateau::deplacement(Joueur* joueur) {
   string nomJeu = jeu->getNomJeuOuVariante();
-  Pion pion = *(joueur->getTabPions[0]);
+  Pion pion = *(joueur->getTabPions()[0]);
 
   srand(time(nullptr));
   int de = (rand() % 6) +1;
-
+  char commande;
+  int choixPion;
 
   if(joueur->getEstHumain() == false) {
     this_thread::sleep_for(chrono::seconds(DELAY));
@@ -267,9 +268,10 @@ void Plateau::deplacement(Joueur* joueur) {
 	  cin >> choixPion;
 	  cin.clear();
 	} while(choixPion < 0 || (joueur->getNbPions()-1) < choixPion);
-	pion = *(joueur->getTabPions[choixPion]);
+	pion = *(joueur->getTabPions()[choixPion]);
 
-	deplacementPion(choixPion, de);
+	pion = *(joueur->getTabPions()[choixPion]);
+	deplacementPion(pion, de);
       }
       else { // if(commande == 'd')
 	cout << "Lancer de de . . . " << de << " !" << endl;
@@ -279,9 +281,10 @@ void Plateau::deplacement(Joueur* joueur) {
 	  cin >> choixPion;
 	  cin.clear();
 	} while(choixPion < 0 || (joueur->getNbPions()-1) < choixPion);
-	pion = *(joueur->getTabPions[choixPion]);
+	pion = *(joueur->getTabPions()[choixPion]);
 
-	deplacementPion(choixPion, de);
+	pion = *(joueur->getTabPions()[choixPion]);
+	deplacementPion(pion, de);
       }
     }
 

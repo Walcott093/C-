@@ -50,6 +50,7 @@ public:
   friend ostream& operator<<(ostream&, Plateau&);
   Case* operator[](int);
 
+  int question();
   bool finDePartie();
   //void deplacementPion(Pion);
   int deplacement(Joueur*);

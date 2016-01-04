@@ -130,6 +130,32 @@ Case* Plateau::operator[](int pos) {
 
 
 /********** DEBUT : FONCTIONS SUPPLEMENTAIRES **********/
+// Affiche la question sur le terminal et renvoie la reponse au return
+int Plateau::question() {
+  srand(time(nullptr));
+  int DIFFICULTE;
+  int diff = (rand() % 3); // entre 0 et 2
+  switch(diff){
+  case 0: DIFFICULTE = DIFFICULTE_FACILE;break;
+  case 1: DIFFICULTE = DIFFICULTE_MOYENNE;break;
+  case 2: DIFFICULTE = DIFFICULTE_DIFFICILE;break;   
+  }
+  int nb1 = (rand() % DIFFICULTE) +1;
+  int nb2 = (rand() % DIFFICULTE) +1;
+  int op = (rand() % 4); //entre 0 et 3
+  cout << "Quelle est le resultat de : ";
+  switch(op){
+  case 0: cout << nb1 << " + " << nb2 << " ?" << endl;return nb1+nb2;
+  case 1: cout << nb1 << " - " << nb2 << " ?" << endl;return nb1-nb2;
+  case 2: cout << nb1 << " * " << nb2 << " ?" << endl;return nb1*nb2;
+  case 3: cout << nb1 << " / " << nb2 << " ?" << endl;return nb1/nb2;
+  default: return 0;
+  }
+}
+
+
+
+
 bool Plateau::finDePartie() {
   string nomJeu = jeu->getNomJeuOuVariante();
   
@@ -216,6 +242,8 @@ int Plateau::deplacementPion(Pion* pion, int distance) {
 
   return ret;
 }
+
+
 
 
 

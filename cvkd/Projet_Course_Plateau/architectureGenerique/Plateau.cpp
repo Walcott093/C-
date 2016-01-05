@@ -175,6 +175,7 @@ bool Plateau::finDePartie() {
     for(int i=0 ; i<plateauNbJoueursTotal ; i++)
       cptPionsJoueurs[i] = 0;
     cout << "caseFinale nbPions= " << caseFinale->getNbPions() << endl; //X
+
     if(caseFinale->getNbPions() >= plateauNbPionsParJoueur) {
       forward_list<Pion*> list = caseFinale->getListePions();
       for(auto it=list.begin() ; it!=list.end() ; ++it) {
@@ -381,11 +382,9 @@ void Plateau::lancer() {
   int tourJoueur = 0;
   int passeTourJoueur = -1;
   Joueur* joueur;
-  char commande;
-  int choixPion = 0;
   cout << *this << endl;
 
-  while(!finDePartie()) {
+  do {
     if(passeTourJoueur == tourJoueur) {
       tourJoueur++;
       passeTourJoueur = -1;
@@ -395,21 +394,25 @@ void Plateau::lancer() {
  
       joueur = (jeu->getTableauJoueurs())[tourJoueur];
  	
-      cout << "Tour de " << joueur->getNom() << endl;
+      if(ret != 1)
+	cout << "Tour de " << joueur->getNom() << endl;
  
       ret = deplacement(joueur);
-      if(ret == 1)
+      if(ret == 1) {
 	tourJoueur--;
-      else if(ret == -1)
+	cout << "   Le joueur " << joueur->getNom() << " rejoue" << endl;
+      }
+      else if(ret == -1) {
 	passeTourJoueur = tourJoueur;
+	cout << "   Le joueur " << joueur->getNom() << " passe son prochain tour" << endl;
+      }
    
       cout << *this << endl;
       tourJoueur++;
-    }
-    if(finDePartie())
-      break;
-  }
-  joueur = (jeu->getTableauJoueurs())[--tourJoueur];
+    } 
+  } while(!finDePartie());
+  
+  //joueur = (jeu->getTableauJoueurs())[--tourJoueur];
   cout << "GAME OVER!" << endl;
   cout << joueur->getNom() << " a eu raison de ses adversaires !" << endl;
 }

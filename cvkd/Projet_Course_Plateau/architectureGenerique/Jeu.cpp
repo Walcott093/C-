@@ -100,13 +100,12 @@ Joueur* Jeu::creationJoueur() {
   else if(idJoueur == 1) couleur = BLEU;
   else if(idJoueur == 2) couleur = VERT;
   else couleur = JAUNE; // if(idJoueur == 3)
-  idJoueur++;
   
   int idPion = 0;
   Pion** tab = new Pion*[nbPionsParJoueur];
   for(int i=0 ; i<nbPionsParJoueur ; i++) {
     tab[i] = new Pion(idJoueur, idPion++, couleur, 0);
   }
-  return new Joueur(estHumain, idJoueur, nom, score, nbPionsParJoueur, tab);
+  return new Joueur(estHumain, idJoueur++, nom, score, nbPionsParJoueur, tab);
 }
 /********** FIN : FONCTIONS SUPPLEMENTAIRES **********/

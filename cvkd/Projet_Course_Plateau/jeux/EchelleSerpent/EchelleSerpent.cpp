@@ -35,6 +35,7 @@ EchelleSerpent::~EchelleSerpent() {
 
 
 /********** DEBUT : ACCESSEURS ET REDEFINITION D'OPERATEUR(S) **********/
+int EchelleSerpent::getNbCasesPlateau() { return nbCasesPlateau; }
 int EchelleSerpent::getNbCasesEchelles() { return nbCasesEchelles; }
 int EchelleSerpent::getNbCasesSerpents() { return nbCasesSerpents; }
 int EchelleSerpent::getNbCasesOranges() { return nbCasesOranges; }
@@ -46,6 +47,7 @@ int EchelleSerpent::getNbCasesSerpentsRestantes() { return nbCasesSerpentsRestan
 int EchelleSerpent::getNbCasesOrangesRestantes() { return nbCasesOrangesRestantes; }
 int EchelleSerpent::getNbCasesVertesRestantes() { return nbCasesVertesRestantes; }
 
+void EchelleSerpent::setNbCasesPlateau(int a) { nbCasesPlateau = a; }
 void EchelleSerpent::setNbCasesEchelles(int a) { nbCasesEchelles = a; }
 void EchelleSerpent::setNbCasesSerpents(int a) { nbCasesSerpents = a; }
 void EchelleSerpent::setNbCasesOranges(int a) { nbCasesOranges = a; }

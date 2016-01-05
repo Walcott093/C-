@@ -24,7 +24,7 @@ $(ES_DIR)ObjetEchelleSerpent.o : $(ES_DIR)ObjetEchelleSerpent.cpp
 	g++ -std=c++11 -Wall -I $(HEADERS_DIR) -c $(ES_DIR)ObjetEchelleSerpent.cpp
 $(ES_DIR)CaseEchelleSerpent.o :  $(ES_DIR)CaseEchelleSerpent.cpp  $(AG_DIR)Constantes.hpp $(AG_DIR)Case.hpp $(ES_DIR)ObjetEchelleSerpent.hpp $(ES_DIR)EchelleSerpent.hpp
 	g++ -std=c++11 -Wall -I $(HEADERS_DIR) -c  $(ES_DIR)CaseEchelleSerpent.cpp
-main.o : main.cpp $(AG_DIR)Constantes.hpp $(AG_DIR)Plateau.hpp $(AG_DIR)Jeu.hpp $(ES_DIR)EchelleSerpent.hpp
+$(AG_DIR)main.o : $(AG_DIR)main.cpp $(AG_DIR)Constantes.hpp $(AG_DIR)Plateau.hpp $(AG_DIR)Jeu.hpp $(ES_DIR)EchelleSerpent.hpp
 	g++ -std=c++11 -Wall -I $(HEADERS_DIR) -c $(AG_DIR)main.cpp
 
 clean :

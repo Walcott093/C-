@@ -15,7 +15,7 @@ public:
   int getNbCasesSerpents();
   int getNbCasesOranges();
   int getNbCasesVertes();
-  int getNbCasesNonNeutres();
+  int getNbCasesNonNeutresRestantes();
   int getNbCasesPlateauRestantes();
   int getNbCasesEchellesRestantes();
   int getNbCasesSerpentsRestantes();
@@ -27,7 +27,7 @@ public:
   void setNbCasesSerpents(int);
   void setNbCasesOranges(int);
   void setNbCasesVertes(int);
-  void setNbCasesNonNeutres(int);
+  void setNbCasesNonNeutresRestantes(int);
   void setNbCasesPlateauRestantes(int);
   void setNbCasesEchellesRestantes(int);
   void setNbCasesSerpentsRestantes(int);
@@ -42,7 +42,7 @@ private:
   int nbCasesVertes;
 
   /*** DEBUT : Sert a la repartition des cases par probabilite ***/
-  int nbCasesNonNeutres;
+  int nbCasesNonNeutresRestantes;
   int nbCasesPlateauRestantes;
   int nbCasesEchellesRestantes;
   int nbCasesSerpentsRestantes;

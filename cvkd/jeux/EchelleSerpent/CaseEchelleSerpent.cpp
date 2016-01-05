@@ -65,42 +65,43 @@ int CaseEchelleSerpent::randomSpecificite() {
   int ret = NEUTRE; // 0
   int x = 0;
   string nomVariante = jeuVariante->getNomJeuOuVariante();
-  srand(time(nullptr));
 
   int val = jeuVariante->getNbCasesPlateauRestantes();
-
-  x = (rand() % val) +1;
   jeuVariante->setNbCasesPlateauRestantes(val -1); // <=> jeuVariante.nbCasesPlateauRestantes--; on retire car on traite une case qui ne sera donc plus a traiter
+
+  if(position == 0 || position == jeuVariante->getNbCasesPlateau()-1)
+    return ret; // La 1ere et la derniere et la derniere case sont forcement des cases NEUTRE
+
+  srand(time(nullptr));
+  x = (rand() % val) +1;
   
-  /*cout << "nbCasesNonNeutres= " << jeuVariante->getNbCasesNonNeutres() << endl;
+  /*cout << "nbCasesNonNeutresRestantes= " << jeuVariante->getNbCasesNonNeutresRestantes() << endl;
   cout << "nbCasesEchellesRestantes= " << jeuVariante->getNbCasesEchellesRestantes() << endl;
   cout << "nbCasesSerpentsRestantes= " << jeuVariante->getNbCasesSerpentsRestantes() << endl;
   cout << "nbCasesOrangesRestantes= " << jeuVariante->getNbCasesOrangesRestantes() << endl;
   cout << "nbCasesVertesRestantes= " << jeuVariante->getNbCasesVertesRestantes() << endl;*/
-  if(1 <= x && x <= jeuVariante->getNbCasesNonNeutres()) {
-    cout << "**nbCasesNonNeutres= " << jeuVariante->getNbCasesNonNeutres() << endl;
-    jeuVariante->setNbCasesNonNeutres( jeuVariante->getNbCasesNonNeutres() -1 ); // <=> jeuVariante.nbCasesNonNeutres--;
-    cout << "**nbCasesNonNeutres= " << jeuVariante->getNbCasesNonNeutres() << endl;
-    int rdm;
-    srand(time(nullptr));
-    do {
-      cout << "nbCasesNonNeutres= " << jeuVariante->getNbCasesNonNeutres() << endl;
-  cout << "nbCasesEchellesRestantes= " << jeuVariante->getNbCasesEchellesRestantes() << endl;
-  cout << "nbCasesSerpentsRestantes= " << jeuVariante->getNbCasesSerpentsRestantes() << endl;
-  cout << "nbCasesOrangesRestantes= " << jeuVariante->getNbCasesOrangesRestantes() << endl;
-  cout << "nbCasesVertesRestantes= " << jeuVariante->getNbCasesVertesRestantes() << endl;
+  if(1 <= x && x <= jeuVariante->getNbCasesNonNeutresRestantes()) {
+    cout << "**nbCasesNonNeutresRestantes= " << jeuVariante->getNbCasesNonNeutresRestantes() << endl;
+    jeuVariante->setNbCasesNonNeutresRestantes( jeuVariante->getNbCasesNonNeutresRestantes() -1 ); // <=> jeuVariante.nbCasesNonNeutresRestantes--;
+    cout << "**nbCasesNonNeutresRestantes= " << jeuVariante->getNbCasesNonNeutresRestantes() << endl;
 
-  //srand(time(nullptr));
+    do {
+      cout << "nbCasesNonNeutresRestantes= " << jeuVariante->getNbCasesNonNeutresRestantes() << endl;
+      cout << "nbCasesEchellesRestantes= " << jeuVariante->getNbCasesEchellesRestantes() << endl;
+      cout << "nbCasesSerpentsRestantes= " << jeuVariante->getNbCasesSerpentsRestantes() << endl;
+      cout << "nbCasesOrangesRestantes= " << jeuVariante->getNbCasesOrangesRestantes() << endl;
+      cout << "nbCasesVertesRestantes= " << jeuVariante->getNbCasesVertesRestantes() << endl;
+      
       if(nomVariante == ECHELLE_SERPENT) {
 	cout << "** ** dans ECHELLE SERPENT" << endl;
 	ret = (rand() % NB_SPECIFICITES_ES) +1; // 1 (ECHELLE) ou 2 (SERPENT)
 	cout << "** ** ** ret = " << ret << endl;
       }
       else { // if ESOV || ESP || ESPP
-	  cout << "** ** dans ESOV || ESP || ESPP" << endl;
-	  ret = (rand() % NB_SPECIFICITES_ESOV) +1; // 1 (ECHELLE) ou 2 (SERPENT) ou 3 (ORANGE) ou 4 (VERTE)
-	  cout << "** ** ** ret = " << ret << endl;
-	}
+	cout << "** ** dans ESOV || ESP || ESPP" << endl;
+	ret = (rand() % NB_SPECIFICITES_ESOV) +1; // 1 (ECHELLE) ou 2 (SERPENT) ou 3 (ORANGE) ou 4 (VERTE)
+	cout << "** ** ** ret = " << ret << endl;
+      }
       
       cout << "[CaseEchelleSerpent.cpp] : do while" << endl;
     } while((ret == ECHELLE && jeuVariante->getNbCasesEchellesRestantes() == 0)

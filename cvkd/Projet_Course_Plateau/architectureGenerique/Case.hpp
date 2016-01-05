@@ -14,6 +14,9 @@ protected:
 
 public:
   Case();
+  /*
+  Case(int, int, int); // position, nbPionsMax, nbPions
+  Case(int, int, int, forward_list<Pion*>, ObjetEchelleSerpent*); // position, nbPionsMax, nbPions, listePions, obj  // Sert pour la premiere case ou se trouvent tous les pions au debut, ou pour modifier une case en cours de partie si un jeu le permet*/
 
   Case(int, int, int, int); // specificite, position, nbPionsMax, nbPions
   Case(int, int, int, int, forward_list<Pion*>, ObjetEchelleSerpent*); // specificite, position, nbPionsMax, nbPions, listePions, obj  // Sert pour la premiere case ou se trouvent tous les pions au debut, ou pour modifier une case en cours de partie si un jeu le permet

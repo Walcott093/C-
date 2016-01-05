@@ -8,6 +8,20 @@ using namespace std;
 Case::Case() {
   cout << "                              Creation d'une Case par defaut" << endl;
 }
+/*
+Case::Case(int pos, int nbMax, int nb):
+  position(pos), nbPionsMax(nbMax), nbPions(nb) {
+
+  // forward_list par defaut vide
+  obj = nullptr;
+  cout << "                              Construction de la case : " << this << endl;
+}
+
+Case::Case(int pos, int nbMax, int nb, forward_list<Pion*> pions, ObjetEchelleSerpent* o):
+  position(pos), nbPionsMax(nbMax), nbPions(nb), listePions(pions), obj(o) {
+  cout << "                              Construction de la case : " << this <<endl;
+  }*/
+
 
 Case::Case(int spe, int pos, int nbMax, int nb):
   specificite(spe), position(pos), nbPionsMax(nbMax), nbPions(nb) {
@@ -16,7 +30,6 @@ Case::Case(int spe, int pos, int nbMax, int nb):
   obj = nullptr;
   cout << "                              Construction de la case : " << this << endl;
 }
-
 Case::Case(int spe, int pos, int nbMax, int nb, forward_list<Pion*> pions, ObjetEchelleSerpent* o):
   specificite(spe), position(pos), nbPionsMax(nbMax), nbPions(nb), listePions(pions), obj(o) {
   cout << "                              Construction de la case : " << this <<endl;

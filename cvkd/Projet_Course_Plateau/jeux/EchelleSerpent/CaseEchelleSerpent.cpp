@@ -6,8 +6,6 @@ using namespace std;
 /*** DEBUT : Sert a la repartition des cases par probabilite ***/
 static int cptIdE = 1;
 static int cptIdS = 1;
-static int nbEchellesRestantes;
-static int nbSerpentsRestants;
 static bool basHautEchelle = false;
 static bool queueTeteSerpent = false; // pe inutile avec la classe ObjetEchelleSerpent
 static Case* caseBasEchelle;

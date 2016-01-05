@@ -14,7 +14,7 @@ using namespace std;
 
 
 int main() {
-  int choixJeu, nbJoueursHumains, nbJoueursDisponibles, nbJoueursRobots, nbJoueursTotal, nbPionsParJoueur, nbLignesPlateau, nbColonnesPlateau, nbCasesPlateau, nbEchelles, nbSerpents, nbCasesOranges, nbCasesVertes, nbCasesOrangesVertesDispo, difficultePedagogique;
+  int choixJeu, nbJoueursHumains, nbJoueursDisponibles, nbJoueursRobots, nbJoueursTotal, nbPionsParJoueur, nbLignesPlateau, nbColonnesPlateau, nbCasesPlateau, nbEchelles, nbSerpents, nbCasesOranges, nbCasesVertes, nbCasesOrangesVertesDispo;//, difficultePedagogique;
 
   Jeu* jeu;
   
@@ -165,7 +165,7 @@ int main() {
 
 
     /**** DEBUT : CHOIX DU NOMBRE DE CASES ORANGES ****/
-    int nbCasesOrangesVertesDispo = 0;
+    nbCasesOrangesVertesDispo = 0;
     if(nbEchelles + nbSerpents == 0)
       nbCasesOrangesVertesDispo = nbCasesPlateau/2;
     else
@@ -234,7 +234,7 @@ int main() {
       cin >> difficultePedagogique;
       cin.clear(); // A securiser encore plus si time
     } while(difficultePedagogique < 1 || 3 < difficultePedagogique);
-    /**** FIN : CHOIX DE LA DIFFICULTE DES QUESTIONS ****/
+    **** FIN : CHOIX DE LA DIFFICULTE DES QUESTIONS ****/
 
     jeu = new EchelleSerpent(ECHELLE_SERPENT_PEDAGOGIQUE, nbJoueursHumains, nbJoueursTotal, 1, nbCasesPlateau, nbEchelles, nbSerpents, nbCasesOranges, nbCasesVertes);
     break;

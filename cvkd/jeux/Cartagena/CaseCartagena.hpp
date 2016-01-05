@@ -1,7 +1,7 @@
 #ifndef CASECARTAGENA
 #define CASECARTAGENA
 #include "Case.hpp"
-
+using namespace std;
 public class CaseCartagena : public Case {
 
 public:

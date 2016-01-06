@@ -4,8 +4,8 @@ AG_DIR = architectureGenerique/
 ES_DIR = jeux/EchelleSerpent/
 all : $(GOALS)
 
-main : $(AG_DIR)Pion.o $(AG_DIR)Joueur.o $(AG_DIR)Case.o $(AG_DIR)Jeu.o $(AG_DIR)Plateau.o $(AG_DIR)CaseNormale.o $(ES_DIR)EchelleSerpent.o $(ES_DIR)ObjetEchelleSerpent.o $(ES_DIR)CaseEchelleSerpent.o $(AG_DIR)main.o
-	g++ -std=c++11 -o main Pion.o Joueur.o Case.o Plateau.o Jeu.o CaseNormale.o EchelleSerpent.o ObjetEchelleSerpent.o CaseEchelleSerpent.o main.o
+main : $(AG_DIR)Pion.o $(AG_DIR)Joueur.o $(AG_DIR)Case.o $(AG_DIR)Jeu.o $(AG_DIR)Plateau.o $(ES_DIR)EchelleSerpent.o $(ES_DIR)ObjetEchelleSerpent.o $(ES_DIR)CaseEchelleSerpent.o $(AG_DIR)main.o
+	g++ -std=c++11 -o main Pion.o Joueur.o Case.o Plateau.o Jeu.o EchelleSerpent.o ObjetEchelleSerpent.o CaseEchelleSerpent.o main.o
 $(AG_DIR)Pion.o : $(AG_DIR)Pion.cpp $(AG_DIR)Constantes.hpp
 	g++ -std=c++11 -Wall -I $(HEADERS_DIR) -c $(AG_DIR)Pion.cpp
 $(AG_DIR)Joueur.o : $(AG_DIR)Joueur.cpp $(AG_DIR)Pion.hpp
@@ -16,8 +16,6 @@ $(AG_DIR)Plateau.o : $(AG_DIR)Plateau.cpp $(AG_DIR)Constantes.hpp $(AG_DIR)Pion.
 	g++ -std=c++11 -Wall -I $(HEADERS_DIR) -c $(AG_DIR)Plateau.cpp
 $(AG_DIR)Jeu.o : $(AG_DIR)Jeu.cpp $(AG_DIR)Constantes.hpp $(AG_DIR)Pion.hpp $(AG_DIR)Joueur.hpp
 	g++ -std=c++11 -Wall -I $(HEADERS_DIR) -c $(AG_DIR)Jeu.cpp
-$(AG_DIR)CaseNormale.o : $(AG_DIR)CaseNormale.cpp $(AG_DIR)Constantes.hpp $(AG_DIR)Case.hpp $(ES_DIR)ObjetEchelleSerpent.hpp
-	g++ -std=c++11 -Wall -I $(HEADERS_DIR) -c $(AG_DIR)CaseNormale.cpp
 $(ES_DIR)EchelleSerpent.o : $(ES_DIR)EchelleSerpent.cpp $(AG_DIR)Jeu.hpp
 	g++ -std=c++11 -Wall -I $(HEADERS_DIR) -c $(ES_DIR)EchelleSerpent.cpp
 $(ES_DIR)ObjetEchelleSerpent.o : $(ES_DIR)ObjetEchelleSerpent.cpp

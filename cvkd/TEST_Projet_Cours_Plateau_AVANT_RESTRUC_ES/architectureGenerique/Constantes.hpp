@@ -73,20 +73,20 @@ const int NB_SPECIFICITES_ESOV = 4; // Echelle + Serpent + Orange + Verte
 const int NEUTRE = 0;
 const int ECHELLE = 1;
 const int SERPENT = 2;
-/*const int ECHELLE_BAS = 1;
-const int ECHELLE_HAUT = 2;
-const int SERPENT_QUEUE = 3;
-const int SERPENT_TETE = 4;*/
 
 const int ORANGE = 3;
 const int VERTE = 4;
-
 
 // Used in "../jeux/EchelleSerpent/ObjetEchelleSerpent.hpp"
 const string TYPE_ECHELLE_BAS = "TypeEchelleBas";
 const string TYPE_ECHELLE_HAUT = "TypeEchelleHaut";
 const string TYPE_SERPENT_QUEUE = "TypeSerpentQueue";
 const string TYPE_SERPENT_TETE = "TypeSerpentTete";
+
+// Used in "Plateau.cpp"
+const int JOUER_TOUR = 5;
+const int REJOUER_TOUR_SUIVANT = 6;
+const int PASSER_TOUR_SUIVANT = 7;
 /********** DEBUT : CONSTANTES POUR ECHELLE_SERPENT ET SES VARIANTES  **********/
 
 

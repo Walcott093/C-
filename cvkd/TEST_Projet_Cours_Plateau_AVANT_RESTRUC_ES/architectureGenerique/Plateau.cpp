@@ -233,9 +233,9 @@ bool Plateau::finDePartie() {
 
 
 
-// Return: 0 = case NEUTRE ; 1 = case ORANGE ; -1 = case VERTE
+// Return: JOUEUR_TOUR = case NEUTRE ; REJOUER_TOUR_SUIVANT = case ORANGE ; PASSER_TOUR_SUIVANT = case VERTE
 int Plateau::deplacementPion(Pion* pion, int distance) {
-  int ret = 0;  
+  int ret = JOUER_TOUR;  
   string nomJeu = jeu->getNomJeuOuVariante();
 
   Case* casePion = plateau[pion->getPosition()];
@@ -272,9 +272,9 @@ int Plateau::deplacementPion(Pion* pion, int distance) {
       }
     }
     else if(new_casePionES->getSpecificite() == ORANGE)
-      ret = 1;
+      ret = REJOUER_TOUR_SUIVANT;
     else if(new_casePionES->getSpecificite() == VERTE)
-      ret = -1;
+      ret = PASSER_TOUR_SUIVANT;
   }
 
   return ret;
@@ -286,7 +286,7 @@ int Plateau::deplacementPion(Pion* pion, int distance) {
 
 // Return: 0 = case NEUTRE ; 1 = case ORANGE ; -1 = case VERTE
 int Plateau::deplacement(Joueur* joueur) {
-  int ret = 0;
+  int ret = JOUER_TOUR;
   string nomJeu = jeu->getNomJeuOuVariante();
   Pion* pion = joueur->getTabPions()[0];
 
@@ -411,33 +411,36 @@ void Plateau::lancer() {
   cout << "Debut de la partie !" << endl;
   string nomJeu = jeu->getNomJeuOuVariante();
 
-  int ret = 0;
+  int* passeTourJoueur = new int[jeu->getNbJoueursTotal()];
+  for(int i=0 ; i<jeu->getNbJoueursTotal() ; i++)
+    passeTourJoueur[i] = -1;
+
+  int ret = JOUER_TOUR;
   int tourJoueur = 0;
-  int passeTourJoueur = -1;
   Joueur* joueur;
   cout << *this << endl;
 
   do {
     tourJoueur = tourJoueur % plateauNbJoueursTotal;
-
-    if(passeTourJoueur == tourJoueur) {
+    
+    if(passeTourJoueur[tourJoueur] == tourJoueur) {
+      passeTourJoueur[tourJoueur] = -1;
       tourJoueur++;
-      passeTourJoueur = -1;
     }
     else {
       joueur = (jeu->getTableauJoueurs())[tourJoueur];
  	
-      if(ret != 1)
+      if(ret != JOUER_TOUR)
 	cout << "------------------- ------------------- Tour de " << joueur->getNom() << endl;
  
       ret = deplacement(joueur);
       cout << "------------------- RET = " << ret << endl;
-      if(ret == 1) {
+      if(ret == REJOUER_TOUR_SUIVANT) {
 	tourJoueur--;
 	cout << "------------------- ------------------- Le joueur " << joueur->getNom() << " rejoue" << endl;
       }
-      else if(ret == -1) {
-	passeTourJoueur = tourJoueur;
+      else if(ret == PASSER_TOUR_SUIVANT) {
+	passeTourJoueur[tourJoueur] = tourJoueur;
 	cout << "------------------- ------------------- Le joueur " << joueur->getNom() << " passe son prochain tour" << endl;
       }
    

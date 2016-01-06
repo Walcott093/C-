@@ -10,9 +10,7 @@
 #include "Case.hpp"
 #include "../jeux/EchelleSerpent/EchelleSerpent.hpp"
 #include "../jeux/EchelleSerpent/CaseEchelleSerpent.hpp"
-//#include "../jeux/Cartagena/Cartagena.hpp"
 //#include "../jeux/Cartagena/CaseCartagena.hpp"
-//#include "../jeux/Numeri/Numeri.hpp"
 //#include "../jeux/Numeri/CaseNumeri.hpp"
 
 
@@ -29,6 +27,9 @@ public:
   int getNbLignes();
   int getNbColonnes();
   int getNbCases();
+  string getPlateauNomJeu();
+  int getPlateauNbPionsParJoueur();
+  int getPlateauNbJoueursTotal();
   Case** getPlateau();
   /*
  _ _ _ _
@@ -41,6 +42,9 @@ public:
   void setNbLignes(int);
   void setNbColonnes(int);
   void setNbCases(int);
+  void setPlateauNomJeu(string);
+  void setPlateauNbPionsParJoueur(int);
+  void setPlateauNbJoueursTotal(int);
   void setPlateau(Case**);
 
   friend ostream& operator<<(ostream&, Plateau&);
@@ -48,6 +52,7 @@ public:
 
   int question();
   bool finDePartie();
+  //void deplacementPion(Pion);
   int deplacement(Joueur*);
   int deplacementPion(Pion*, int);
   void lancer();
@@ -57,7 +62,9 @@ private:
   int nbLignes;
   int nbColonnes;
   int nbCases;
-
+  string plateauNomJeu;
+  int plateauNbPionsParJoueur;
+  int plateauNbJoueursTotal;
   Case** plateau; // Doit etre Case** car Case est abstraite
    
 };

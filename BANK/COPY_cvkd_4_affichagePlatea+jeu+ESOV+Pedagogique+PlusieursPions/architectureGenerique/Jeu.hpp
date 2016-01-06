@@ -6,8 +6,7 @@
 #include "Joueur.hpp"
 using namespace std;
 
-/***** CLASSE ABSTRAITE *****/
-/***** FAUX: CLASSE CONCRETE *****/
+/***** CLASSE CONCRETE ET NON PLUS ABSTRAITE *****/
 
 class Jeu {
 public:

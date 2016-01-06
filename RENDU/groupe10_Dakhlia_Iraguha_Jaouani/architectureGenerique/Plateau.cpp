@@ -385,7 +385,8 @@ void Plateau::lancer() {
   int choixPion = 0;
   cout << *this << endl;
 
-  while(!finDePartie()) {
+  
+  do {
     if(passeTourJoueur == tourJoueur) {
       tourJoueur++;
       passeTourJoueur = -1;
@@ -406,10 +407,8 @@ void Plateau::lancer() {
       cout << *this << endl;
       tourJoueur++;
     }
-    if(finDePartie())
-      break;
-  }
-  joueur = (jeu->getTableauJoueurs())[--tourJoueur];
+  } while(!finDePartie());
+  //joueur = (jeu->getTableauJoueurs())[--tourJoueur];
   cout << "GAME OVER!" << endl;
   cout << joueur->getNom() << " a eu raison de ses adversaires !" << endl;
 }

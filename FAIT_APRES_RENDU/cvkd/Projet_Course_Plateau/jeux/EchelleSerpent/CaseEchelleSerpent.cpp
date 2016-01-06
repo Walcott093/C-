@@ -6,30 +6,28 @@ using namespace std;
 /*** DEBUT : Sert a la repartition des cases par probabilite ***/
 static int cptIdE = 1;
 static int cptIdS = 1;
-static int nbEchellesRestantes;
-static int nbSerpentsRestants;
 static bool basHautEchelle = false;
 static bool queueTeteSerpent = false; // pe inutile avec la classe ObjetEchelleSerpent
-static Case* caseBasEchelle;
-static Case* caseHautEchelle;
-static Case* caseQueueSerpent;
-static Case* caseTeteSerpent;
+static CaseEchelleSerpent* caseBasEchelle;
+static CaseEchelleSerpent* caseHautEchelle;
+static CaseEchelleSerpent* caseQueueSerpent;
+static CaseEchelleSerpent* caseTeteSerpent;
 /*** FIN : Sert a la repartition des cases par probabilite ***/
 
 
 
 
 /********** DEBUT : CONSTRUCTEURS / DESTRUCTEURS **********/
-CaseEchelleSerpent::CaseEchelleSerpent(int spe, int position, int nbMax, int nb, EchelleSerpent* jeu):
-  Case(spe, position, nbMax, nb), jeuVariante(jeu) {
+CaseEchelleSerpent::CaseEchelleSerpent(int position, int nbMax, int nb, EchelleSerpent* jeu, int spe):
+  Case(position, nbMax, nb), jeuVariante(jeu), specificite(spe) {
 
   specificite = randomSpecificite();
   // if specificite != ECHELLE, SERPENT => alors obj = nullptr
   cout << "                              Construction de la CaseEchelleSerpent : " << this << endl;
 }
 
-CaseEchelleSerpent::CaseEchelleSerpent(int spe, int position, int nbMax, int nb, forward_list<Pion*> pions, ObjetEchelleSerpent* oes, EchelleSerpent* jeu):
-  Case(spe, position, nbMax, nb, pions, oes), jeuVariante(jeu) {
+CaseEchelleSerpent::CaseEchelleSerpent(int position, int nbMax, int nb, forward_list<Pion*> pions, ObjetEchelleSerpent* oes, EchelleSerpent* jeu, int spe):
+  Case(position, nbMax, nb, pions), jeuVariante(jeu), specificite(spe), obj(oes) {
   specificite = randomSpecificite();
 
   cout << "                              Construction de la CaseEchelleSerpent : " << this <<endl;
@@ -44,17 +42,55 @@ CaseEchelleSerpent::~CaseEchelleSerpent() {
 
 
 /********** DEBUT : ACCESSEURS ET REDEFINITION D'OPERATEUR(S) **********/
+int CaseEchelleSerpent::getSpecificite() { return specificite; }
 EchelleSerpent* CaseEchelleSerpent::getJeuVariante() { return jeuVariante; }
+ObjetEchelleSerpent* CaseEchelleSerpent::getObj() { return obj; }
 //int CaseEchelleSerpent::getNbCasesPlateau() { return nbCasesPlateau; }
 //bool CaseEchelleSerpent::getIsObjetEchelleSerpent() { return isObjetEchelleSerpent; }
 //ObjetEchelleSerpent* CaseEchelleSerpent::getObj() { return obj; }
 //int CaseEchelleSerpent::getSpecificiteCase() { return specificiteCase; }
 
+void CaseEchelleSerpent::setSpecificite(int spe) { specificite = spe; }
 void CaseEchelleSerpent::setJeuVariante(EchelleSerpent* es) { jeuVariante = es; }
+void CaseEchelleSerpent::setObj(ObjetEchelleSerpent* oes) { obj = oes; }
 //void CaseEchelleSerpent::setNbCasesPlateau(int i) { nbCasesPlateau = i; }
 //void CaseEchelleSerpent::setIsObjetEchelleSerpent(bool b) { isObjetEchelleSerpent = b; }
 //void CaseEchelleSerpent::setObj(ObjetEchelleSerpent* oes) { obj = oes; }
 //void CaseEchelleSerpent::setSpecificiteCase(int s) { specificiteCase = s; }
+
+ostream& operator<<(ostream& o, CaseEchelleSerpent*& c) {
+  if(c->obj != nullptr) {
+    string type = (c->obj)->getType();
+    int idOES = (c->obj)->getIdOES();
+    if(c->specificite == ECHELLE || c->specificite == SERPENT) {
+      if(type == TYPE_ECHELLE_BAS)
+	o << BLANC << "e" << idOES << SUFFIXE_COULEUR;
+      else if(type == TYPE_ECHELLE_HAUT)
+	o << BLANC << "E" << idOES << SUFFIXE_COULEUR;
+      else if(type == TYPE_SERPENT_QUEUE)
+	o << NOIR << "s" << idOES << SUFFIXE_COULEUR;
+      else if(type == TYPE_SERPENT_TETE)
+	o << NOIR << "S" << idOES << SUFFIXE_COULEUR;
+    }
+  }
+  if(c->specificite == ORANGE)
+    o << CYAN << "O" << SUFFIXE_COULEUR;
+  else if(c->specificite == VERTE)
+    o << MAGENTA << "V" << SUFFIXE_COULEUR;
+
+  int retrait = 0;
+  if(c->specificite == ECHELLE || c->specificite == SERPENT)
+    retrait = 2;
+  else if(c->specificite == ORANGE || c->specificite == VERTE)
+    retrait = 1;    
+  int tailleCase = 2 + c->getNbPionsMax();
+
+  for(auto it=c->listePions.begin() ; it!=c->listePions.end(); ++it)
+    o << *it;  
+  for(int i=0 ; i<tailleCase -retrait -c->getNbPions() ; i++)
+    o << " ";
+  return o;
+}
 /********** FIN : ACCESSEURS ET REDEFINITION D'OPERATEUR(S) **********/
 
 

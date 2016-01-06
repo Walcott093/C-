@@ -19,12 +19,12 @@ Plateau::Plateau(Jeu* j, int rangeOrd, int rangeAbs):
     for(int i=0 ; i<nbCases ; i++)
       plateau[i] = new CaseEchelleSerpent(i, nbPionsMax, 0, (EchelleSerpent*)jeu, NEUTRE); // On met la specificite de la case a NEUTRE par defaut et le constructeur de la classe CaseEchelleSerpent se chagera de changer sa specificite en fonction des parametres pertinents (nbCasesNonNeutres, etc.)
   }
-  /*
+
   else if(plateauNomJeu == CARTAGENA) {
     for(int i=0 ; i<nbCases ; i++)
       plateau[i] = new CaseCartagena(i, nbPionsMax, 0, (Cartagena*)jeu, SYMBOLE_1); // On met le symbole a SYMBOLE_1 par defaut et le constructeur de la classe CaseCartagena se chargera de changer son symbole en fonction de(s) parametre(s) pertinent(s) (nbCases)
   }
-  */
+
     // On place tous les pions sur la 1ere case
     forward_list<Pion*> list;    
     Joueur** tabJoueurs = jeu->getTableauJoueurs();
@@ -303,7 +303,7 @@ int Plateau::deplacement(Joueur* joueur) {
        || nomJeu == ECHELLE_SERPENT_PEDAGOGIQUE) {
       cout << "Lancer de de . . . " << endl;
       this_thread::sleep_for(chrono::seconds(DELAY_DE));
-      cout << "------------------- ------------------- " << de << " !" << endl;
+      cout << "------------------- " << de << " !" << endl;
       ret = deplacementPion(pion, de);
     }
 
@@ -311,7 +311,7 @@ int Plateau::deplacement(Joueur* joueur) {
       srand(time(nullptr));
       cout << "Lancer de de . . . " << endl;
       this_thread::sleep_for(chrono::seconds(DELAY_DE));
-      cout << "------------------- ------------------- " << de << " !" << endl;
+      cout << "------------------- " << de << " !" << endl;
 
       pion = joueur->getTabPions()[rand() % joueur->getNbPions()];
       ret = deplacementPion(pion, de);      
@@ -339,7 +339,7 @@ int Plateau::deplacement(Joueur* joueur) {
       } while(commande != 'd');
       cout << "Lancer de de . . . " << endl;
       this_thread::sleep_for(chrono::seconds(DELAY_DE));
-      cout << "------------------- ------------------- " << de << " !" << endl;
+      cout << "------------------- " << de << " !" << endl;
       
       if(nomJeu == ECHELLE_SERPENT_PEDAGOGIQUE) {
 	int reponse = question(); // Affiche le calcule et renvoie le resultat
@@ -372,7 +372,7 @@ int Plateau::deplacement(Joueur* joueur) {
 	} while(choixPion < 0 || (joueur->getNbPions()-1) < choixPion);
 	cout << "Lancer de de . . . " << endl;
 	this_thread::sleep_for(chrono::seconds(DELAY_DE));
-	cout << "------------------- ------------------- " << de << " !" << endl;
+	cout << "------------------- " << de << " !" << endl;
 
 	pion = joueur->getTabPions()[choixPion];
 	ret = deplacementPion(pion, de);
@@ -380,7 +380,7 @@ int Plateau::deplacement(Joueur* joueur) {
       else { // if(commande == 'd')
 	cout << "Lancer de de . . . " << endl;
 	this_thread::sleep_for(chrono::seconds(DELAY_DE));
-	cout << "------------------- ------------------- " << de << " !" << endl;
+	cout << "------------------- " << de << " !" << endl;
 
 	do {
 	  cout << "Choix du pion :" << endl;
@@ -418,27 +418,26 @@ void Plateau::lancer() {
   cout << *this << endl;
 
   do {
-    tourJoueur = tourJoueur % plateauNbJoueursTotal;
-
     if(passeTourJoueur == tourJoueur) {
       tourJoueur++;
       passeTourJoueur = -1;
     }
     else {
+      tourJoueur = tourJoueur % plateauNbJoueursTotal;
+ 
       joueur = (jeu->getTableauJoueurs())[tourJoueur];
  	
       if(ret != 1)
-	cout << "------------------- ------------------- Tour de " << joueur->getNom() << endl;
+	cout << "Tour de " << joueur->getNom() << endl;
  
       ret = deplacement(joueur);
-      cout << "------------------- RET = " << ret << endl;
       if(ret == 1) {
 	tourJoueur--;
-	cout << "------------------- ------------------- Le joueur " << joueur->getNom() << " rejoue" << endl;
+	cout << "   Le joueur " << joueur->getNom() << " rejoue" << endl;
       }
       else if(ret == -1) {
 	passeTourJoueur = tourJoueur;
-	cout << "------------------- ------------------- Le joueur " << joueur->getNom() << " passe son prochain tour" << endl;
+	cout << "   Le joueur " << joueur->getNom() << " passe son prochain tour" << endl;
       }
    
       cout << *this << endl;

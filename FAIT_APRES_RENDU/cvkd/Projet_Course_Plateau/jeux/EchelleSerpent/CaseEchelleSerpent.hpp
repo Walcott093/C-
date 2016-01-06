@@ -27,8 +27,8 @@ public:
   int randomSpecificite();
 
 private:
-  int specificite;
   EchelleSerpent* jeuVariante;
+  int specificite;
   ObjetEchelleSerpent* obj;
 
 };

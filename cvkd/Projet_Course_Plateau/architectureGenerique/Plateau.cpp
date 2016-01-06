@@ -6,11 +6,11 @@ using namespace std;
 
 /********** DEBUT : CONSTRUCTEURS / DESTRUCTEURS **********/
 Plateau::Plateau(Jeu* j, int rangeOrd, int rangeAbs):
-  jeu(j), nbLignes(rangeOrd), nbColonnes(rangeAbs), nbCases(rangeOrd*rangeAbs), plateauNomJeu(j->getNomJeuOuVariante()), plateauNbPionsParJoueur(j->getNbPionsParJoueur()), plateauNbJoueursTotal(j->getNbJoueursTotal()) {
+  jeu(j), nbLignes(rangeOrd), nbColonnes(rangeAbs), nbCases(rangeOrd*rangeAbs) {
 
   plateau = new Case*[nbCases];
-  int nbPionsMax = plateauNbPionsParJoueur * plateauNbJoueursTotal;
- 
+  int nbPionsMax = jeu->getNbPionsParJoueur() * jeu->getNbJoueursTotal(); 
+  string plateauNomJeu = jeu->getNomJeuOuVariante();
 
   if(plateauNomJeu == ECHELLE_SERPENT
      || plateauNomJeu == ECHELLE_SERPENT_ORANGE_VERTE
@@ -79,18 +79,12 @@ Jeu* Plateau::getJeu() { return jeu; }
 int Plateau::getNbLignes() { return nbLignes; }
 int Plateau::getNbColonnes() { return nbColonnes; }
 int Plateau::getNbCases() { return nbCases; }
-string Plateau::getPlateauNomJeu() { return plateauNomJeu; }
-int Plateau::getPlateauNbPionsParJoueur() { return plateauNbPionsParJoueur; }
-int Plateau::getPlateauNbJoueursTotal() { return plateauNbJoueursTotal; }
 Case** Plateau::getPlateau() { return plateau; }
 
 void Plateau::setJeu(Jeu *j) { jeu = j; }
 void Plateau::setNbLignes(int a) { nbLignes = a; }
 void Plateau::setNbColonnes(int a) { nbColonnes = a; }
 void Plateau::setNbCases(int a) { nbCases = a; }
-void Plateau::setPlateauNomJeu(string s) { plateauNomJeu = s; }
-void Plateau::setPlateauNbPionsParJoueur(int i) { plateauNbPionsParJoueur = i; }
-void Plateau::setPlateauNbJoueursTotal(int i) { plateauNbJoueursTotal = i; }
 void Plateau::setPlateau(Case** c) { plateau = c; }
 
 ostream& operator<<(ostream& o,Plateau& p){
@@ -184,6 +178,8 @@ int Plateau::question() {
 
 bool Plateau::finDePartie() {
   string nomJeu = jeu->getNomJeuOuVariante();
+  int plateauNbJoueursTotal = jeu->getNbJoueursTotal();
+  int plateauNbPionsParJoueur = jeu->getNbPionsParJoueur();
 
   /* FIN DE PARTIE [ECHELLE_SERPENT + CARTAGENA]: LORSQUE TOUS LES PIONS D'UN JOUEUR SE TROUVENT SUR LA DERNIERE CASE DU PLATEAU */
   if(nomJeu == ECHELLE_SERPENT
@@ -233,9 +229,9 @@ bool Plateau::finDePartie() {
 
 
 
-// Return: 0 = case NEUTRE ; 1 = case ORANGE ; -1 = case VERTE
+// Return: JOUEUR_TOUR = case NEUTRE ; REJOUER_TOUR_SUIVANT = case ORANGE ; PASSER_TOUR_SUIVANT = case VERTE
 int Plateau::deplacementPion(Pion* pion, int distance) {
-  int ret = 0;  
+  int ret = JOUER_TOUR;  
   string nomJeu = jeu->getNomJeuOuVariante();
 
   Case* casePion = plateau[pion->getPosition()];
@@ -272,9 +268,9 @@ int Plateau::deplacementPion(Pion* pion, int distance) {
       }
     }
     else if(new_casePionES->getSpecificite() == ORANGE)
-      ret = 1;
+      ret = REJOUER_TOUR_SUIVANT;
     else if(new_casePionES->getSpecificite() == VERTE)
-      ret = -1;
+      ret = PASSER_TOUR_SUIVANT;
   }
 
   return ret;
@@ -286,7 +282,7 @@ int Plateau::deplacementPion(Pion* pion, int distance) {
 
 // Return: 0 = case NEUTRE ; 1 = case ORANGE ; -1 = case VERTE
 int Plateau::deplacement(Joueur* joueur) {
-  int ret = 0;
+  int ret = JOUER_TOUR;
   string nomJeu = jeu->getNomJeuOuVariante();
   Pion* pion = joueur->getTabPions()[0];
 
@@ -410,34 +406,38 @@ int Plateau::deplacement(Joueur* joueur) {
 void Plateau::lancer() {
   cout << "Debut de la partie !" << endl;
   string nomJeu = jeu->getNomJeuOuVariante();
+  int plateauNbJoueursTotal = jeu->getNbJoueursTotal();
 
-  int ret = 0;
+  int* passeTourJoueur = new int[jeu->getNbJoueursTotal()];
+  for(int i=0 ; i<jeu->getNbJoueursTotal() ; i++)
+    passeTourJoueur[i] = -1;
+
+  int ret = JOUER_TOUR;
   int tourJoueur = 0;
-  int passeTourJoueur = -1;
   Joueur* joueur;
   cout << *this << endl;
 
   do {
     tourJoueur = tourJoueur % plateauNbJoueursTotal;
-
-    if(passeTourJoueur == tourJoueur) {
+    
+    if(passeTourJoueur[tourJoueur] == tourJoueur) {
+      passeTourJoueur[tourJoueur] = -1;
       tourJoueur++;
-      passeTourJoueur = -1;
     }
     else {
       joueur = (jeu->getTableauJoueurs())[tourJoueur];
  	
-      if(ret != 1)
+      if(ret != JOUER_TOUR)
 	cout << "------------------- ------------------- Tour de " << joueur->getNom() << endl;
  
       ret = deplacement(joueur);
       cout << "------------------- RET = " << ret << endl;
-      if(ret == 1) {
+      if(ret == REJOUER_TOUR_SUIVANT) {
 	tourJoueur--;
 	cout << "------------------- ------------------- Le joueur " << joueur->getNom() << " rejoue" << endl;
       }
-      else if(ret == -1) {
-	passeTourJoueur = tourJoueur;
+      else if(ret == PASSER_TOUR_SUIVANT) {
+	passeTourJoueur[tourJoueur] = tourJoueur;
 	cout << "------------------- ------------------- Le joueur " << joueur->getNom() << " passe son prochain tour" << endl;
       }
    

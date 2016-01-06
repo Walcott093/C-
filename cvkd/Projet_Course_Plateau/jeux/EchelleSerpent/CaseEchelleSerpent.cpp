@@ -74,42 +74,21 @@ ostream& operator<<(ostream& o, CaseEchelleSerpent*& c) {
     }
   }
   if(c->specificite == ORANGE)
-    o << CYAN << "O " << SUFFIXE_COULEUR;
+    o << CYAN << "O" << SUFFIXE_COULEUR;
   else if(c->specificite == VERTE)
-    o << MAGENTA << "V " << SUFFIXE_COULEUR;
+    o << MAGENTA << "V" << SUFFIXE_COULEUR;
 
   int retrait = 0;
   if(c->specificite == ECHELLE || c->specificite == SERPENT)
     retrait = 2;
   else if(c->specificite == ORANGE || c->specificite == VERTE)
-    retrait = 1;
-    
-  int maxEspace = 2 + c->getNbPionsMax();
-  
-  switch(c->nbPions) {
-  case 0:
-    for(int i=0 ; i<maxEspace-retrait ; i++)
-      o << " ";
-    break;
-  case 1:
-    for(int i=0 ; i<retrait ; i++)
-      o << " ";
-    o << *((c->listePions).begin());
-    for(int i=0 ; i<maxEspace-1-retrait-retrait ; i++)
-      o << " ";
-    break;
-  default:
-    for(int i=0 ; i<retrait ; i++)
-      o << " ";
-    int cpt = 0;
-    for(auto it=c->listePions.begin() ; it!=c->listePions.end(); ++it) {
-      o << *it;
-      cpt++;
-    }
-    for(int i=0 ; i<maxEspace-cpt-retrait-retrait ; i++)
-      o << " ";
-    break;
-    }
+    retrait = 1;    
+  int tailleCase = 2 + c->getNbPionsMax();
+
+  for(auto it=c->listePions.begin() ; it!=c->listePions.end(); ++it)
+    o << *it;  
+  for(int i=0 ; i<tailleCase -retrait -c->getNbPions() ; i++)
+    o << " ";
   return o;
 }
 /********** FIN : ACCESSEURS ET REDEFINITION D'OPERATEUR(S) **********/
